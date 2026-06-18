@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sabores de Bolivia 🇧🇴 | Guía Gastronómica Oficial</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #FDF8F0; color: #3E1F0D; scroll-behavior: smooth; line-height: 1.5; }
+        :root { --rojo:#C0392B; --naranja:#E67E22; --amarillo:#F39C12; --dorado:#D4A017; --marron:#3E1F0D; --gris:#F5EFE6; --blanco:#fff; --sombra:0 4px 20px rgba(0,0,0,0.08); --sombra2:0 12px 28px rgba(0,0,0,0.15); }
+
+        /* NAV */
+        nav { position:sticky; top:0; z-index:1000; background:linear-gradient(135deg,#2c0e00,#4a1a00); padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; box-shadow:var(--sombra2); }
+        nav .logo { font-family:'Georgia',serif; font-size:1.8rem; font-weight:900; color:var(--dorado); letter-spacing:1px; }
+        nav .logo span { color:var(--amarillo); }
+        nav ul { list-style:none; display:flex; gap:1.2rem; flex-wrap:wrap; align-items:center; }
+        nav ul li a { color:var(--gris); text-decoration:none; font-weight:500; font-size:0.95rem; transition:0.2s; }
+        nav ul li a:hover { color:var(--amarillo); }
+        .nav-user { display:flex; align-items:center; gap:0.8rem; color:var(--gris); font-size:0.85rem; }
+        .nav-user span { font-weight:600; color:var(--amarillo); }
+        .btn-logout { background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:0.4rem 1rem; border-radius:20px; cursor:pointer; font-size:0.82rem; font-family:inherit; transition:0.2s; }
+        .btn-logout:hover { background:var(--rojo); border-color:var(--rojo); }
+        .btn-mis-reservas { background:rgba(255,215,0,0.2); border:1px solid var(--dorado); color:var(--dorado); padding:0.4rem 1rem; border-radius:20px; cursor:pointer; font-size:0.82rem; font-family:inherit; transition:0.2s; }
+        .btn-mis-reservas:hover { background:var(--dorado); color:#2c1a0a; }
+
+        /* HERO */
+        .hero { background:linear-gradient(125deg,#2b1a0e 0%,#5c2e16 100%); height:70vh; display:flex; align-items:center; justify-content:center; text-align:center; color:white; padding:2rem; box-shadow:inset 0 0 0 1000px rgba(0,0,0,0.35); }
+        .hero-content h1 { font-family:'Georgia',serif; font-size:3.5rem; margin-bottom:1rem; text-shadow:2px 2px 8px rgba(0,0,0,0.5); }
+        .hero-content h1 span { color:var(--amarillo); }
+        .hero-content p { font-size:1.2rem; max-width:700px; margin:0 auto 2rem; opacity:0.95; }
+        .btn-hero { background:var(--rojo); color:white; border:none; padding:1rem 2.5rem; font-size:1.1rem; font-weight:600; border-radius:50px; cursor:pointer; transition:0.2s; display:inline-block; text-decoration:none; }
+        .btn-hero:hover { background:var(--naranja); transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+
+        /* SECTIONS */
+        .section { padding:4rem 2rem; max-width:1300px; margin:0 auto; }
+        .section h2 { font-family:'Georgia',serif; font-size:2.5rem; text-align:center; margin-bottom:2rem; color:var(--marron); }
+        .section h2::after { content:''; display:block; width:80px; height:4px; background:var(--dorado); margin:0.6rem auto 0; border-radius:4px; }
+        .filtros { display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; justify-content:center; }
+        .filtros button { padding:0.6rem 1.4rem; border:2px solid var(--dorado); background:var(--blanco); color:var(--marron); border-radius:30px; cursor:pointer; font-weight:500; transition:0.2s; font-family:inherit; }
+        .filtros button:hover, .filtros button.active { background:var(--dorado); color:white; border-color:var(--dorado); }
+
+        /* CARDS */
+        .grid-restaurantes { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:2rem; }
+        .card { background:var(--blanco); border-radius:24px; overflow:hidden; box-shadow:var(--sombra); transition:0.25s; display:flex; flex-direction:column; }
+        .card:hover { transform:translateY(-6px); box-shadow:var(--sombra2); }
+        .card-img { height:210px; width:100%; display:block; object-fit:cover; background:#f5d7b3; }
+        .card-body { padding:1.4rem; flex:1; }
+        .card-body h3 { font-family:'Georgia',serif; font-size:1.4rem; margin:0.4rem 0 0.2rem; color:var(--marron); }
+        .ciudad { color:var(--rojo); font-weight:600; font-size:0.85rem; margin-bottom:0.3rem; }
+        .badge { display:inline-block; background:var(--amarillo); color:#2c1a0a; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.75rem; font-weight:600; margin-right:0.4rem; margin-bottom:0.4rem; }
+        .badge-hora { background:#e3f2fd; color:#1565c0; }
+        .btn-reservar { background:var(--rojo); color:white; border:none; padding:0.5rem 1.2rem; border-radius:30px; cursor:pointer; font-weight:600; font-family:inherit; font-size:0.85rem; transition:0.2s; }
+        .btn-reservar:hover { background:var(--naranja); }
+        .menu-toggle { background:none; border:1px solid var(--dorado); color:var(--marron); padding:0.35rem 1rem; border-radius:20px; cursor:pointer; font-size:0.8rem; margin-top:0.6rem; transition:0.2s; }
+        .menu-toggle:hover { background:var(--dorado); color:white; }
+        .menu-detalle { display:none; margin-top:0.8rem; border-top:1px solid #f0e0c8; padding-top:0.8rem; }
+        .menu-detalle.open { display:block; }
+        .menu-item { display:flex; justify-content:space-between; padding:0.3rem 0; border-bottom:1px dashed #f0e0c8; font-size:0.85rem; }
+        .menu-item .plato { font-weight:500; }
+        .menu-item .precio { color:var(--rojo); font-weight:700; }
+        .menu-seccion { font-weight:700; color:var(--dorado); font-size:0.8rem; margin:0.6rem 0 0.2rem; text-transform:uppercase; }
+        .info-row { font-size:0.82rem; color:#5a3d2a; margin:0.2rem 0; word-break:break-word; }
+        .btns-row { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.8rem; }
+        .loader { text-align:center; padding:3rem; color:#7a5a44; font-size:1.1rem; }
+
+        /* MODALES */
+        .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); display:none; justify-content:center; align-items:center; z-index:4000; }
+        .modal { background:var(--blanco); border-radius:28px; width:90%; max-width:550px; max-height:90vh; overflow-y:auto; box-shadow:var(--sombra2); }
+        .modal-body { padding:2rem; }
+        .modal-body h3 { font-family:'Georgia',serif; font-size:1.6rem; margin-bottom:1rem; }
+        .modal-close { float:right; background:none; border:none; font-size:1.8rem; cursor:pointer; color:#7a5a44; }
+        .form-group { margin-bottom:1rem; }
+        .form-group label { display:block; font-weight:600; margin-bottom:0.3rem; color:var(--marron); }
+        .form-group input, .form-group select, .form-group textarea { width:100%; padding:0.7rem; border:1.5px solid #e2d4c4; border-radius:14px; font-family:inherit; font-size:0.9rem; background:white; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--dorado); }
+        .btn-enviar { background:var(--rojo); color:white; border:none; padding:0.75rem 1.8rem; border-radius:40px; cursor:pointer; font-weight:600; font-family:inherit; font-size:1rem; transition:0.2s; }
+        .btn-enviar:hover { background:var(--naranja); }
+        .extras-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:0.5rem; margin:0.5rem 0; }
+        .stars { display:flex; gap:0.5rem; font-size:2rem; cursor:pointer; }
+        .stars span { color:#ccc; transition:0.1s; }
+        .stars span.active { color:var(--amarillo); }
+        .tabla-estado { width:100%; border-collapse:collapse; margin-top:1rem; }
+        .tabla-estado th, .tabla-estado td { border:1px solid #e2d4c4; padding:0.6rem; text-align:left; font-size:0.85rem; }
+        .tabla-estado th { background:var(--dorado); color:white; }
+
+        /* TOAST */
+        #toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(100px); background:#2d2b26; color:white; padding:0.9rem 1.8rem; border-radius:50px; font-weight:500; z-index:9999; transition:0.25s; opacity:0; pointer-events:none; font-size:0.9rem; white-space:nowrap; box-shadow:0 6px 18px black; }
+        #toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+        #toast.exito { background:#27ae60; }
+        #toast.error { background:#c0392b; }
+
+        /* FOOTER */
+        footer { background:var(--marron); color:#f0e2d4; text-align:center; padding:2rem; margin-top:3rem; }
+        footer a { color:var(--amarillo); text-decoration:none; }
+
+        /* SPLASH */
+        #splashScreen { position:fixed; inset:0; z-index:99999; background:linear-gradient(145deg,#1a0800 0%,#3d1500 40%,#6b2800 70%,#1a0800 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.6s ease,transform 0.6s ease; overflow:hidden; }
+        #splashScreen.ocultar { opacity:0; transform:scale(1.04); pointer-events:none; }
+        .splash-bg-pattern { position:absolute; inset:0; background-image:radial-gradient(circle at 20% 50%,rgba(212,160,23,0.08) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(192,57,43,0.1) 0%,transparent 40%); pointer-events:none; }
+        .splash-decos { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+        .splash-deco { position:absolute; font-size:5rem; opacity:0.04; animation:flotarDeco 8s ease-in-out infinite; }
+        @keyframes flotarDeco { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(5deg)} }
+        .splash-content { position:relative; z-index:2; text-align:center; width:100%; max-width:480px; padding:1.5rem; animation:entrarSplash 0.8s ease forwards; }
+        @keyframes entrarSplash { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        .splash-logo { font-family:'Georgia',serif; font-size:2.5rem; font-weight:900; color:var(--dorado); letter-spacing:2px; margin-bottom:0.2rem; text-shadow:0 0 40px rgba(212,160,23,0.4); }
+        .splash-logo span { color:var(--amarillo); }
+        .splash-bandera { font-size:3rem; margin:0.4rem 0; animation:pulsarBandera 2s ease-in-out infinite; }
+        @keyframes pulsarBandera { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
+        .splash-sub { color:rgba(255,255,255,0.6); font-size:0.85rem; margin-bottom:1.2rem; }
+        .splash-linea { width:60px; height:3px; background:linear-gradient(90deg,transparent,var(--dorado),transparent); margin:0.6rem auto 1.2rem; border-radius:2px; }
+        .splash-card { background:rgba(255,255,255,0.05); border:1px solid rgba(212,160,23,0.25); border-radius:24px; padding:1.6rem; backdrop-filter:blur(10px); }
+        .splash-tabs { display:flex; gap:0.4rem; margin-bottom:1.1rem; background:rgba(0,0,0,0.3); border-radius:50px; padding:4px; }
+        .splash-tab { flex:1; padding:0.45rem; border:none; border-radius:50px; background:transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:0.8rem; font-weight:600; cursor:pointer; transition:0.2s; }
+        .splash-tab.active { background:var(--rojo); color:white; box-shadow:0 4px 12px rgba(192,57,43,0.4); }
+        .splash-input { width:100%; padding:0.7rem 1rem; border:1.5px solid rgba(212,160,23,0.3); border-radius:14px; background:rgba(255,255,255,0.08); color:white; font-family:inherit; font-size:0.88rem; margin-bottom:0.7rem; outline:none; transition:border-color 0.2s; }
+        .splash-input::placeholder { color:rgba(255,255,255,0.35); }
+        .splash-input:focus { border-color:var(--dorado); background:rgba(255,255,255,0.12); }
+        .splash-select { width:100%; padding:0.7rem 1rem; border:1.5px solid rgba(212,160,23,0.3); border-radius:14px; background:rgba(40,15,0,0.85); color:white; font-family:inherit; font-size:0.88rem; margin-bottom:0.7rem; outline:none; cursor:pointer; }
+        .splash-fila { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; }
+        .splash-btn { width:100%; padding:0.8rem; background:linear-gradient(135deg,var(--rojo),#e74c3c); color:white; border:none; border-radius:40px; font-size:0.95rem; font-weight:700; font-family:inherit; cursor:pointer; transition:0.2s; box-shadow:0 6px 20px rgba(192,57,43,0.4); margin-top:0.4rem; }
+        .splash-btn:hover { background:linear-gradient(135deg,var(--naranja),var(--rojo)); transform:translateY(-2px); }
+        .splash-btn:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+        .splash-status { font-size:0.8rem; margin-top:0.6rem; min-height:1.2rem; }
+        .splash-panel-sub { color:rgba(255,255,255,0.45); font-size:0.78rem; margin-bottom:0.9rem; }
+
+        @media(max-width:700px) {
+            .hero-content h1{font-size:2rem}
+            .grid-restaurantes{grid-template-columns:1fr}
+            nav ul{gap:0.7rem;justify-content:center;margin-top:0.5rem}
+            #toast{white-space:normal;width:90%;text-align:center}
+            .splash-fila{grid-template-columns:1fr}
+            .splash-logo{font-size:2rem}
+        }
+    </style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splashScreen">
+    <div class="splash-bg-pattern"></div>
+    <div class="splash-decos">
+        <span class="splash-deco" style="top:8%;left:5%;animation-delay:0s">🍽️</span>
+        <span class="splash-deco" style="top:15%;right:8%;animation-delay:1s">🇧🇴</span>
+        <span class="splash-deco" style="bottom:20%;left:3%;animation-delay:2s">🌶️</span>
+        <span class="splash-deco" style="bottom:10%;right:5%;animation-delay:0.5s">🥘</span>
+        <span class="splash-deco" style="top:50%;left:1%;animation-delay:1.5s">🍖</span>
+        <span class="splash-deco" style="top:40%;right:2%;animation-delay:2.5s">🌽</span>
+    </div>
+    <div class="splash-content">
+        <div class="splash-bandera">🇧🇴</div>
+        <div class="splash-logo">Sabores<span>Bolivia</span></div>
+        <div class="splash-linea"></div>
+        <p class="splash-sub">Guía gastronómica · Reservas y catálogo en tiempo real</p>
+        <div class="splash-card">
+            <div class="splash-tabs">
+                <button class="splash-tab active" id="tabNuevo" onclick="splashTab('nuevo',this)">✨ Soy nuevo</button>
+                <button class="splash-tab" id="tabExiste" onclick="splashTab('existe',this)">🔑 Ya tengo cuenta</button>
+            </div>
+
+            <!-- NUEVO USUARIO -->
+            <div id="spPanelNuevo">
+                <p class="splash-panel-sub">Regístrate gratis para reservar y opinar</p>
+                <input class="splash-input" type="text"  id="spNombre"   placeholder="Nombre completo *">
+                <input class="splash-input" type="tel"   id="spTelefono" placeholder="Teléfono * (+591 7XXXXXXX)">
+                <input class="splash-input" type="email" id="spCorreo"   placeholder="Correo electrónico *">
+                <div class="splash-fila">
+                    <select class="splash-select" id="spCiudad">
+                        <option value="Santa Cruz">📍 Santa Cruz</option>
+                        <option value="La Paz">📍 La Paz</option>
+                        <option value="Cochabamba">📍 Cochabamba</option>
+                        <option value="Tarija">📍 Tarija</option>
+                    </select>
+                    <input class="splash-input" style="margin-bottom:0" type="text" id="spInteres" placeholder="Interés (opcional)">
+                </div>
+                <button class="splash-btn" id="spBtnRegistrar">✅ Registrarme e ingresar</button>
+            </div>
+
+            <!-- YA TENGO CUENTA -->
+            <div id="spPanelExiste" style="display:none">
+                <p class="splash-panel-sub">Ingresa tu correo para recuperar tu sesión</p>
+                <input class="splash-input" type="email" id="spCorreoExiste" placeholder="tu@correo.com *">
+                <button class="splash-btn" id="spBtnEntrar">🚀 Ingresar</button>
+            </div>
+
+            <p class="splash-status" id="spStatus"></p>
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<nav>
+    <div class="logo">Sabores<span>Bolivia</span> 🇧🇴</div>
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#restaurantes">Restaurantes</a></li>
+        <li><a href="#mercados">Mercados</a></li>
+        <li><a href="#supermercados">Supermercados</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-user" id="navUser" style="display:none">
+        👤 Hola, <span id="navNombre"></span>
+        <button class="btn-mis-reservas" onclick="abrirConsultaEstado()">📋 Mis reservas</button>
+        <button class="btn-logout" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+    </div>
+</nav>
+
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <h1>Sabores <span>Auténticos</span> de Bolivia</h1>
+        <p>Reserva en los mejores restaurantes típicos. Sistema conectado a Google Sheets con estados y trazabilidad.</p>
+        <a href="#restaurantes" class="btn-hero">🍽️ Explorar Restaurantes</a>
+    </div>
+</section>
+
+<section class="section" id="restaurantes">
+    <h2>🏪 Restaurantes Recomendados</h2>
+    <div class="filtros" id="contenedorFiltros"></div>
+    <div class="grid-restaurantes" id="gridRestaurantes"><div class="loader">⏳ Cargando restaurantes...</div></div>
+</section>
+
+<section class="section" id="mercados">
+    <h2>🛒 Mercados Populares — Santa Cruz</h2>
+    <div class="grid-restaurantes" id="gridMercados"><div class="loader">⏳ Cargando mercados...</div></div>
+</section>
+
+<section class="section" id="supermercados">
+    <h2>🏬 Supermercados con Productos Nacionales</h2>
+    <div class="filtros" id="filtrosSuper"></div>
+    <div class="grid-restaurantes" id="gridSupermercados"><div class="loader">⏳ Cargando supermercados...</div></div>
+</section>
+
+<section id="contacto" style="max-width:700px;margin:2rem auto;background:white;border-radius:28px;padding:2rem;">
+    <h2 style="font-family:Georgia;text-align:center;margin-bottom:1.5rem;">📬 Contáctanos</h2>
+    <div class="form-group"><label>Tu nombre</label><input type="text" id="ctcNombre" placeholder="Tu nombre"></div>
+    <div class="form-group"><label>Correo electrónico</label><input type="email" id="ctcEmail" placeholder="tu@email.com"></div>
+    <div class="form-group"><label>Mensaje</label><textarea id="ctcMsg" rows="4" placeholder="Cuéntanos tu experiencia..."></textarea></div>
+    <button class="btn-enviar" id="btnContacto">Enviar Mensaje</button>
+</section>
+
+<footer>
+    <p>© 2026 Comida Nacional Bolivia 🇧🇴 | Datos extraídos de investigación de campo</p>
+    <p style="margin-top:0.5rem"><a href="#inicio">Volver al inicio ↑</a></p>
+</footer>
+
+<!-- MODAL RESERVA -->
+<div class="modal-overlay" id="modalReserva">
+    <div class="modal">
+        <button class="modal-close" onclick="cerrar('modalReserva')">&times;</button>
+        <div class="modal-body">
+            <h3>🍽️ Reservar Mesa</h3>
+            <p><strong id="resNombreRest"></strong></p>
+            <div class="form-group"><label>Nombre *</label><input type="text" id="resNombre"></div>
+            <div class="form-group"><label>Teléfono *</label><input type="tel" id="resTel"></div>
+            <div class="form-group"><label>Correo *</label><input type="email" id="resEmail"></div>
+            <div class="form-group"><label>Fecha *</label><input type="date" id="resFecha"></div>
+            <div class="form-group"><label>Hora *</label><input type="time" id="resHora"></div>
+            <div class="form-group"><label>Personas</label><select id="resPersonas"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+            <div class="form-group"><label>Extras</label>
+                <div class="extras-grid">
+                    <label><input type="checkbox" value="Decoración"> 🎈 Decoración</label>
+                    <label><input type="checkbox" value="Pastel"> 🎂 Pastel</label>
+                    <label><input type="checkbox" value="Música"> 🎵 Música</label>
+                </div>
+            </div>
+            <div class="form-group"><label>Nota</label><textarea id="resExtra" rows="2"></textarea></div>
+            <button class="btn-enviar" id="btnReserva">📲 Confirmar Reserva</button>
+            <p id="resStatus" style="font-size:0.8rem;margin-top:0.5rem;"></p>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL OPINIÓN -->
+<div class="modal-overlay" id="modalOpinion">
+    <div class="modal">
+        <button class="modal-close" onclick="cerrar('modalOpinion')">&times;</button>
+        <div class="modal-body">
+            <h3>⭐ Dejar Opinión</h3>
+            <div class="form-group"><label>Tu nombre</label><input type="text" id="opNombre"></div>
+            <div class="form-group"><label>Restaurante</label><select id="opRest"></select></div>
+            <div class="form-group"><label>Calificación</label>
+                <div class="stars" id="starsContainer">
+                    <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+                </div>
+            </div>
+            <div class="form-group"><label>Comentario</label><textarea id="opTexto" rows="3"></textarea></div>
+            <button class="btn-enviar" id="btnOpinion">📤 Enviar Opinión</button>
+            <p id="opStatus"></p>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL MIS RESERVAS -->
+<div class="modal-overlay" id="modalEstado">
+    <div class="modal">
+        <button class="modal-close" onclick="cerrar('modalEstado')">&times;</button>
+        <div class="modal-body">
+            <h3>📋 Mis reservas</h3>
+            <div class="form-group"><label>Correo electrónico</label><input type="email" id="consultaEmail" placeholder="tu@email.com"></div>
+            <button class="btn-enviar" id="btnConsultar">Consultar</button>
+            <div id="resultadoEstado" style="margin-top:1rem;"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// =====================================================
+// CONFIGURACIÓN — NUEVA URL del Apps Script (actualizada)
+// =====================================================
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz9eWTYqeIvV4d8KkiINNh4x5D2wPBYWVFAsVg5VrOIdnMEu7h_P4K-VGIYdJe0XkaQQ/exec";
+
+let usuarioActual = null;
+
+// =====================================================
+// UTILIDADES
+// =====================================================
+function toast(msg, tipo = "exito") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "show " + tipo;
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.className = "", 2800);
+}
+function cerrar(id) { document.getElementById(id).style.display = "none"; }
+
+// =====================================================
+// API — compatibilidad total con el Apps Script nuevo
+// =====================================================
+async function llamarScript(action, params = {}) {
+    const url = new URL(SCRIPT_URL);
+    url.searchParams.set("action", action);
+    for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
+    const resp = await fetch(url.toString());
+    return await resp.json();
+}
+
+async function fetchPOST(action, data = {}) {
+    try {
+        await fetch(SCRIPT_URL, {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: JSON.stringify({ action, ...data })
+        });
+        return { exito: true };
+    } catch (err) {
+        console.error("[POST]", err);
+        return { exito: false };
+    }
+}
+
+// =====================================================
+// SPLASH — TABS
+// =====================================================
+function splashTab(tab, el) {
+    document.querySelectorAll(".splash-tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+    document.getElementById("spPanelNuevo").style.display  = tab === "nuevo"  ? "block" : "none";
+    document.getElementById("spPanelExiste").style.display = tab === "existe" ? "block" : "none";
+    document.getElementById("spStatus").textContent = "";
+    document.getElementById("spStatus").style.color = "";
+}
+
+// =====================================================
+// SPLASH — REGISTRAR NUEVO USUARIO
+// =====================================================
+document.getElementById("spBtnRegistrar").addEventListener("click", async () => {
+    const nombre   = document.getElementById("spNombre").value.trim();
+    const telefono = document.getElementById("spTelefono").value.trim();
+    const correo   = document.getElementById("spCorreo").value.trim();
+    const ciudad   = document.getElementById("spCiudad").value;
+    const interes  = document.getElementById("spInteres").value.trim() || "Gastronomía";
+    const status   = document.getElementById("spStatus");
+    const btn      = document.getElementById("spBtnRegistrar");
+
+    if (!nombre || !telefono || !correo || !correo.includes("@")) {
+        status.style.color = "rgba(255,180,100,0.95)";
+        status.textContent = "⚠️ Completa nombre, teléfono y correo.";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "⏳ Verificando...";
+    status.textContent = "";
+
+    try {
+        const check = await llamarScript("consultarUsuario", { correo });
+        if (check && check.existe === true && check.usuario) {
+            sesionIniciada(check.usuario);
+            btn.textContent = "✅ ¡Bienvenido de vuelta!";
+            status.style.color = "rgba(100,255,150,0.9)";
+            status.textContent = "¡Hola de nuevo " + check.usuario.nombre.split(" ")[0] + "!";
+            setTimeout(ocultarSplash, 900);
+            return;
+        }
+    } catch(e) { console.warn("check previo falló:", e); }
+
+    btn.textContent = "⏳ Registrando...";
+    await fetchPOST("registrarUsuario", { nombre, telefono, correo, ciudad, interes });
+    sesionIniciada({ nombre, telefono, correo, ciudad, interes });
+    btn.textContent = "✅ ¡Bienvenido!";
+    status.style.color = "rgba(100,255,150,0.9)";
+    status.textContent = "¡Hola " + nombre.split(" ")[0] + "! Ingresando...";
+    setTimeout(ocultarSplash, 900);
+});
+
+// =====================================================
+// SPLASH — YA TENGO CUENTA
+// =====================================================
+document.getElementById("spBtnEntrar").addEventListener("click", async () => {
+    const correo = document.getElementById("spCorreoExiste").value.trim();
+    const status = document.getElementById("spStatus");
+    const btn    = document.getElementById("spBtnEntrar");
+
+    if (!correo || !correo.includes("@")) {
+        status.style.color = "rgba(255,180,100,0.95)";
+        status.textContent = "⚠️ Ingresa un correo válido.";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "⏳ Buscando...";
+    status.textContent = "";
+
+    try {
+        const result = await llamarScript("consultarUsuario", { correo });
+        if (result && result.existe === true && result.usuario) {
+            sesionIniciada(result.usuario);
+            status.style.color = "rgba(100,255,150,0.9)";
+            status.textContent = "¡Hola " + result.usuario.nombre.split(" ")[0] + "! Ingresando...";
+            setTimeout(ocultarSplash, 900);
+        } else {
+            status.style.color = "rgba(255,150,100,0.9)";
+            status.textContent = "❌ Correo no encontrado. ¿Aún no te registraste? Usa '✨ Soy nuevo'.";
+            btn.disabled = false;
+            btn.textContent = "🚀 Ingresar";
+        }
+    } catch(err) {
+        console.error(err);
+        status.style.color = "rgba(255,150,100,0.9)";
+        status.textContent = "⚠️ Error de conexión. Intenta de nuevo.";
+        btn.disabled = false;
+        btn.textContent = "🚀 Ingresar";
+    }
+});
+
+// =====================================================
+// SESIÓN
+// =====================================================
+function sesionIniciada(usuario) {
+    usuarioActual = {
+        nombre:   usuario.nombre   || "",
+        telefono: usuario.telefono || "",
+        correo:   usuario.correo   || "",
+        ciudad:   usuario.ciudad   || "",
+        interes:  usuario.interes  || ""
+    };
+    localStorage.setItem("usuarioComidaNacional", JSON.stringify(usuarioActual));
+    mostrarNavUser();
+}
+
+function mostrarNavUser() {
+    const navUser = document.getElementById("navUser");
+    const navNombre = document.getElementById("navNombre");
+    if (usuarioActual) {
+        navNombre.textContent = usuarioActual.nombre.split(" ")[0];
+        navUser.style.display = "flex";
+    } else {
+        navUser.style.display = "none";
+    }
+}
+
+function cerrarSesion() {
+    if (confirm("¿Cerrar sesión?")) {
+        localStorage.removeItem("usuarioComidaNacional");
+        usuarioActual = null;
+        location.reload();
+    }
+}
+
+function ocultarSplash() {
+    const splash = document.getElementById("splashScreen");
+    splash.classList.add("ocultar");
+    setTimeout(() => splash.style.display = "none", 650);
+}
+
+function cargarSesion() {
+    const saved = localStorage.getItem("usuarioComidaNacional");
+    if (saved) {
+        try {
+            usuarioActual = JSON.parse(saved);
+            mostrarNavUser();
+            ocultarSplash();
+        } catch(e) {
+            localStorage.removeItem("usuarioComidaNacional");
+        }
+    }
+}
+
+// =====================================================
+// CATÁLOGOS
+// =====================================================
+let restaurantes = [], mercados = [], supermercados = [];
+
+async function cargarCatalogos() {
+    try {
+        const result = await llamarScript("obtenerCatalogos");
+        const data = result && result.success ? result.data : result;
+        if (data && data.restaurantes) {
+            restaurantes  = data.restaurantes  || [];
+            mercados      = data.mercados      || [];
+            supermercados = data.supermercados || [];
+            renderRestaurantes();
+            renderMercados();
+            renderSupermercados();
+            generarFiltros();
+            generarFiltrosSuper();
+            llenarSelectOpinion();
+        } else {
+            document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ No se pudieron cargar los datos.</div>';
+        }
+    } catch(e) {
+        console.error("cargarCatalogos:", e);
+        document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ Error de conexión con el servidor.</div>';
+    }
+}
+
+function renderRestaurantes(filtro = "todas") {
+    const grid = document.getElementById("gridRestaurantes");
+    const lista = filtro === "todas" ? restaurantes : restaurantes.filter(r => r.ciudad === filtro);
+    if (!lista.length) { grid.innerHTML = '<div class="loader">No hay restaurantes disponibles.</div>'; return; }
+    grid.innerHTML = "";
+    lista.forEach(r => {
+        let menuData = r.menu || r.menu_json || null;
+        if (menuData && typeof menuData === "string") { try { menuData = JSON.parse(menuData); } catch(e) { menuData = null; } }
+        const menuHTML = (menuData && Array.isArray(menuData)) ? menuData.map(cat =>
+            `<div class="menu-seccion">${cat.cat}</div>` +
+            (cat.items||[]).map(item => `<div class="menu-item"><span class="plato">${item.plato}</span><span class="precio">${item.precio}</span></div>`).join("")
+        ).join("") : "";
+        const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3bc8f'/%3E%3Ctext x='50' y='55' font-size='40' text-anchor='middle' fill='%237a4c29'%3E🍽️%3C/text%3E%3C/svg%3E";
+        const nombre = (r.nombre || "").replace(/'/g, "\\'");
+        const card = document.createElement("div"); card.className = "card";
+        card.innerHTML = `
+            <img src="${r.imagen || placeholder}" class="card-img" alt="${r.nombre}" loading="lazy"
+                 onerror="this.onerror=null;this.src='${placeholder}'">
+            <div class="card-body">
+                <span class="badge">${r.tipo || "Restaurante"}</span>
+                <span class="badge badge-hora">⏰ ${r.horario || "—"}</span>
+                <h3>${r.nombre || ""}</h3>
+                <div class="ciudad">📍 ${r.ciudad || ""}</div>
+                <div class="info-row">📞 ${r.telefono || "—"}</div>
+                <div class="info-row">📌 ${r.direccion || "—"}</div>
+                ${menuHTML ? `<button class="menu-toggle" onclick="toggleMenu(this)">🍽️ Ver Menú ▼</button><div class="menu-detalle">${menuHTML}</div>` : ""}
+                <div class="btns-row">
+                    <button class="btn-reservar" onclick="abrirReserva('${nombre}')">📅 Reservar</button>
+                    ${r.telefono ? `<span class="badge" style="background:#e8dccc;">💬 ${r.telefono}</span>` : ""}
+                </div>
+            </div>`;
+        grid.appendChild(card);
+    });
+}
+
+window.toggleMenu = function(btn) {
+    const d = btn.nextElementSibling; const open = d.classList.toggle("open");
+    btn.textContent = open ? "🍽️ Ocultar Menú ▲" : "🍽️ Ver Menú ▼";
+};
+
+function generarFiltros() {
+    const cont = document.getElementById("contenedorFiltros");
+    const ciudades = [...new Set(restaurantes.map(r => r.ciudad).filter(Boolean))];
+    cont.innerHTML = '<button class="active" data-filtro="todas">Todas las ciudades</button>';
+    ciudades.forEach(c => { const b = document.createElement("button"); b.textContent = "📍 " + c; b.dataset.filtro = c; cont.appendChild(b); });
+    cont.querySelectorAll("button").forEach(b => b.addEventListener("click", e => {
+        cont.querySelectorAll("button").forEach(x => x.classList.remove("active")); e.target.classList.add("active"); renderRestaurantes(e.target.dataset.filtro);
+    }));
+}
+
+// -------------------------------------------------------------
+// MERCADOS: ahora usa la imagen desde Google Sheets (columna 'imagen')
+// -------------------------------------------------------------
+function renderMercados() {
+    const grid = document.getElementById("gridMercados");
+    if (!mercados.length) { grid.innerHTML = '<div class="loader">No hay mercados disponibles.</div>'; return; }
+    const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3bc8f'/%3E%3Ctext x='50' y='55' font-size='40' text-anchor='middle' fill='%237a4c29'%3E🛒%3C/text%3E%3C/svg%3E";
+    grid.innerHTML = mercados.map(m => `
+        <div class="card">
+            <img src="${m.imagen || placeholder}" class="card-img" alt="${m.nombre}" loading="lazy"
+                 onerror="this.onerror=null;this.src='${placeholder}'">
+            <div class="card-body">
+                <span class="badge badge-hora">⏰ ${m.horario || "—"}</span>
+                <h3>${m.nombre || ""}</h3>
+                <div class="info-row">📍 ${m.direccion || "—"}</div>
+                <div class="info-row">🚌 Líneas: ${m.lineas || "—"}</div>
+                <div class="info-row">🥬 Abasto mayorista y minorista</div>
+            </div>
+        </div>`).join("");
+}
+
+// -------------------------------------------------------------
+// SUPERMERCADOS: ahora usa la imagen desde Google Sheets (columna 'imagen')
+// -------------------------------------------------------------
+function renderSupermercados(filtro = "todas") {
+    const grid = document.getElementById("gridSupermercados");
+    const lista = filtro === "todas" ? supermercados : supermercados.filter(s => s.cadena === filtro);
+    if (!lista.length) { grid.innerHTML = '<div class="loader">No hay supermercados disponibles.</div>'; return; }
+    const placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3bc8f'/%3E%3Ctext x='50' y='55' font-size='40' text-anchor='middle' fill='%237a4c29'%3E🏬%3C/text%3E%3C/svg%3E";
+    grid.innerHTML = lista.map(s => `
+        <div class="card">
+            <img src="${s.imagen || placeholder}" class="card-img" alt="${s.nombre}" loading="lazy"
+                 onerror="this.onerror=null;this.src='${placeholder}'">
+            <div class="card-body">
+                <span class="badge">${s.cadena || ""}</span>
+                <span class="badge badge-hora">${s.horario || "—"}</span>
+                <h3>${s.nombre || ""}</h3>
+                <div class="info-row">📍 ${s.direccion || "—"}</div>
+                <div class="info-row">🚌 Líneas: ${s.lineas || "—"}</div>
+                <div class="info-row">💵 Pasaje sugerido: 3 Bs</div>
+            </div>
+        </div>`).join("");
+}
+
+function generarFiltrosSuper() {
+    const cont = document.getElementById("filtrosSuper");
+    const cadenas = [...new Set(supermercados.map(s => s.cadena).filter(Boolean))];
+    cont.innerHTML = '<button class="active" data-filtro="todas">Todas las cadenas</button>';
+    cadenas.forEach(c => { const b = document.createElement("button"); b.textContent = "🏬 " + c; b.dataset.filtro = c; cont.appendChild(b); });
+    cont.querySelectorAll("button").forEach(b => b.addEventListener("click", e => {
+        cont.querySelectorAll("button").forEach(x => x.classList.remove("active")); e.target.classList.add("active"); renderSupermercados(e.target.dataset.filtro);
+    }));
+}
+
+function llenarSelectOpinion() {
+    document.getElementById("opRest").innerHTML = restaurantes.map(r => `<option value="${r.nombre}">${r.nombre} (${r.ciudad||""})</option>`).join("");
+}
+
+// =====================================================
+// RESERVAS
+// =====================================================
+window.abrirReserva = function(nombre) {
+    if (!usuarioActual) { toast("Debes registrarte primero", "error"); return; }
+    document.getElementById("resNombreRest").textContent = nombre;
+    document.getElementById("resNombre").value = usuarioActual.nombre;
+    document.getElementById("resTel").value    = usuarioActual.telefono;
+    document.getElementById("resEmail").value  = usuarioActual.correo;
+    document.getElementById("resFecha").value  = "";
+    document.getElementById("resHora").value   = "";
+    document.getElementById("resStatus").innerHTML = "";
+    document.querySelectorAll(".extras-grid input").forEach(i => i.checked = false);
+    document.getElementById("resExtra").value = "";
+    document.getElementById("modalReserva").style.display = "flex";
+};
+
+document.getElementById("btnReserva").addEventListener("click", async () => {
+    const restaurante = document.getElementById("resNombreRest").textContent;
+    const nombre   = document.getElementById("resNombre").value.trim();
+    const telefono = document.getElementById("resTel").value.trim();
+    const correo   = document.getElementById("resEmail").value.trim();
+    const fecha    = document.getElementById("resFecha").value;
+    const hora     = document.getElementById("resHora").value;
+    const personas = document.getElementById("resPersonas").value;
+    const extras   = Array.from(document.querySelectorAll(".extras-grid input:checked")).map(i => i.value).join(", ");
+    const nota     = document.getElementById("resExtra").value.trim() || "Sin nota";
+
+    if (!nombre || !telefono || !correo || !fecha || !hora) { toast("Completa todos los campos obligatorios", "error"); return; }
+    document.getElementById("resStatus").innerHTML = "⏳ Enviando...";
+    document.getElementById("btnReserva").disabled = true;
+    await fetchPOST("crearSolicitud", { tipo:"Reserva", nombre, telefono, correo, restaurante, fecha, hora, personas, extras, nota, estado:"Pendiente" });
+    document.getElementById("btnReserva").disabled = false;
+    cerrar("modalReserva");
+    toast(`✅ Reserva enviada a ${restaurante}`);
+});
+
+// =====================================================
+// MIS RESERVAS
+// =====================================================
+window.abrirConsultaEstado = function() {
+    document.getElementById("consultaEmail").value = usuarioActual ? usuarioActual.correo : "";
+    document.getElementById("resultadoEstado").innerHTML = "";
+    document.getElementById("modalEstado").style.display = "flex";
+};
+
+document.getElementById("btnConsultar").addEventListener("click", async () => {
+    const email = document.getElementById("consultaEmail").value.trim();
+    if (!email) { toast("Ingresa un correo electrónico", "error"); return; }
+    document.getElementById("resultadoEstado").innerHTML = "⏳ Consultando...";
+    const raw = await llamarScript("consultarSolicitudes", { correo: email });
+    const solicitudes = Array.isArray(raw) ? raw : (raw && raw.data ? raw.data : (raw && raw.success === false ? [] : (Array.isArray(raw) ? raw : [])));
+    const div = document.getElementById("resultadoEstado");
+    if (solicitudes && solicitudes.length > 0) {
+        let html = `<table class="tabla-estado">几年<th>Fecha</th><th>Restaurante</th><th>Tipo</th><th>Estado</th><th>Detalle</th></tr>`;
+        solicitudes.forEach(s => { html += `<tr><td>${s.fechaHora||"—"}</td><td>${s.restaurante||"—"}</td><td>${s.tipo||""}</td><td><span class="badge" style="background:#6c757d;color:white;">${s.estado||""}</span></td><td>${s.nota||""}</td></tr>`; });
+        html += `</table><p style="margin-top:0.5rem;font-size:0.8rem;">📌 Estados: Pendiente · Confirmado · Rechazado · Atendido</p>`;
+        div.innerHTML = html;
+    } else { div.innerHTML = "<p>No se encontraron solicitudes para este correo.</p>"; }
+});
+
+// =====================================================
+// OPINIÓN
+// =====================================================
+let starsVal = 0;
+document.getElementById("starsContainer").addEventListener("click", e => {
+    if (e.target.dataset.val) {
+        starsVal = parseInt(e.target.dataset.val);
+        document.querySelectorAll("#starsContainer span").forEach((s, i) => s.classList.toggle("active", i < starsVal));
+    }
+});
+
+document.getElementById("btnOpinion").addEventListener("click", async () => {
+    if (!usuarioActual) { toast("Debes registrarte para opinar", "error"); return; }
+    const nombre     = document.getElementById("opNombre").value.trim() || usuarioActual.nombre;
+    const restaurante = document.getElementById("opRest").value;
+    const comentario = document.getElementById("opTexto").value.trim();
+    if (!comentario || starsVal === 0) { toast("Completa el comentario y la calificación", "error"); return; }
+    await fetchPOST("crearSolicitud", { tipo:"Opinión", nombre, correo:usuarioActual.correo, telefono:usuarioActual.telefono, restaurante, calificacion:starsVal+"★", comentario, estado:"Publicado" });
+    cerrar("modalOpinion"); toast("¡Gracias por tu opinión!");
+    starsVal = 0; document.querySelectorAll("#starsContainer span").forEach(s => s.classList.remove("active")); document.getElementById("opTexto").value = "";
+});
+
+// =====================================================
+// CONTACTO
+// =====================================================
+document.getElementById("btnContacto").addEventListener("click", async () => {
+    if (!usuarioActual) { toast("Regístrate para contactarnos", "error"); return; }
+    const mensaje = document.getElementById("ctcMsg").value.trim();
+    if (!mensaje) { toast("Escribe un mensaje", "error"); return; }
+    await fetchPOST("crearSolicitud", { tipo:"Contacto", nombre:usuarioActual.nombre, correo:usuarioActual.correo, telefono:usuarioActual.telefono, mensaje, estado:"Pendiente" });
+    toast("📨 Mensaje enviado. Te contactaremos pronto.");
+    document.getElementById("ctcMsg").value = "";
+});
+
+// =====================================================
+// CERRAR MODALES AL CLICK AFUERA (menos el splash)
+// =====================================================
+window.addEventListener("click", e => {
+    if (e.target.classList.contains("modal-overlay")) e.target.style.display = "none";
+});
+
+// =====================================================
+// BOTÓN FLOTANTE OPINIÓN
+// =====================================================
+const btnF = document.createElement("button");
+btnF.textContent = "💬"; btnF.title = "Dejar opinión";
+btnF.style.cssText = "position:fixed;bottom:2rem;right:2rem;background:var(--dorado);color:#fff;border:none;width:58px;height:58px;border-radius:50%;font-size:1.8rem;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,0.2);z-index:3000;transition:0.2s;";
+btnF.onmouseover = () => btnF.style.transform = "scale(1.1)";
+btnF.onmouseout  = () => btnF.style.transform = "scale(1)";
+btnF.onclick = () => {
+    if (!usuarioActual) { toast("Regístrate para opinar", "error"); return; }
+    document.getElementById("opNombre").value = usuarioActual.nombre;
+    document.getElementById("modalOpinion").style.display = "flex";
+};
+document.body.appendChild(btnF);
+
+// =====================================================
+// INICIO
+// =====================================================
+cargarSesion();
+cargarCatalogos();
+</script>
+</body>
+</html>
