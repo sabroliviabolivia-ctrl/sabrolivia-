@@ -145,6 +145,7 @@ main{margin-left:68px;min-height:100vh;}
 .tb-btn{
   padding:.4rem .9rem;border-radius:20px;cursor:pointer;
   font-size:.88rem;font-family:'Inter',sans-serif;transition:.2s;border:none;font-weight:600;
+  white-space:nowrap;
 }
 .tb-reservas{background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.28);color:var(--gold);}
 .tb-reservas:hover{background:rgba(245,166,35,.22);}
@@ -469,7 +470,13 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   .ni-icon{font-size:1.3rem;min-width:auto;}
   .ni-label{opacity:1!important;font-size:.68rem;text-align:center;white-space:normal;line-height:1.15;}
   main{margin-left:0;padding-bottom:76px;}
-  #topBar{left:0;}
+  #topBar{left:0; padding:0 .6rem; height:52px; font-size:.85rem;}
+  #topBar .tb-left{ gap:.3rem; }
+  #topBar .tb-logo{ font-size:1rem; }
+  #topBar .tb-flag{ font-size:.9rem; }
+  #topBar .tb-right{ gap:.2rem; flex-wrap:wrap; justify-content:flex-end; }
+  #topBar .tb-btn{ padding:.2rem .5rem; font-size:.7rem; }
+  #topBar .tb-user{ font-size:.8rem; }
   .calc-row{grid-template-columns:1fr;}
   .grid-cards{grid-template-columns:1fr;}
   .recetas-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
@@ -544,8 +551,8 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <span id="tbAlergBadge" class="alergia-badge" style="display:none">⚠️ Alergias activas</span>
   </div>
   <div class="tb-right">
-    <span>👤 Hola, <span class="tb-user" id="tbNombre"></span></span>
-    <button class="tb-btn tb-reservas" onclick="abrirConsultaEstado()">📋 Mis reservas</button>
+    <span>👤 <span class="tb-user" id="tbNombre"></span></span>
+    <button class="tb-btn tb-reservas" onclick="abrirConsultaEstado()">📋 Reservas</button>
     <button class="tb-btn tb-alergia" onclick="abrirAlergias()">🌿 Alergias</button>
     <button class="tb-btn tb-logout" onclick="cerrarSesion()">🚪 Salir</button>
   </div>
@@ -1403,49 +1410,28 @@ Detrás de cada plato boliviano hay una historia, una familia y mucho cariño pu
 
 // 🟢 FUNCIÓN MEJORADA PARA WHATSAPP
 function enviarPresupuestoWA() {
-  // 1. Verificar sesión
   if (!usuarioActual) {
     toast("Debes registrarte primero para usar esta función", "error");
     return;
   }
-
-  // 2. Verificar que exista el teléfono
   if (!usuarioActual.telefono || usuarioActual.telefono.trim() === "") {
     toast("⚠️ No tienes un número de teléfono registrado. Actualiza tu perfil.", "error");
     return;
   }
-
-  // 3. Limpiar el número: solo dígitos
   let tel = usuarioActual.telefono.replace(/\D/g, "");
-  
-  // 4. Asegurar código de país Bolivia (591)
-  if (!tel.startsWith("591")) {
-    tel = "591" + tel;
-  }
-
-  // 5. Validar longitud mínima (después del código deben quedar al menos 8 dígitos)
-  if (tel.length < 11) { // 591 + 8 dígitos = 11
+  if (!tel.startsWith("591")) tel = "591" + tel;
+  if (tel.length < 11) {
     toast("⚠️ El número de teléfono parece incompleto. Debe tener al menos 8 dígitos después del código de país.", "error");
     console.warn("Teléfono inválido:", tel);
     return;
   }
-
-  // 6. Generar el mensaje del presupuesto
   const { texto } = calcResumen();
-
-  // 7. Construir la URL de WhatsApp
   const waUrl = `https://wa.me/${tel}?text=${encodeURIComponent(texto)}`;
-
-  // 8. Abrir WhatsApp (con manejo de bloqueo de pop-ups)
   try {
     const ventana = window.open(waUrl, "_blank");
     if (!ventana || ventana.closed || typeof ventana.closed === 'undefined') {
-      // Si el pop-up fue bloqueado, ofrecemos una alternativa
       toast("⚠️ Tu navegador bloqueó la ventana emergente. Copia el enlace manualmente.", "info");
       console.log("Abre este enlace en tu navegador:", waUrl);
-      // Mostrar el enlace en un mensaje para que el usuario lo copie
-      // Podríamos copiarlo al portapapeles, pero es más sencillo mostrarlo en la consola.
-      // También podríamos mostrar un alert, pero usamos toast.
     } else {
       toast("📲 Abriendo WhatsApp...", "info");
     }
