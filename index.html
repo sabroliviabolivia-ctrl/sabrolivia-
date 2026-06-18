@@ -500,9 +500,9 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
       </div>
       <div id="spPanelNuevo">
         <p class="sp-panel-sub">Regístrate gratis para reservar y explorar</p>
-        <input class="sp-input" type="text"  id="spNombre"   placeholder="Nombre completo *">
-        <input class="sp-input" type="tel"   id="spTelefono" placeholder="Teléfono * (+591 7XXXXXXX)">
-        <input class="sp-input" type="email" id="spCorreo"   placeholder="Correo electrónico *">
+        <input class="sp-input" type="text"  id="spNombre"   placeholder="Nombre completo *" required>
+        <input class="sp-input" type="tel"   id="spTelefono" placeholder="Teléfono * (ej: 59170000000)" required>
+        <input class="sp-input" type="email" id="spCorreo"   placeholder="Correo electrónico *" required>
         <div class="sp-2col">
           <select class="sp-select" id="spCiudad">
             <option value="Santa Cruz">📍 Santa Cruz</option>
@@ -516,7 +516,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
       </div>
       <div id="spPanelExiste" style="display:none">
         <p class="sp-panel-sub">Ingresa tu correo para recuperar tu sesión</p>
-        <input class="sp-input" type="email" id="spCorreoExiste" placeholder="tu@correo.com *">
+        <input class="sp-input" type="email" id="spCorreoExiste" placeholder="tu@correo.com *" required>
         <button class="sp-btn" id="spBtnEntrar">🚀 Ingresar</button>
       </div>
       <p class="sp-status" id="spStatus"></p>
@@ -524,7 +524,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- ══ SIDEBAR (sin pestaña Inicio) ══ -->
+<!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
   <div class="sb-logo">🇧🇴 Sabrolivia</div>
   <a href="#" class="nav-item ni-rest active" onclick="showPage('restaurantes',this)"><span class="ni-icon">🍽️</span><span class="ni-label">Restaurantes</span></a>
@@ -554,7 +554,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 <!-- ══ MAIN ══ -->
 <main>
 
-<!-- RESTAURANTES (primera página visible) -->
+<!-- RESTAURANTES -->
 <div id="pageRestaurantes" class="page active">
   <div class="sec-page">
     <div class="sec-header">
@@ -689,7 +689,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <div style="background:var(--panel);border:1px solid var(--glass-border);border-radius:26px;padding:1.8rem;max-width:580px;box-shadow:var(--sombra);">
       <div class="form-group"><label>Tu nombre</label><input type="text" id="ctcNombre" placeholder="Tu nombre"></div>
       <div class="form-group"><label>Correo electrónico</label><input type="email" id="ctcEmail" placeholder="tu@email.com"></div>
-      <div class="form-group"><label>Mensaje</label><textarea id="ctcMsg" rows="4" placeholder="Cuéntanos tu experiencia..."></textarea></div>
+      <div class="form-group"><label>Mensaje</label><textarea id="ctcMsg" rows="4" placeholder="Cuéntanos tu experiencia..." required></textarea></div>
       <button class="btn-enviar" id="btnContacto">Enviar Mensaje</button>
     </div>
   </div>
@@ -709,12 +709,12 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <h3>🍽️ Reservar Mesa</h3>
     <p style="font-size:.95rem;color:rgba(200,185,220,.55);margin-bottom:.75rem"><strong id="resNombreRest" style="color:var(--gold)"></strong></p>
     <div id="alergWarningReserva" class="alerg-warning">⚠️ Este restaurante puede contener <span id="alergIngrsWarn"></span>. ¿Aún deseas reservar?</div>
-    <div class="form-group"><label>Nombre *</label><input type="text" id="resNombre"></div>
-    <div class="form-group"><label>Teléfono * (con código de país, ej: 59170000000)</label><input type="tel" id="resTel" placeholder="+591 7XXXXXXX"></div>
-    <div class="form-group"><label>Correo *</label><input type="email" id="resEmail"></div>
+    <div class="form-group"><label>Nombre *</label><input type="text" id="resNombre" required></div>
+    <div class="form-group"><label>Teléfono * (con código de país, ej: 59170000000)</label><input type="tel" id="resTel" placeholder="59170000000" required></div>
+    <div class="form-group"><label>Correo *</label><input type="email" id="resEmail" required></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem">
-      <div class="form-group"><label>Fecha *</label><input type="date" id="resFecha"></div>
-      <div class="form-group"><label>Hora *</label><input type="time" id="resHora"></div>
+      <div class="form-group"><label>Fecha *</label><input type="date" id="resFecha" required></div>
+      <div class="form-group"><label>Hora *</label><input type="time" id="resHora" required></div>
     </div>
     <div class="form-group"><label>Tipo de comida</label>
       <select id="resTipoComida">
@@ -724,7 +724,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
       </select>
     </div>
     <div class="form-group"><label>Personas *</label>
-      <select id="resPersonas">
+      <select id="resPersonas" required>
         <option value="1">1 persona</option><option value="2" selected>2 personas</option>
         <option value="3">3 personas</option><option value="4">4 personas</option>
         <option value="5">5 personas</option><option value="6+">6+ personas</option>
@@ -754,14 +754,14 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   <div class="modal"><div class="modal-body">
     <button class="modal-close" onclick="cerrar('modalOpinion')">&times;</button>
     <h3>⭐ Dejar Opinión</h3>
-    <div class="form-group"><label>Tu nombre</label><input type="text" id="opNombre"></div>
-    <div class="form-group"><label>Restaurante</label><select id="opRest"></select></div>
+    <div class="form-group"><label>Tu nombre</label><input type="text" id="opNombre" required></div>
+    <div class="form-group"><label>Restaurante</label><select id="opRest" required></select></div>
     <div class="form-group"><label>Calificación</label>
       <div class="stars" id="starsContainer">
         <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
       </div>
     </div>
-    <div class="form-group"><label>Comentario</label><textarea id="opTexto" rows="3"></textarea></div>
+    <div class="form-group"><label>Comentario</label><textarea id="opTexto" rows="3" required></textarea></div>
     <button class="btn-enviar" id="btnOpinion">📤 Enviar Opinión</button>
   </div></div>
 </div>
@@ -807,7 +807,7 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 // ══════════════════════════════════════════════
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz9eWTYqeIvV4d8KkiINNh4x5D2wPBYWVFAsVg5VrOIdnMEu7h_P4K-VGIYdJe0XkaQQ/exec";
 
-// ══ DATOS RESTAURANTES (actualizados con links limpios) ══
+// ══ DATOS RESTAURANTES (extra) ══
 const RESTAURANTES_EXTRA = {
   "RINCON PACEÑO":{
     maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66",
@@ -895,7 +895,6 @@ const RESTAURANTES_EXTRA = {
   }
 };
 
-// ── Helper: busca el key correcto en RESTAURANTES_EXTRA ──
 function getRestKey(nombre){
   const n = (nombre||"").toUpperCase();
   return Object.keys(RESTAURANTES_EXTRA).find(k => n.includes(k) || k.includes(n)) || null;
@@ -963,12 +962,23 @@ async function llamarScript(action, params={}){
   const r=await fetch(url.toString());
   return await r.json();
 }
+
 async function fetchPOST(action, data={}){
   try{
-    await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify({action,...data})});
-    return{exito:true};
-  }catch(e){return{exito:false};}
+    const resp = await fetch(SCRIPT_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain"},
+      body:JSON.stringify({action,...data})
+    });
+    const resultado = await resp.json();
+    const exito = !!resultado.success;
+    const mensaje = resultado.mensaje || resultado.error || (exito ? "Operación completada" : "Ocurrió un error en el servidor");
+    return { exito, mensaje };
+  }catch(e){
+    return { exito: false, mensaje: "Error de conexión con el servidor" };
+  }
 }
+
 function ytThumb(url){
   const m=url.match(/(?:youtu\.be\/|v=|v\/|embed\/)([a-zA-Z0-9_-]{11})/);
   return m?`https://img.youtube.com/vi/${m[1]}/mqdefault.jpg`:"";
@@ -1020,10 +1030,15 @@ document.getElementById("spBtnRegistrar").addEventListener("click",async()=>{
     }
   }catch(e){}
   btn.textContent="⏳ Registrando...";
-  await fetchPOST("registrarUsuario",{nombre,telefono,correo,ciudad,interes});
-  sesionIniciada({nombre,telefono,correo,ciudad,interes});
-  status.style.color="rgba(0,229,160,.9)";status.textContent="¡Bienvenido "+nombre.split(" ")[0]+"!";
-  setTimeout(ocultarSplash,900);
+  const resp = await fetchPOST("registrarUsuario",{nombre,telefono,correo,ciudad,interes});
+  if(resp.exito){
+    sesionIniciada({nombre,telefono,correo,ciudad,interes});
+    status.style.color="rgba(0,229,160,.9)";status.textContent="¡Bienvenido "+nombre.split(" ")[0]+"!";
+    setTimeout(ocultarSplash,900);
+  }else{
+    status.style.color="rgba(255,107,53,.9)";status.textContent="❌ Error al registrar: "+resp.mensaje;
+    btn.disabled=false;btn.textContent="✅ Registrarme e ingresar";
+  }
 });
 
 document.getElementById("spBtnEntrar").addEventListener("click",async()=>{
@@ -1247,7 +1262,6 @@ function generarFiltros(){
   }));
 }
 
-// Botón micro que redirige a cruzero.net/routes
 function microBtn(){
   return `<a class="btn-micro" href="https://cruzero.net/routes" target="_blank" rel="noopener">🚌 Cómo llegar en micro</a>`;
 }
@@ -1386,14 +1400,60 @@ Detrás de cada plato boliviano hay una historia, una familia y mucho cariño pu
 ¡Buen provecho y que la pasen lindo en familia! 🇧🇴✨`;
   return{texto,total:d.total,rest};
 }
-function enviarPresupuestoWA(){
-  if(!usuarioActual){toast("Regístrate primero","error");return;}
-  const{texto}=calcResumen();
-  // Limpieza del teléfono: solo dígitos, y aseguramos el código de país de Bolivia (591)
-  const tel=(usuarioActual.telefono||"").replace(/\D/g,"").replace(/^(?!591)/,"591");
-  const waUrl=tel?`https://wa.me/${tel}?text=${encodeURIComponent(texto)}`:`https://wa.me/?text=${encodeURIComponent(texto)}`;
-  window.open(waUrl,"_blank");
+
+// 🟢 FUNCIÓN MEJORADA PARA WHATSAPP
+function enviarPresupuestoWA() {
+  // 1. Verificar sesión
+  if (!usuarioActual) {
+    toast("Debes registrarte primero para usar esta función", "error");
+    return;
+  }
+
+  // 2. Verificar que exista el teléfono
+  if (!usuarioActual.telefono || usuarioActual.telefono.trim() === "") {
+    toast("⚠️ No tienes un número de teléfono registrado. Actualiza tu perfil.", "error");
+    return;
+  }
+
+  // 3. Limpiar el número: solo dígitos
+  let tel = usuarioActual.telefono.replace(/\D/g, "");
+  
+  // 4. Asegurar código de país Bolivia (591)
+  if (!tel.startsWith("591")) {
+    tel = "591" + tel;
+  }
+
+  // 5. Validar longitud mínima (después del código deben quedar al menos 8 dígitos)
+  if (tel.length < 11) { // 591 + 8 dígitos = 11
+    toast("⚠️ El número de teléfono parece incompleto. Debe tener al menos 8 dígitos después del código de país.", "error");
+    console.warn("Teléfono inválido:", tel);
+    return;
+  }
+
+  // 6. Generar el mensaje del presupuesto
+  const { texto } = calcResumen();
+
+  // 7. Construir la URL de WhatsApp
+  const waUrl = `https://wa.me/${tel}?text=${encodeURIComponent(texto)}`;
+
+  // 8. Abrir WhatsApp (con manejo de bloqueo de pop-ups)
+  try {
+    const ventana = window.open(waUrl, "_blank");
+    if (!ventana || ventana.closed || typeof ventana.closed === 'undefined') {
+      // Si el pop-up fue bloqueado, ofrecemos una alternativa
+      toast("⚠️ Tu navegador bloqueó la ventana emergente. Copia el enlace manualmente.", "info");
+      console.log("Abre este enlace en tu navegador:", waUrl);
+      // Mostrar el enlace en un mensaje para que el usuario lo copie
+      // Podríamos copiarlo al portapapeles, pero es más sencillo mostrarlo en la consola.
+      // También podríamos mostrar un alert, pero usamos toast.
+    } else {
+      toast("📲 Abriendo WhatsApp...", "info");
+    }
+  } catch (error) {
+    toast("❌ Error al abrir WhatsApp: " + error.message, "error");
+  }
 }
+
 function enviarPresupuestoMail(){
   if(!usuarioActual){toast("Regístrate primero","error");return;}
   const{texto,rest}=calcResumen();
@@ -1456,34 +1516,32 @@ document.getElementById("btnReserva").addEventListener("click",async()=>{
   if(!nombre||!telefono||!correo||!fecha||!hora){toast("Completa todos los campos obligatorios","error");return;}
   document.getElementById("resStatus").textContent="⏳ Enviando...";
   document.getElementById("btnReserva").disabled=true;
-  await fetchPOST("crearSolicitud",{tipo:"Reserva",nombre,telefono,correo,restaurante,fecha,hora,personas,extras,nota,tipoComida,montoEstimado:total+"Bs",estado:"Pendiente"});
-
-  // Mensaje WhatsApp completo
-  const key=getRestKey(restaurante);
-  const info=key?RESTAURANTES_EXTRA[key]:null;
-  const maps=info&&info.maps?`\n📍 Maps: ${info.maps}`:"";
-  const msgWA=`🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
-
+  const resp = await fetchPOST("crearSolicitud",{tipo:"Reserva",nombre,telefono,correo,restaurante,fecha,hora,personas,extras,nota,tipoComida,montoEstimado:total+"Bs",estado:"Pendiente"});
   document.getElementById("btnReserva").disabled=false;
-  cerrar("modalReserva");
-  toast(`✅ Reserva enviada a ${restaurante}`);
-
-  // WhatsApp: limpiar el teléfono del usuario (solo dígitos, sin + ni espacios)
-  const telUsuario=(usuarioActual&&usuarioActual.telefono||telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
-  if(telUsuario){
+  if(resp.exito){
+    cerrar("modalReserva");
+    toast(`✅ Reserva enviada a ${restaurante}`);
+    const key=getRestKey(restaurante);
+    const info=key?RESTAURANTES_EXTRA[key]:null;
+    const maps=info&&info.maps?`\n📍 Maps: ${info.maps}`:"";
+    const msgWA=`🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
+    const telUsuario=(usuarioActual&&usuarioActual.telefono||telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
+    if(telUsuario){
+      setTimeout(()=>{
+        if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
+          window.open(`https://wa.me/${telUsuario}?text=${encodeURIComponent(msgWA)}`,"_blank");
+        }
+      },500);
+    }
     setTimeout(()=>{
-      if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
-        window.open(`https://wa.me/${telUsuario}?text=${encodeURIComponent(msgWA)}`,"_blank");
-      }
-    },500);
+      const mailSubject=encodeURIComponent(`Reserva en ${restaurante} – ${fecha}`);
+      const mailBody=encodeURIComponent(msgWA.replace(/\*/g,""));
+      window.open(`mailto:${correo}?subject=${mailSubject}&body=${mailBody}`,"_blank");
+    },1500);
+  }else{
+    document.getElementById("resStatus").textContent="❌ "+resp.mensaje;
+    toast("No se pudo guardar la reserva, intente nuevamente", "error");
   }
-
-  // Envío adicional por correo (mailto)
-  setTimeout(()=>{
-    const mailSubject=encodeURIComponent(`Reserva en ${restaurante} – ${fecha}`);
-    const mailBody=encodeURIComponent(msgWA.replace(/\*/g,""));
-    window.open(`mailto:${correo}?subject=${mailSubject}&body=${mailBody}`,"_blank");
-  },1500);
 });
 
 // ══ MIS RESERVAS ══
@@ -1523,10 +1581,14 @@ document.getElementById("btnOpinion").addEventListener("click",async()=>{
   const restaurante=document.getElementById("opRest").value;
   const comentario=document.getElementById("opTexto").value.trim();
   if(!comentario||starsVal===0){toast("Completa el comentario y calificación","error");return;}
-  await fetchPOST("crearSolicitud",{tipo:"Opinión",nombre,correo:usuarioActual.correo,restaurante,calificacion:starsVal+"★",comentario,estado:"Publicado"});
-  cerrar("modalOpinion");toast("¡Gracias por tu opinión! ⭐");
-  starsVal=0;document.querySelectorAll("#starsContainer span").forEach(s=>s.classList.remove("active"));
-  document.getElementById("opTexto").value="";
+  const resp=await fetchPOST("crearSolicitud",{tipo:"Opinión",nombre,correo:usuarioActual.correo,restaurante,calificacion:starsVal+"★",comentario,estado:"Publicado"});
+  if(resp.exito){
+    cerrar("modalOpinion");toast("¡Gracias por tu opinión! ⭐");
+    starsVal=0;document.querySelectorAll("#starsContainer span").forEach(s=>s.classList.remove("active"));
+    document.getElementById("opTexto").value="";
+  }else{
+    toast("Error al enviar opinión: "+resp.mensaje, "error");
+  }
 });
 document.getElementById("btnOpinarFloat").addEventListener("click",()=>{
   if(!usuarioActual){toast("Regístrate para opinar","error");return;}
@@ -1539,9 +1601,13 @@ document.getElementById("btnContacto").addEventListener("click",async()=>{
   if(!usuarioActual){toast("Regístrate para contactarnos","error");return;}
   const mensaje=document.getElementById("ctcMsg").value.trim();
   if(!mensaje){toast("Escribe un mensaje","error");return;}
-  await fetchPOST("crearSolicitud",{tipo:"Contacto",nombre:usuarioActual.nombre,correo:usuarioActual.correo,mensaje,estado:"Pendiente"});
-  toast("📨 Mensaje enviado. Te contactaremos pronto.");
-  document.getElementById("ctcMsg").value="";
+  const resp=await fetchPOST("crearSolicitud",{tipo:"Contacto",nombre:usuarioActual.nombre,correo:usuarioActual.correo,mensaje,estado:"Pendiente"});
+  if(resp.exito){
+    toast("📨 Mensaje enviado. Te contactaremos pronto.");
+    document.getElementById("ctcMsg").value="";
+  }else{
+    toast("Error al enviar mensaje: "+resp.mensaje, "error");
+  }
 });
 
 // ══ MAPA HISTÓRICO ══
