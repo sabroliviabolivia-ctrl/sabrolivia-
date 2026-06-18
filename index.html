@@ -205,6 +205,8 @@ main{margin-left:68px;min-height:100vh;}
   display:inline-flex;align-items:center;gap:.25rem;padding:.28rem .7rem;border-radius:10px;
   font-size:.82rem;font-weight:700;text-decoration:none;transition:.18s;border:none;cursor:pointer;font-family:'Inter',sans-serif;
 }
+.sb-wa-rest{background:rgba(37,211,102,.14);color:#25D366;}
+.sb-wa-rest:hover{background:#25D366;color:#fff;}
 .sb-maps{background:rgba(26,115,232,.12);color:#4A90E2;}
 .sb-maps:hover{background:#1a73e8;color:#fff;}
 .sb-fb{background:rgba(24,119,242,.1);color:#5B8DEF;}
@@ -811,72 +813,84 @@ const RESTAURANTES_EXTRA = {
     maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66",
     fb:"https://www.facebook.com/share/1B3ooPsGPF/",
     tt:"https://www.tiktok.com/@el.rincon.paceo",
+    wa:"78763081",
     alergenos:["gluten","cerdo"]
   },
   "LA CASA DEL CAMBA":{
     maps:"https://maps.app.goo.gl/aq7ih3qdPaxxdorLA",
     fb:"https://www.facebook.com/share/1FmKXTqPqb/",
     tt:"https://www.tiktok.com/@casadelcambaoficial",
+    wa:"76003877",
     alergenos:["gluten","cerdo"]
   },
   "SUCREMANTA":{
     maps:"https://maps.app.goo.gl/GjbCmfWkiiazLSWKA",
     fb:"https://www.facebook.com/share/1DxP1grKdo/",
     tt:"https://www.tiktok.com/@sucremantaestradi",
+    wa:"77839392",
     alergenos:["gluten","lactosa"]
   },
   "LA BODEGA BOLIVIANA":{
     maps:"https://maps.app.goo.gl/MbTFqf18jBxjHPpx9",
     fb:"https://www.facebook.com/share/1D2rnAD5ax/",
     tt:"https://www.tiktok.com/@bodega.boliviana",
+    wa:"78894436",
     alergenos:["gluten","cerdo","huevo"]
   },
   "EL AJIBE COMIDA TIPICA":{
     maps:"https://maps.app.goo.gl/rNvA5scV5rx7D2cU6",
     fb:"https://www.facebook.com/share/1aGftybXf1/",
     tt:"https://www.tiktok.com/@elaljibecomidatipica",
+    wa:"70288881",
     alergenos:["cerdo","gluten"]
   },
   "GUSTITOS BOLIVIANOS":{
     maps:"https://maps.app.goo.gl/qCtHhfQDdgFsS9QE6",
     fb:"https://www.facebook.com/share/1HD6dtqvEz/",
     tt:"https://www.tiktok.com/@restaurantgustitos",
+    wa:"69501915",
     alergenos:["huevo","gluten"]
   },
   "LA RUFINA BOLIVIA":{
     maps:"https://maps.app.goo.gl/dXFVxXYzu56KxHo6A",
     fb:"https://www.facebook.com/share/1LBfwWoDvF/",
     tt:"https://www.tiktok.com/@larufinabolivia",
+    wa:"68216777",
     alergenos:["gluten","cerdo"]
   },
   "RESTAURANT DOÑA REMEDIOS":{
     maps:"https://maps.app.goo.gl/6A4hKfhHtqkPoiDu5",
     fb:"https://www.facebook.com/share/14ewXP2psFc/",
     tt:"",
+    wa:"74855203",
     alergenos:["huevo","lactosa"]
   },
   "CASA DE CAMPO":{
     maps:"https://maps.app.goo.gl/r2prXjjnQsesradd7",
     fb:"https://www.facebook.com/share/19BvvY2ai1/",
     tt:"https://www.tiktok.com/@restcdc",
+    wa:"44243937",
     alergenos:["gluten","cerdo","huevo"]
   },
   "CAYENNA RESTAURANT":{
     maps:"https://maps.app.goo.gl/fEnnjhght7iYXagQ6",
     fb:"https://www.facebook.com/share/1EPgyeTTYR/",
     tt:"https://www.tiktok.com/@cayenna.bistrocafe",
+    wa:"62845067",
     alergenos:["lactosa","gluten"]
   },
   "HEREDAD DE JACOB":{
     maps:"https://maps.app.goo.gl/XqMHNXivrAaeDSZ1A",
     fb:"https://www.facebook.com/share/1AnwvM5xkf/",
     tt:"https://www.tiktok.com/@laheredaddejacobturismo",
+    wa:"78247190",
     alergenos:["gluten","huevo"]
   },
   "LA CASA DE DOÑA PASTORITA":{
     maps:"https://maps.app.goo.gl/nGB2gktLVBuTJV9X7",
     fb:"https://www.facebook.com/share/18eL2EbtA4/",
     tt:"https://www.tiktok.com/@saicepastorita",
+    wa:"70227000",
     alergenos:["cerdo","gluten"]
   }
 };
@@ -1161,6 +1175,10 @@ function buildSocialRow(nombre){
   const info=key?RESTAURANTES_EXTRA[key]:null;
   if(!info) return "";
   let html='<div class="social-row">';
+  if(info.wa){
+    const msj=encodeURIComponent("Buenas, ¿tendría mesas disponibles para hacer una reserva en su restaurante?");
+    html+=`<a class="social-btn sb-wa-rest" href="https://wa.me/591${info.wa}?text=${msj}" target="_blank" rel="noopener">💬 WhatsApp</a>`;
+  }
   if(info.maps) html+=`<a class="social-btn sb-maps" href="${info.maps}" target="_blank" rel="noopener">📍 Maps</a>`;
   if(info.fb)   html+=`<a class="social-btn sb-fb"   href="${info.fb}"   target="_blank" rel="noopener">📘 Facebook</a>`;
   if(info.tt)   html+=`<a class="social-btn sb-tt"   href="${info.tt}"   target="_blank" rel="noopener">🎵 TikTok</a>`;
@@ -1347,15 +1365,32 @@ function calcResumen(){
   const rest=document.getElementById("calcRest").value||"—";
   const key=getRestKey(rest);
   const info=key?RESTAURANTES_EXTRA[key]:null;
-  const maps=info&&info.maps?`\n📍 Maps: ${info.maps}`:"";
-  const fb=info&&info.fb?`\n📘 Facebook: ${info.fb}`:"";
-  return{texto:`🇧🇴 *Sabrolivia – Presupuesto estimado*\n\n🏪 ${rest}\n🍽️ ${d.tipo}\n👥 ${d.personas}p · ${d.platos}pl/p\n\n💰 Base: ${d.subtotal}Bs\n➕ Extras: ${d.extrasTotal}Bs\n✅ *TOTAL: ${d.total}Bs*${maps}${fb}`,total:d.total,rest};
+  const maps=info&&info.maps?`\n📍 Ubicación: ${info.maps}`:"";
+  const primerNombre=(usuarioActual&&usuarioActual.nombre)?usuarioActual.nombre.split(" ")[0]:"";
+  const saludo=primerNombre?`¡Hola ${primerNombre}! 👋🇧🇴`:"¡Hola! 👋🇧🇴";
+  const texto=
+`${saludo}
+
+Aquí tienes el presupuesto que armaste con Sabrolivia, pensado para que disfrutes la mejor comida boliviana sin sorpresas en el bolsillo:
+
+🏪 *${rest}*
+🍽️ ${d.tipo}
+👥 ${d.personas} persona(s) · ${d.platos} plato(s) por persona
+
+💰 Base: ${d.subtotal} Bs
+➕ Extras: ${d.extrasTotal} Bs
+✅ *TOTAL ESTIMADO: ${d.total} Bs*${maps}
+
+Detrás de cada plato boliviano hay una historia, una familia y mucho cariño puesto en la cocina. Gracias por elegir Sabrolivia para descubrir y disfrutar nuestra gastronomía 🥘💛
+
+¡Buen provecho y que la pasen lindo en familia! 🇧🇴✨`;
+  return{texto,total:d.total,rest};
 }
 function enviarPresupuestoWA(){
   if(!usuarioActual){toast("Regístrate primero","error");return;}
   const{texto}=calcResumen();
-  // Limpieza del teléfono: solo dígitos
-  const tel=(usuarioActual.telefono||"").replace(/\D/g,"");
+  // Limpieza del teléfono: solo dígitos, y aseguramos el código de país de Bolivia (591)
+  const tel=(usuarioActual.telefono||"").replace(/\D/g,"").replace(/^(?!591)/,"591");
   const waUrl=tel?`https://wa.me/${tel}?text=${encodeURIComponent(texto)}`:`https://wa.me/?text=${encodeURIComponent(texto)}`;
   window.open(waUrl,"_blank");
 }
@@ -1434,7 +1469,7 @@ document.getElementById("btnReserva").addEventListener("click",async()=>{
   toast(`✅ Reserva enviada a ${restaurante}`);
 
   // WhatsApp: limpiar el teléfono del usuario (solo dígitos, sin + ni espacios)
-  const telUsuario=(usuarioActual&&usuarioActual.telefono||telefono).replace(/\D/g,"");
+  const telUsuario=(usuarioActual&&usuarioActual.telefono||telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
   if(telUsuario){
     setTimeout(()=>{
       if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
