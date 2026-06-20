@@ -167,6 +167,36 @@ main{margin-left:68px;min-height:100vh;}
 .menu-seccion{font-weight:700;color:var(--ember);font-size:.8rem;margin:.5rem 0 .15rem;text-transform:uppercase;letter-spacing:.1em;}
 .loader{text-align:center;padding:3rem;color:rgba(200,185,220,.35);font-size:.9rem;}
 
+/* ══ PLATO ESTRELLA (NUEVO) ══ */
+.plato-estrella-row{
+  display:flex;align-items:center;gap:.65rem;
+  margin:.55rem 0 .25rem;
+  padding:.5rem .6rem;
+  background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(255,107,53,.05));
+  border:1px solid rgba(245,166,35,.22);
+  border-radius:14px;
+}
+.pe-thumb-wrap{
+  width:58px;height:58px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid var(--gold);box-shadow:0 4px 12px rgba(245,166,35,.35);
+  position:relative;background:var(--panel2);
+}
+.pe-thumb-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  /* object-position se ajusta por inline style según cada plato */
+}
+.pe-info{display:flex;flex-direction:column;gap:.05rem;min-width:0;flex:1;}
+.pe-label{
+  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gold);font-weight:700;
+}
+.pe-nombre{
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;
+  color:#F0E8FF;line-height:1.15;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.pe-star{font-size:.85rem;flex-shrink:0;}
+
 /* ══ FILTROS ══ */
 .filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.8rem;}
 .filtros button{
@@ -609,12 +639,11 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 </footer>
 </main>
 
-<!-- ══ MODAL LOGIN/REGISTRO (estilo oscuro como antes) ══ -->
+<!-- ══ MODAL LOGIN/REGISTRO ══ -->
 <div class="modal-overlay" id="modalLogin">
   <div class="modal" style="background:rgba(15,12,16,0.96); border:1px solid rgba(245,166,35,.18);">
     <div class="modal-body" style="padding:1.8rem;">
       <button class="modal-close" onclick="cerrar('modalLogin')" style="color:rgba(200,185,220,.4);">&times;</button>
-      <!-- Imagen pequeña encima -->
       <div style="display:flex; justify-content:center; margin-bottom:0.5rem;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJyGq_QektIzFB7Iz0xcum8FltLbzquDytw&s" alt="Sabrolivia" style="max-width:70px; border-radius:12px; opacity:0.7; border:1px solid rgba(245,166,35,.2);">
       </div>
@@ -754,90 +783,129 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz9eWTYqeIvV4d8KkiINNh4x5D2wPBYWVFAsVg5VrOIdnMEu7h_P4K-VGIYdJe0XkaQQ/exec";
 
 // ══ DATOS RESTAURANTES (extra) ══
+// NUEVO: cada restaurante ahora incluye su "plato" (nombre del plato estrella),
+// "platoImg" (imagen del plato) y "platoPos" (object-position CSS para encuadrar
+// bien el plato dentro del círculo, evitando logos/texto cuando es posible).
 const RESTAURANTES_EXTRA = {
   "RINCON PACEÑO":{
     maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66",
     fb:"https://www.facebook.com/share/1B3ooPsGPF/",
     tt:"https://www.tiktok.com/@el.rincon.paceo",
     wa:"78763081",
-    alergenos:["gluten","cerdo"]
+    alergenos:["gluten","cerdo"],
+    plato:"Ispi",
+    platoImg:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ispi_Pace%C3%B1o.jpg/960px-Ispi_Pace%C3%B1o.jpg",
+    platoPos:"center 40%"
   },
   "LA CASA DEL CAMBA":{
     maps:"https://maps.app.goo.gl/aq7ih3qdPaxxdorLA",
     fb:"https://www.facebook.com/share/1FmKXTqPqb/",
     tt:"https://www.tiktok.com/@casadelcambaoficial",
     wa:"76003877",
-    alergenos:["gluten","cerdo"]
+    alergenos:["gluten","cerdo"],
+    plato:"Majadito",
+    platoImg:"https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/05/majadito-de-charque-Paulina-Cocina-Recetas-1722430370.jpg",
+    platoPos:"center 35%"
   },
   "SUCREMANTA":{
     maps:"https://maps.app.goo.gl/GjbCmfWkiiazLSWKA",
     fb:"https://www.facebook.com/share/1DxP1grKdo/",
     tt:"https://www.tiktok.com/@sucremantaestradi",
     wa:"77839392",
-    alergenos:["gluten","lactosa"]
+    alergenos:["gluten","lactosa"],
+    plato:"Menudito",
+    platoImg:"https://pxcdn.reduno.com.bo/reduno/102021/1633357722127.webp?cw=800&ch=450&extw=jpg",
+    platoPos:"center 55%"
   },
   "LA BODEGA BOLIVIANA":{
     maps:"https://maps.app.goo.gl/MbTFqf18jBxjHPpx9",
     fb:"https://www.facebook.com/share/1D2rnAD5ax/",
     tt:"https://www.tiktok.com/@bodega.boliviana",
     wa:"78894436",
-    alergenos:["gluten","cerdo","huevo"]
+    alergenos:["gluten","cerdo","huevo"],
+    plato:"Fideos Uchu's",
+    platoImg:"https://pxcdn.reduno.com.bo/reduno/062018/1544509859861.webp?cw=800&ch=450&extw=png",
+    platoPos:"center 55%"
   },
   "EL AJIBE COMIDA TIPICA":{
     maps:"https://maps.app.goo.gl/rNvA5scV5rx7D2cU6",
     fb:"https://www.facebook.com/share/1aGftybXf1/",
     tt:"https://www.tiktok.com/@elaljibecomidatipica",
     wa:"70288881",
-    alergenos:["cerdo","gluten"]
+    alergenos:["cerdo","gluten"],
+    plato:"Locro Carretero",
+    platoImg:"https://pxcdn.eldeber.com.bo/eldeber/40821/092025/1757313936746.webp?cw=1200&ch=675&extw=jpg",
+    platoPos:"center 55%"
   },
   "GUSTITOS BOLIVIANOS":{
     maps:"https://maps.app.goo.gl/qCtHhfQDdgFsS9QE6",
     fb:"https://www.facebook.com/share/1HD6dtqvEz/",
     tt:"https://www.tiktok.com/@restaurantgustitos",
     wa:"69501915",
-    alergenos:["huevo","gluten"]
+    alergenos:["huevo","gluten"],
+    plato:"Thimpu de Cordero",
+    platoImg:"https://upload.wikimedia.org/wikipedia/commons/8/8e/Thimpu_2.jpg",
+    platoPos:"center 40%"
   },
   "LA RUFINA BOLIVIA":{
     maps:"https://maps.app.goo.gl/dXFVxXYzu56KxHo6A",
     fb:"https://www.facebook.com/share/1LBfwWoDvF/",
     tt:"https://www.tiktok.com/@larufinabolivia",
     wa:"68216777",
-    alergenos:["gluten","cerdo"]
+    alergenos:["gluten","cerdo"],
+    plato:"Mondongo",
+    platoImg:"https://www.cocina-boliviana.com/base/stock/Recipe/mondongo-chuquisaqueno/mondongo-chuquisaqueno_web.jpg.webp",
+    platoPos:"center 50%"
   },
   "RESTAURANT DOÑA REMEDIOS":{
     maps:"https://maps.app.goo.gl/6A4hKfhHtqkPoiDu5",
     fb:"https://www.facebook.com/share/14ewXP2psFc/",
     tt:"",
     wa:"74855203",
-    alergenos:["huevo","lactosa"]
+    alergenos:["huevo","lactosa"],
+    plato:"Fricasé Mixto",
+    platoImg:"https://upload.wikimedia.org/wikipedia/commons/c/cd/Fricase_mixto.jpg",
+    platoPos:"center 45%"
   },
   "CASA DE CAMPO":{
     maps:"https://maps.app.goo.gl/r2prXjjnQsesradd7",
     fb:"https://www.facebook.com/share/19BvvY2ai1/",
     tt:"https://www.tiktok.com/@restcdc",
     wa:"44243937",
-    alergenos:["gluten","cerdo","huevo"]
+    alergenos:["gluten","cerdo","huevo"],
+    plato:"Pique Macho",
+    platoImg:"https://estaticos-noticias.unitel.bo/binrepository/1121x512/49c0/1024d512/none/125450566/PANM/pique-macho-foto-la-batidora_289322020_1140x520_UN415197_MG172766577.jpeg",
+    platoPos:"center 50%"
   },
   "CAYENNA RESTAURANT":{
     maps:"https://maps.app.goo.gl/fEnnjhght7iYXagQ6",
     fb:"https://www.facebook.com/share/1EPgyeTTYR/",
     tt:"https://www.tiktok.com/@cayenna.bistrocafe",
     wa:"62845067",
-    alergenos:["lactosa","gluten"]
+    alergenos:["lactosa","gluten"],
+    plato:"Fricasé",
+    platoImg:"https://pxcdn.eldeber.com.bo/eldeber/19183/092025/1757307713993.webp?cw=1200&ch=675&extw=jpg",
+    platoPos:"center 55%"
   },
   "HEREDAD DE JACOB":{
     maps:"https://maps.app.goo.gl/XqMHNXivrAaeDSZ1A",
     fb:"https://www.facebook.com/share/1AnwvM5xkf/",
     tt:"https://www.tiktok.com/@laheredaddejacobturismo",
     wa:"78247190",
-    alergenos:["gluten","huevo"]
+    alergenos:["gluten","huevo"],
+    plato:"Chancho a la Cruz",
+    platoImg:"https://upload.wikimedia.org/wikipedia/commons/9/91/Chancho_a_la_Cruz.jpg",
+    platoPos:"center 45%"
   },
   "LA CASA DE DOÑA PASTORITA":{
     maps:"https://maps.app.goo.gl/nGB2gktLVBuTJV9X7",
     fb:"https://www.facebook.com/share/18eL2EbtA4/",
     tt:"https://www.tiktok.com/@saicepastorita",
     wa:"70227000",
-    alergenos:["cerdo","gluten"]
+    alergenos:["cerdo","gluten"],
+    plato:"Chancho a la Olla",
+    platoImg:"https://cookpad.com/bo/recipe/images/d18c1c45f41c38ea?image_region_id=5",
+    platoPos:"center 50%"
   }
 };
 
@@ -1197,6 +1265,26 @@ function getAlergInfoForRest(nombre){
   return (RESTAURANTES_EXTRA[key]&&RESTAURANTES_EXTRA[key].alergenos)||[];
 }
 
+// NUEVO: construye la fila de "Plato Estrella" — imagen circular del plato,
+// recortada con object-fit:cover + object-position, sin mover la foto principal.
+function buildPlatoEstrellaRow(nombre){
+  const key=getRestKey(nombre);
+  const info=key?RESTAURANTES_EXTRA[key]:null;
+  if(!info || !info.plato || !info.platoImg) return "";
+  const pos = info.platoPos || "center center";
+  const ph="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231D1525'/%3E%3Ctext x='50' y='58' font-size='34' text-anchor='middle' fill='%23F5A623'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E";
+  return `<div class="plato-estrella-row">
+    <div class="pe-thumb-wrap">
+      <img src="${info.platoImg}" alt="${info.plato}" loading="lazy" style="object-position:${pos}" onerror="this.onerror=null;this.src='${ph}'">
+    </div>
+    <div class="pe-info">
+      <span class="pe-label">Plato Estrella</span>
+      <span class="pe-nombre">${info.plato}</span>
+    </div>
+    <span class="pe-star">⭐</span>
+  </div>`;
+}
+
 function renderRestaurantes(filtro="todas"){
   const grid=document.getElementById("gridRestaurantes");
   const lista=filtro==="todas"?restaurantes:restaurantes.filter(r=>r.ciudad===filtro);
@@ -1226,6 +1314,7 @@ function renderRestaurantes(filtro="todas"){
         ${alergBadgeHTML}
         <h3>${r.nombre||""}</h3>
         <div class="card-city">📍 ${r.ciudad||""}</div>
+        ${buildPlatoEstrellaRow(r.nombre||"")}
         <div class="info-row">📞 ${r.telefono||"—"}</div>
         <div class="info-row">📌 ${r.direccion||"—"}</div>
         ${buildSocialRow(r.nombre||"")}
@@ -1489,7 +1578,6 @@ document.getElementById("btnReserva").addEventListener("click", async function()
   if(resp.exito){
     cerrar("modalReserva");
     toast(`✅ Reserva enviada a ${restaurante}`);
-    // Envío de confirmación WA/mail opcional (similar al anterior)
     const key = getRestKey(restaurante);
     const info = key ? RESTAURANTES_EXTRA[key] : null;
     const maps = info && info.maps ? `\n📍 Maps: ${info.maps}` : "";
