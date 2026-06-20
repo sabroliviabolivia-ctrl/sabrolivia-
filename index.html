@@ -19,70 +19,6 @@
 html{scroll-behavior:smooth;font-size:18px;}
 body{font-family:'Inter',sans-serif;background:var(--obsidian);color:#E8E0F0;line-height:1.6;overflow-x:hidden;}
 
-/* ══ SPLASH SCREEN ══ */
-#splashScreen{
-  position:fixed;inset:0;z-index:99999;
-  background:var(--obsidian);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity .7s,transform .7s;overflow:hidden;
-}
-#splashScreen.ocultar{opacity:0;transform:scale(1.03);pointer-events:none;}
-
-/* Imagen de fondo full */
-.sp-bg-img{
-  position:absolute;inset:0;
-  background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJyGq_QektIzFB7Iz0xcum8FltLbzquDytw&s');
-  background-size:cover;background-position:center;
-  filter:brightness(.32) saturate(.8);
-}
-.sp-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(8,6,8,.97) 0%, rgba(8,6,8,.55) 50%, transparent 100%);
-}
-
-.sp-content{
-  position:relative;z-index:2;text-align:center;
-  width:100%;max-width:420px;padding:1.5rem;
-  animation:spEnter .8s ease forwards;
-}
-@keyframes spEnter{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-
-/* Form card */
-.sp-card{
-  background:rgba(15,12,16,0.78);border:1px solid rgba(245,166,35,.18);
-  border-radius:24px;padding:1.8rem;backdrop-filter:blur(24px);
-  box-shadow:0 0 60px rgba(124,58,237,.12),var(--sombra);
-}
-.sp-tabs{display:flex;gap:.3rem;background:rgba(0,0,0,.4);border-radius:50px;padding:4px;margin-bottom:1.2rem;}
-.sp-tab{
-  flex:1;padding:.5rem;border:none;border-radius:50px;background:transparent;
-  color:rgba(255,255,255,.4);font-family:'Inter',sans-serif;font-size:.92rem;font-weight:700;cursor:pointer;transition:.2s;
-}
-.sp-tab.active{background:linear-gradient(135deg,var(--ember),var(--rose));color:#fff;box-shadow:0 4px 14px rgba(255,107,53,.4);}
-.sp-input{
-  width:100%;padding:.75rem 1.1rem;border:1.5px solid rgba(245,166,35,.2);border-radius:13px;
-  background:rgba(255,255,255,.05);color:#fff;font-family:'Inter',sans-serif;font-size:1rem;
-  margin-bottom:.65rem;outline:none;transition:border-color .2s;
-}
-.sp-input::placeholder{color:rgba(255,255,255,.3);}
-.sp-input:focus{border-color:var(--gold);}
-.sp-select{
-  width:100%;padding:.75rem 1.1rem;border:1.5px solid rgba(245,166,35,.2);border-radius:13px;
-  background:rgba(10,8,12,.9);color:#fff;font-family:'Inter',sans-serif;font-size:1rem;
-  margin-bottom:.65rem;outline:none;cursor:pointer;
-}
-.sp-2col{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
-.sp-btn{
-  width:100%;padding:.85rem;background:linear-gradient(135deg,var(--ember),var(--rose));
-  color:#fff;border:none;border-radius:50px;font-size:1.05rem;font-weight:700;
-  font-family:'Inter',sans-serif;cursor:pointer;transition:.2s;
-  box-shadow:0 6px 22px rgba(255,107,53,.4);margin-top:.45rem;
-}
-.sp-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,107,53,.5);}
-.sp-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.sp-panel-sub{color:rgba(255,255,255,.4);font-size:.88rem;margin-bottom:.85rem;text-align:center;}
-.sp-status{font-size:.88rem;margin-top:.55rem;min-height:1.1rem;text-align:center;}
-
 /* ══ SIDEBAR ══ */
 #sidebar{
   position:fixed;left:0;top:0;bottom:0;width:68px;
@@ -123,16 +59,15 @@ body{font-family:'Inter',sans-serif;background:var(--obsidian);color:#E8E0F0;lin
 /* ══ MAIN ══ */
 main{margin-left:68px;min-height:100vh;}
 
-/* ══ TOP BAR (post-login) ══ */
+/* ══ TOP BAR ══ */
 #topBar{
   position:fixed;top:0;right:0;left:68px;height:58px;
   background:rgba(10,6,12,0.92);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--glass-border);
-  display:none;align-items:center;justify-content:space-between;
+  display:flex;align-items:center;justify-content:space-between;
   padding:0 1.4rem;z-index:900;font-size:.95rem;
   color:rgba(200,185,220,.65);
 }
-#topBar.show{display:flex;}
 .tb-left{display:flex;align-items:center;gap:.8rem;}
 .tb-logo{
   font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;
@@ -153,6 +88,10 @@ main{margin-left:68px;min-height:100vh;}
 .tb-alergia:hover{background:rgba(0,229,160,.2);}
 .tb-logout{background:rgba(255,58,120,.08);border:1px solid rgba(255,58,120,.2);color:var(--rose);}
 .tb-logout:hover{background:rgba(255,58,120,.18);}
+.tb-login{background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);color:var(--violet2);}
+.tb-login:hover{background:rgba(124,58,237,.22);}
+.tb-registro{background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:var(--neon);}
+.tb-registro:hover{background:rgba(0,229,160,.2);}
 .alergia-badge{
   background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);
   color:var(--ember);padding:.22rem .65rem;border-radius:10px;font-size:.85rem;font-weight:700;
@@ -495,42 +434,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 <div id="toast"></div>
 <button id="btnOpinarFloat" title="Dejar opinión" style="display:none">💬</button>
 
-<!-- ══ SPLASH SCREEN ══ -->
-<div id="splashScreen">
-  <div class="sp-bg-img"></div>
-  <div class="sp-overlay"></div>
-  <div class="sp-content">
-    <div class="sp-card">
-      <div class="sp-tabs">
-        <button class="sp-tab active" onclick="spTab('nuevo',this)">✨ Soy nuevo</button>
-        <button class="sp-tab" onclick="spTab('existe',this)">🔑 Tengo cuenta</button>
-      </div>
-      <div id="spPanelNuevo">
-        <p class="sp-panel-sub">Regístrate gratis para reservar y explorar</p>
-        <input class="sp-input" type="text"  id="spNombre"   placeholder="Nombre completo *" required>
-        <input class="sp-input" type="tel"   id="spTelefono" placeholder="Teléfono * (ej: 59170000000)" required>
-        <input class="sp-input" type="email" id="spCorreo"   placeholder="Correo electrónico *" required>
-        <div class="sp-2col">
-          <select class="sp-select" id="spCiudad">
-            <option value="Santa Cruz">📍 Santa Cruz</option>
-            <option value="La Paz">📍 La Paz</option>
-            <option value="Cochabamba">📍 Cochabamba</option>
-            <option value="Tarija">📍 Tarija</option>
-          </select>
-          <input class="sp-input" style="margin-bottom:0" type="text" id="spInteres" placeholder="Interés (opcional)">
-        </div>
-        <button class="sp-btn" id="spBtnRegistrar">✅ Registrarme e ingresar</button>
-      </div>
-      <div id="spPanelExiste" style="display:none">
-        <p class="sp-panel-sub">Ingresa tu correo para recuperar tu sesión</p>
-        <input class="sp-input" type="email" id="spCorreoExiste" placeholder="tu@correo.com *" required>
-        <button class="sp-btn" id="spBtnEntrar">🚀 Ingresar</button>
-      </div>
-      <p class="sp-status" id="spStatus"></p>
-    </div>
-  </div>
-</div>
-
 <!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
   <div class="sb-logo">🇧🇴 Sabrolivia</div>
@@ -550,11 +453,8 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <span class="tb-logo">Sabrolivia</span>
     <span id="tbAlergBadge" class="alergia-badge" style="display:none">⚠️ Alergias activas</span>
   </div>
-  <div class="tb-right">
-    <span>👤 <span class="tb-user" id="tbNombre"></span></span>
-    <button class="tb-btn tb-reservas" onclick="abrirConsultaEstado()">📋 Reservas</button>
-    <button class="tb-btn tb-alergia" onclick="abrirAlergias()">🌿 Alergias</button>
-    <button class="tb-btn tb-logout" onclick="cerrarSesion()">🚪 Salir</button>
+  <div class="tb-right" id="tbRight">
+    <!-- Contenido dinámico: se llena con JavaScript -->
   </div>
 </div>
 
@@ -708,6 +608,45 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   <a href="#" onclick="showPage('restaurantes',null)">Volver arriba ↑</a>
 </footer>
 </main>
+
+<!-- ══ MODAL LOGIN/REGISTRO (estilo oscuro como antes) ══ -->
+<div class="modal-overlay" id="modalLogin">
+  <div class="modal" style="background:rgba(15,12,16,0.96); border:1px solid rgba(245,166,35,.18);">
+    <div class="modal-body" style="padding:1.8rem;">
+      <button class="modal-close" onclick="cerrar('modalLogin')" style="color:rgba(200,185,220,.4);">&times;</button>
+      <!-- Imagen pequeña encima -->
+      <div style="display:flex; justify-content:center; margin-bottom:0.5rem;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJyGq_QektIzFB7Iz0xcum8FltLbzquDytw&s" alt="Sabrolivia" style="max-width:70px; border-radius:12px; opacity:0.7; border:1px solid rgba(245,166,35,.2);">
+      </div>
+      <div class="sp-tabs" style="display:flex; gap:.3rem; background:rgba(0,0,0,.4); border-radius:50px; padding:4px; margin-bottom:1.2rem;">
+        <button class="sp-tab active" onclick="loginTab('nuevo',this)" style="flex:1; padding:.5rem; border:none; border-radius:50px; background:transparent; color:rgba(255,255,255,.4); font-family:'Inter',sans-serif; font-size:.92rem; font-weight:700; cursor:pointer; transition:.2s;">✨ Soy nuevo</button>
+        <button class="sp-tab" onclick="loginTab('existe',this)" style="flex:1; padding:.5rem; border:none; border-radius:50px; background:transparent; color:rgba(255,255,255,.4); font-family:'Inter',sans-serif; font-size:.92rem; font-weight:700; cursor:pointer; transition:.2s;">🔑 Tengo cuenta</button>
+      </div>
+      <div id="loginPanelNuevo">
+        <p class="sp-panel-sub" style="color:rgba(255,255,255,.4); font-size:.88rem; margin-bottom:.85rem; text-align:center;">Regístrate gratis para reservar y explorar</p>
+        <input class="sp-input" type="text"  id="loginNombre"   placeholder="Nombre completo *" required style="width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(255,255,255,.05); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; margin-bottom:.65rem; outline:none; transition:border-color .2s;">
+        <input class="sp-input" type="tel"   id="loginTelefono" placeholder="Teléfono * (ej: 59170000000)" required style="width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(255,255,255,.05); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; margin-bottom:.65rem; outline:none; transition:border-color .2s;">
+        <input class="sp-input" type="email" id="loginCorreo"   placeholder="Correo electrónico *" required style="width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(255,255,255,.05); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; margin-bottom:.65rem; outline:none; transition:border-color .2s;">
+        <div class="sp-2col" style="display:grid; grid-template-columns:1fr 1fr; gap:.5rem;">
+          <select class="sp-select" id="loginCiudad" style="width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(10,8,12,.9); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; margin-bottom:.65rem; outline:none; cursor:pointer;">
+            <option value="Santa Cruz">📍 Santa Cruz</option>
+            <option value="La Paz">📍 La Paz</option>
+            <option value="Cochabamba">📍 Cochabamba</option>
+            <option value="Tarija">📍 Tarija</option>
+          </select>
+          <input class="sp-input" style="margin-bottom:0; width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(255,255,255,.05); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; outline:none; transition:border-color .2s;" type="text" id="loginInteres" placeholder="Interés (opcional)">
+        </div>
+        <button class="sp-btn" id="loginBtnRegistrar" style="width:100%; padding:.85rem; background:linear-gradient(135deg,var(--ember),var(--rose)); color:#fff; border:none; border-radius:50px; font-size:1.05rem; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:.2s; box-shadow:0 6px 22px rgba(255,107,53,.4); margin-top:.45rem;">✅ Registrarme e ingresar</button>
+      </div>
+      <div id="loginPanelExiste" style="display:none">
+        <p class="sp-panel-sub" style="color:rgba(255,255,255,.4); font-size:.88rem; margin-bottom:.85rem; text-align:center;">Ingresa tu correo para recuperar tu sesión</p>
+        <input class="sp-input" type="email" id="loginCorreoExiste" placeholder="tu@correo.com *" required style="width:100%; padding:.75rem 1.1rem; border:1.5px solid rgba(245,166,35,.2); border-radius:13px; background:rgba(255,255,255,.05); color:#fff; font-family:'Inter',sans-serif; font-size:1rem; margin-bottom:.65rem; outline:none; transition:border-color .2s;">
+        <button class="sp-btn" id="loginBtnEntrar" style="width:100%; padding:.85rem; background:linear-gradient(135deg,var(--ember),var(--rose)); color:#fff; border:none; border-radius:50px; font-size:1.05rem; font-weight:700; font-family:'Inter',sans-serif; cursor:pointer; transition:.2s; box-shadow:0 6px 22px rgba(255,107,53,.4); margin-top:.45rem;">🚀 Ingresar</button>
+      </div>
+      <p class="sp-status" id="loginStatus" style="font-size:.88rem; margin-top:.55rem; min-height:1.1rem; text-align:center;"></p>
+    </div>
+  </div>
+</div>
 
 <!-- ══ MODAL RESERVA ══ -->
 <div class="modal-overlay" id="modalReserva">
@@ -1007,128 +946,173 @@ function showPage(id, navEl){
   return false;
 }
 
-// ══ SPLASH TABS ══
-function spTab(tab,el){
-  document.querySelectorAll(".sp-tab").forEach(t=>t.classList.remove("active"));
-  el.classList.add("active");
-  document.getElementById("spPanelNuevo").style.display  = tab==="nuevo"  ? "block":"none";
-  document.getElementById("spPanelExiste").style.display = tab==="existe" ? "block":"none";
-  document.getElementById("spStatus").textContent="";
+// ══ LOGIN / REGISTRO (MODAL) ══
+function abrirModalLogin(){
+  document.getElementById("modalLogin").style.display="flex";
+  document.getElementById("loginStatus").textContent="";
+  document.querySelectorAll("#modalLogin .sp-tab").forEach(t=>t.classList.remove("active"));
+  document.querySelector("#modalLogin .sp-tab:first-child").classList.add("active");
+  document.getElementById("loginPanelNuevo").style.display="block";
+  document.getElementById("loginPanelExiste").style.display="none";
 }
 
-document.getElementById("spBtnRegistrar").addEventListener("click",async()=>{
-  const nombre=document.getElementById("spNombre").value.trim();
-  const telefono=document.getElementById("spTelefono").value.trim();
-  const correo=document.getElementById("spCorreo").value.trim();
-  const ciudad=document.getElementById("spCiudad").value;
-  const interes=document.getElementById("spInteres").value.trim()||"Gastronomía";
-  const status=document.getElementById("spStatus");
-  const btn=document.getElementById("spBtnRegistrar");
-  if(!nombre||!telefono||!correo||!correo.includes("@")){
-    status.style.color="rgba(255,107,53,.9)";status.textContent="⚠️ Completa nombre, teléfono y correo.";return;
+function loginTab(tab, el){
+  document.querySelectorAll("#modalLogin .sp-tab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("loginPanelNuevo").style.display = tab==="nuevo" ? "block":"none";
+  document.getElementById("loginPanelExiste").style.display = tab==="existe" ? "block":"none";
+  document.getElementById("loginStatus").textContent="";
+}
+
+document.getElementById("loginBtnRegistrar").addEventListener("click", async function(){
+  const nombre = document.getElementById("loginNombre").value.trim();
+  const telefono = document.getElementById("loginTelefono").value.trim();
+  const correo = document.getElementById("loginCorreo").value.trim();
+  const ciudad = document.getElementById("loginCiudad").value;
+  const interes = document.getElementById("loginInteres").value.trim() || "Gastronomía";
+  const status = document.getElementById("loginStatus");
+  const btn = this;
+  if(!nombre || !telefono || !correo || !correo.includes("@")){
+    status.style.color="rgba(255,107,53,.9)";
+    status.textContent="⚠️ Completa nombre, teléfono y correo.";
+    return;
   }
-  btn.disabled=true;btn.textContent="⏳ Verificando...";status.textContent="";
-  try{
-    const check=await llamarScript("consultarUsuario",{correo});
-    if(check&&check.existe===true&&check.usuario){
+  btn.disabled = true;
+  btn.textContent = "⏳ Verificando...";
+  status.textContent = "";
+  try {
+    const check = await llamarScript("consultarUsuario", {correo});
+    if(check && check.existe === true && check.usuario){
       sesionIniciada(check.usuario);
-      status.style.color="rgba(0,229,160,.9)";status.textContent="¡Hola de nuevo "+check.usuario.nombre.split(" ")[0]+"!";
-      setTimeout(ocultarSplash,900);return;
+      status.style.color="rgba(0,229,160,.9)";
+      status.textContent="¡Hola de nuevo "+check.usuario.nombre.split(" ")[0]+"!";
+      setTimeout(()=>{ cerrar("modalLogin"); }, 800);
+      return;
     }
-  }catch(e){}
-  btn.textContent="⏳ Registrando...";
-  const resp = await fetchPOST("registrarUsuario",{nombre,telefono,correo,ciudad,interes});
+  } catch(e) {}
+  btn.textContent = "⏳ Registrando...";
+  const resp = await fetchPOST("registrarUsuario", {nombre, telefono, correo, ciudad, interes});
   if(resp.exito){
-    sesionIniciada({nombre,telefono,correo,ciudad,interes});
-    status.style.color="rgba(0,229,160,.9)";status.textContent="¡Bienvenido "+nombre.split(" ")[0]+"!";
-    setTimeout(ocultarSplash,900);
-  }else{
-    status.style.color="rgba(255,107,53,.9)";status.textContent="❌ Error al registrar: "+resp.mensaje;
-    btn.disabled=false;btn.textContent="✅ Registrarme e ingresar";
+    sesionIniciada({nombre, telefono, correo, ciudad, interes});
+    status.style.color="rgba(0,229,160,.9)";
+    status.textContent="¡Bienvenido "+nombre.split(" ")[0]+"!";
+    setTimeout(()=>{ cerrar("modalLogin"); }, 800);
+  } else {
+    status.style.color="rgba(255,107,53,.9)";
+    status.textContent="❌ Error al registrar: "+resp.mensaje;
+    btn.disabled = false;
+    btn.textContent = "✅ Registrarme e ingresar";
   }
 });
 
-document.getElementById("spBtnEntrar").addEventListener("click",async()=>{
-  const correo=document.getElementById("spCorreoExiste").value.trim();
-  const status=document.getElementById("spStatus");
-  const btn=document.getElementById("spBtnEntrar");
-  if(!correo||!correo.includes("@")){status.style.color="rgba(255,107,53,.9)";status.textContent="⚠️ Ingresa un correo válido.";return;}
-  btn.disabled=true;btn.textContent="⏳ Buscando...";
-  try{
-    const r=await llamarScript("consultarUsuario",{correo});
-    if(r&&r.existe===true&&r.usuario){
+document.getElementById("loginBtnEntrar").addEventListener("click", async function(){
+  const correo = document.getElementById("loginCorreoExiste").value.trim();
+  const status = document.getElementById("loginStatus");
+  const btn = this;
+  if(!correo || !correo.includes("@")){
+    status.style.color="rgba(255,107,53,.9)";
+    status.textContent="⚠️ Ingresa un correo válido.";
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = "⏳ Buscando...";
+  try {
+    const r = await llamarScript("consultarUsuario", {correo});
+    if(r && r.existe === true && r.usuario){
       sesionIniciada(r.usuario);
-      status.style.color="rgba(0,229,160,.9)";status.textContent="¡Hola "+r.usuario.nombre.split(" ")[0]+"!";
-      setTimeout(ocultarSplash,900);
-    }else{
-      status.style.color="rgba(255,107,53,.9)";status.textContent="❌ Correo no encontrado. Usa '✨ Soy nuevo'.";
-      btn.disabled=false;btn.textContent="🚀 Ingresar";
+      status.style.color="rgba(0,229,160,.9)";
+      status.textContent="¡Hola "+r.usuario.nombre.split(" ")[0]+"!";
+      setTimeout(()=>{ cerrar("modalLogin"); }, 800);
+    } else {
+      status.style.color="rgba(255,107,53,.9)";
+      status.textContent="❌ Correo no encontrado. Usa '✨ Soy nuevo'.";
+      btn.disabled = false;
+      btn.textContent = "🚀 Ingresar";
     }
-  }catch(err){
-    status.style.color="rgba(255,107,53,.9)";status.textContent="⚠️ Error de conexión.";
-    btn.disabled=false;btn.textContent="🚀 Ingresar";
+  } catch(err) {
+    status.style.color="rgba(255,107,53,.9)";
+    status.textContent="⚠️ Error de conexión.";
+    btn.disabled = false;
+    btn.textContent = "🚀 Ingresar";
   }
 });
 
 // ══ SESIÓN ══
 function sesionIniciada(usuario){
-  usuarioActual={nombre:usuario.nombre||"",telefono:usuario.telefono||"",correo:usuario.correo||"",ciudad:usuario.ciudad||"",interes:usuario.interes||""};
-  localStorage.setItem("usuarioSabrolivia",JSON.stringify(usuarioActual));
-  const savedAlerg=localStorage.getItem("alergiasSabrolivia_"+usuarioActual.correo);
-  if(savedAlerg){try{misAlergias=JSON.parse(savedAlerg);}catch(e){misAlergias=[];}}
+  usuarioActual = {nombre: usuario.nombre||"", telefono: usuario.telefono||"", correo: usuario.correo||"", ciudad: usuario.ciudad||"", interes: usuario.interes||""};
+  localStorage.setItem("usuarioSabrolivia", JSON.stringify(usuarioActual));
+  const savedAlerg = localStorage.getItem("alergiasSabrolivia_"+usuarioActual.correo);
+  if(savedAlerg){ try { misAlergias = JSON.parse(savedAlerg); } catch(e){ misAlergias = []; } }
   mostrarNavUser();
+  aplicarFiltroAlergias();
 }
+
 function mostrarNavUser(){
-  const bar=document.getElementById("topBar");
+  const tb = document.getElementById("tbRight");
   if(usuarioActual){
-    document.getElementById("tbNombre").textContent=usuarioActual.nombre.split(" ")[0];
-    bar.classList.add("show");
-    document.getElementById("btnOpinarFloat").style.display="flex";
+    tb.innerHTML = `
+      <span>👤 <span class="tb-user">${usuarioActual.nombre.split(" ")[0]}</span></span>
+      <button class="tb-btn tb-reservas" onclick="abrirConsultaEstado()">📋 Reservas</button>
+      <button class="tb-btn tb-alergia" onclick="abrirAlergias()">🌿 Alergias</button>
+      <button class="tb-btn tb-logout" onclick="cerrarSesion()">🚪 Salir</button>
+    `;
+    document.getElementById("btnOpinarFloat").style.display = "flex";
     actualizarBadgeAlergia();
-  }else{
-    bar.classList.remove("show");
-    document.getElementById("btnOpinarFloat").style.display="none";
+  } else {
+    tb.innerHTML = `
+      <button class="tb-btn tb-registro" onclick="abrirModalLogin()">✨ Registrarse</button>
+      <button class="tb-btn tb-login" onclick="abrirModalLogin()">🔑 Iniciar sesión</button>
+    `;
+    document.getElementById("btnOpinarFloat").style.display = "none";
+    document.getElementById("tbAlergBadge").style.display = "none";
   }
 }
+
 function cerrarSesion(){
-  if(confirm("¿Cerrar sesión?")){localStorage.removeItem("usuarioSabrolivia");usuarioActual=null;location.reload();}
+  if(confirm("¿Cerrar sesión?")){
+    localStorage.removeItem("usuarioSabrolivia");
+    usuarioActual = null;
+    misAlergias = [];
+    mostrarNavUser();
+    aplicarFiltroAlergias();
+    toast("Sesión cerrada", "info");
+  }
 }
-function ocultarSplash(){
-  const s=document.getElementById("splashScreen");
-  s.classList.add("ocultar");
-  setTimeout(()=>{s.style.display="none";},700);
-}
+
 function cargarSesion(){
-  const saved=localStorage.getItem("usuarioSabrolivia");
+  const saved = localStorage.getItem("usuarioSabrolivia");
   if(saved){
     try{
-      usuarioActual=JSON.parse(saved);
-      const savedAlerg=localStorage.getItem("alergiasSabrolivia_"+usuarioActual.correo);
-      if(savedAlerg){try{misAlergias=JSON.parse(savedAlerg);}catch(e){misAlergias=[];}}
+      usuarioActual = JSON.parse(saved);
+      const savedAlerg = localStorage.getItem("alergiasSabrolivia_"+usuarioActual.correo);
+      if(savedAlerg){ try { misAlergias = JSON.parse(savedAlerg); } catch(e){ misAlergias = []; } }
       mostrarNavUser();
-      ocultarSplash();
-    }catch(e){localStorage.removeItem("usuarioSabrolivia");}
+      aplicarFiltroAlergias();
+    } catch(e){ localStorage.removeItem("usuarioSabrolivia"); }
+  } else {
+    mostrarNavUser();
   }
 }
 
 // ══ ALERGIAS ══
 function abrirAlergias(){
-  document.querySelectorAll("#alergGrid input[type=checkbox]").forEach(chk=>{chk.checked=misAlergias.includes(chk.value);});
-  document.getElementById("modalAlergias").style.display="flex";
+  if(!usuarioActual){ toast("Debes iniciar sesión para configurar alergias", "error"); abrirModalLogin(); return; }
+  document.querySelectorAll("#alergGrid input[type=checkbox]").forEach(chk=>{chk.checked = misAlergias.includes(chk.value);});
+  document.getElementById("modalAlergias").style.display = "flex";
 }
 function guardarAlergias(){
-  misAlergias=[];
+  misAlergias = [];
   document.querySelectorAll("#alergGrid input[type=checkbox]:checked").forEach(chk=>{misAlergias.push(chk.value);});
   if(usuarioActual) localStorage.setItem("alergiasSabrolivia_"+usuarioActual.correo, JSON.stringify(misAlergias));
   actualizarBadgeAlergia();
   aplicarFiltroAlergias();
   cerrar("modalAlergias");
-  if(misAlergias.length>0){toast(`✅ Alergias guardadas: ${misAlergias.join(", ")}`, "info");}
-  else{toast("✅ Sin alergias configuradas", "exito");}
+  if(misAlergias.length>0){ toast(`✅ Alergias guardadas: ${misAlergias.join(", ")}`, "info"); }
+  else { toast("✅ Sin alergias configuradas", "exito"); }
 }
 function sinAlergias(){
   document.querySelectorAll("#alergGrid input[type=checkbox]").forEach(chk=>chk.checked=false);
-  misAlergias=[];
+  misAlergias = [];
   if(usuarioActual) localStorage.setItem("alergiasSabrolivia_"+usuarioActual.correo, JSON.stringify([]));
   actualizarBadgeAlergia();
   aplicarFiltroAlergias();
@@ -1136,59 +1120,59 @@ function sinAlergias(){
   toast("🎉 ¡Disfruta de toda nuestra variedad sin preocupaciones!", "exito");
 }
 function actualizarBadgeAlergia(){
-  const badge=document.getElementById("tbAlergBadge");
-  if(misAlergias.length>0){badge.style.display="inline-block";badge.textContent="⚠️ "+misAlergias.length+" alergia"+(misAlergias.length>1?"s":"");}
-  else{badge.style.display="none";}
+  const badge = document.getElementById("tbAlergBadge");
+  if(misAlergias.length>0){ badge.style.display = "inline-block"; badge.textContent = "⚠️ "+misAlergias.length+" alergia"+(misAlergias.length>1?"s":""); }
+  else { badge.style.display = "none"; }
 }
 function hayConflictoAlergia(alergenos){
-  if(!misAlergias.length||!alergenos||!alergenos.length) return [];
-  return misAlergias.filter(a=>alergenos.includes(a));
+  if(!misAlergias.length || !alergenos || !alergenos.length) return [];
+  return misAlergias.filter(a => alergenos.includes(a));
 }
 function aplicarFiltroAlergias(){
-  if(!mostrarFiltradoRest||misAlergias.length===0){
+  if(!mostrarFiltradoRest || misAlergias.length===0){
     document.querySelectorAll(".card").forEach(c=>c.classList.remove("filtered-out"));
     document.getElementById("alergWarningBanner").classList.remove("show");
     return;
   }
-  let filtradosCount=0;
-  document.querySelectorAll(".card[data-alergenos]").forEach(card=>{
-    const alerg=JSON.parse(card.dataset.alergenos||"[]");
-    const conflicto=hayConflictoAlergia(alerg);
-    if(conflicto.length>0){card.classList.add("filtered-out");filtradosCount++;}
-    else{card.classList.remove("filtered-out");}
+  let filtradosCount = 0;
+  document.querySelectorAll(".card[data-alergenos]").forEach(card => {
+    const alerg = JSON.parse(card.dataset.alergenos || "[]");
+    const conflicto = hayConflictoAlergia(alerg);
+    if(conflicto.length>0){ card.classList.add("filtered-out"); filtradosCount++; }
+    else { card.classList.remove("filtered-out"); }
   });
-  document.querySelectorAll(".receta-card[data-alergenos]").forEach(card=>{
-    const alerg=JSON.parse(card.dataset.alergenos||"[]");
-    const conflicto=hayConflictoAlergia(alerg);
-    if(conflicto.length>0){card.classList.add("filtered-out");}
-    else{card.classList.remove("filtered-out");}
+  document.querySelectorAll(".receta-card[data-alergenos]").forEach(card => {
+    const alerg = JSON.parse(card.dataset.alergenos || "[]");
+    const conflicto = hayConflictoAlergia(alerg);
+    if(conflicto.length>0){ card.classList.add("filtered-out"); }
+    else { card.classList.remove("filtered-out"); }
   });
-  if(filtradosCount>0&&misAlergias.length>0){document.getElementById("alergWarningBanner").classList.add("show");}
-  else{document.getElementById("alergWarningBanner").classList.remove("show");}
+  if(filtradosCount>0 && misAlergias.length>0){ document.getElementById("alergWarningBanner").classList.add("show"); }
+  else { document.getElementById("alergWarningBanner").classList.remove("show"); }
 }
 function verTodosRest(){
-  mostrarFiltradoRest=false;
+  mostrarFiltradoRest = false;
   document.querySelectorAll(".card.filtered-out").forEach(c=>c.classList.remove("filtered-out"));
   document.getElementById("alergWarningBanner").classList.remove("show");
 }
 
-// ══ CATÁLOGOS ══
+// ══ CATÁLOGOS ══ (sin cambios)
 async function cargarCatalogos(){
   try{
-    const result=await llamarScript("obtenerCatalogos");
-    const data=result&&result.success?result.data:result;
-    if(data&&data.restaurantes){
-      restaurantes=data.restaurantes||[];
-      mercados=data.mercados||[];
-      supermercados=data.supermercados||[];
-      renderRestaurantes();renderMercados();renderSupermercados();
-      generarFiltros();generarFiltrosSuper();
-      llenarSelectOpinion();llenarSelectCalc();
-    }else{
-      document.getElementById("gridRestaurantes").innerHTML='<div class="loader">⚠️ No se pudieron cargar los datos.</div>';
+    const result = await llamarScript("obtenerCatalogos");
+    const data = result && result.success ? result.data : result;
+    if(data && data.restaurantes){
+      restaurantes = data.restaurantes || [];
+      mercados = data.mercados || [];
+      supermercados = data.supermercados || [];
+      renderRestaurantes(); renderMercados(); renderSupermercados();
+      generarFiltros(); generarFiltrosSuper();
+      llenarSelectOpinion(); llenarSelectCalc();
+    } else {
+      document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ No se pudieron cargar los datos.</div>';
     }
-  }catch(e){
-    document.getElementById("gridRestaurantes").innerHTML='<div class="loader">⚠️ Error de conexión.</div>';
+  } catch(e){
+    document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ Error de conexión.</div>';
   }
 }
 
@@ -1254,7 +1238,7 @@ function renderRestaurantes(filtro="todas"){
 }
 
 window.toggleMenu=function(btn){
-  const d=btn.nextElementSibling;const open=d.classList.toggle("open");
+  const d=btn.nextElementSibling; const open=d.classList.toggle("open");
   btn.textContent=open?"🍽️ Ocultar Menú ▲":"🍽️ Ver Menú ▼";
 };
 
@@ -1269,9 +1253,7 @@ function generarFiltros(){
   }));
 }
 
-function microBtn(){
-  return `<a class="btn-micro" href="https://cruzero.net/routes" target="_blank" rel="noopener">🚌 Cómo llegar en micro</a>`;
-}
+function microBtn(){ return `<a class="btn-micro" href="https://cruzero.net/routes" target="_blank" rel="noopener">🚌 Cómo llegar en micro</a>`; }
 
 function renderMercados(){
   const grid=document.getElementById("gridMercados");
@@ -1408,10 +1390,10 @@ Detrás de cada plato boliviano hay una historia, una familia y mucho cariño pu
   return{texto,total:d.total,rest};
 }
 
-// 🟢 FUNCIÓN MEJORADA PARA WHATSAPP
 function enviarPresupuestoWA() {
   if (!usuarioActual) {
-    toast("Debes registrarte primero para usar esta función", "error");
+    toast("Debes iniciar sesión para enviar por WhatsApp", "error");
+    abrirModalLogin();
     return;
   }
   if (!usuarioActual.telefono || usuarioActual.telefono.trim() === "") {
@@ -1422,7 +1404,6 @@ function enviarPresupuestoWA() {
   if (!tel.startsWith("591")) tel = "591" + tel;
   if (tel.length < 11) {
     toast("⚠️ El número de teléfono parece incompleto. Debe tener al menos 8 dígitos después del código de país.", "error");
-    console.warn("Teléfono inválido:", tel);
     return;
   }
   const { texto } = calcResumen();
@@ -1430,8 +1411,8 @@ function enviarPresupuestoWA() {
   try {
     const ventana = window.open(waUrl, "_blank");
     if (!ventana || ventana.closed || typeof ventana.closed === 'undefined') {
-      toast("⚠️ Tu navegador bloqueó la ventana emergente. Copia el enlace manualmente.", "info");
-      console.log("Abre este enlace en tu navegador:", waUrl);
+      toast("⚠️ Tu navegador bloqueó la ventana. Copia el enlace manualmente.", "info");
+      console.log("Abre este enlace:", waUrl);
     } else {
       toast("📲 Abriendo WhatsApp...", "info");
     }
@@ -1441,9 +1422,9 @@ function enviarPresupuestoWA() {
 }
 
 function enviarPresupuestoMail(){
-  if(!usuarioActual){toast("Regístrate primero","error");return;}
-  const{texto,rest}=calcResumen();
-  window.open(`mailto:${usuarioActual.correo}?subject=${encodeURIComponent("Presupuesto – "+rest)}&body=${encodeURIComponent(texto)}`,"_blank");
+  if(!usuarioActual){ toast("Debes iniciar sesión", "error"); abrirModalLogin(); return; }
+  const {texto, rest} = calcResumen();
+  window.open(`mailto:${usuarioActual.correo}?subject=${encodeURIComponent("Presupuesto – "+rest)}&body=${encodeURIComponent(texto)}`, "_blank");
 }
 
 // ══ RESERVA ══
@@ -1462,136 +1443,143 @@ function calcReserva(){
 }
 ["resTipoComida","resPersonas"].forEach(id=>document.getElementById(id).addEventListener("change",calcReserva));
 document.addEventListener("change",e=>{if(e.target.closest("#resExtrasGrid"))calcReserva();});
-document.getElementById("resTipoComida").addEventListener("change",()=>{
-  const tipo=document.getElementById("resTipoComida").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-  document.getElementById("resHora").value=HORA_SUGERIDA[tipo]||"12:00";calcReserva();
+document.getElementById("resTipoComida").addEventListener("change",function(){
+  const tipo = this.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  document.getElementById("resHora").value = HORA_SUGERIDA[tipo] || "12:00";
+  calcReserva();
 });
 
-window.abrirReserva=function(nombre){
-  if(!usuarioActual){toast("Debes registrarte primero","error");return;}
-  document.getElementById("resNombreRest").textContent=nombre;
-  document.getElementById("resNombre").value=usuarioActual.nombre;
-  document.getElementById("resTel").value=usuarioActual.telefono;
-  document.getElementById("resEmail").value=usuarioActual.correo;
-  document.getElementById("resFecha").value="";
-  document.getElementById("resHora").value="12:00";
-  document.getElementById("resStatus").textContent="";
-  document.querySelectorAll("#resExtrasGrid input").forEach(i=>i.checked=false);
-  document.getElementById("resExtra").value="";
-  const alergRest=getAlergInfoForRest(nombre);
-  const conflicto=hayConflictoAlergia(alergRest);
-  const warnEl=document.getElementById("alergWarningReserva");
-  if(conflicto.length>0){document.getElementById("alergIngrsWarn").textContent=conflicto.join(", ");warnEl.classList.add("show");}
-  else{warnEl.classList.remove("show");}
+window.abrirReserva = function(nombre){
+  if(!usuarioActual){ toast("Debes iniciar sesión para reservar", "error"); abrirModalLogin(); return; }
+  document.getElementById("resNombreRest").textContent = nombre;
+  document.getElementById("resNombre").value = usuarioActual.nombre;
+  document.getElementById("resTel").value = usuarioActual.telefono;
+  document.getElementById("resEmail").value = usuarioActual.correo;
+  document.getElementById("resFecha").value = "";
+  document.getElementById("resHora").value = "12:00";
+  document.getElementById("resStatus").textContent = "";
+  document.querySelectorAll("#resExtrasGrid input").forEach(i => i.checked = false);
+  document.getElementById("resExtra").value = "";
+  const alergRest = getAlergInfoForRest(nombre);
+  const conflicto = hayConflictoAlergia(alergRest);
+  const warnEl = document.getElementById("alergWarningReserva");
+  if(conflicto.length>0){ document.getElementById("alergIngrsWarn").textContent = conflicto.join(", "); warnEl.classList.add("show"); }
+  else { warnEl.classList.remove("show"); }
   calcReserva();
-  document.getElementById("modalReserva").style.display="flex";
+  document.getElementById("modalReserva").style.display = "flex";
 };
 
-document.getElementById("btnReserva").addEventListener("click",async()=>{
-  const restaurante=document.getElementById("resNombreRest").textContent;
-  const nombre=document.getElementById("resNombre").value.trim();
-  const telefono=document.getElementById("resTel").value.trim();
-  const correo=document.getElementById("resEmail").value.trim();
-  const fecha=document.getElementById("resFecha").value;
-  const hora=document.getElementById("resHora").value;
-  const personas=document.getElementById("resPersonas").value;
-  const tipoComida=document.getElementById("resTipoComida").value;
-  const extras=Array.from(document.querySelectorAll("#resExtrasGrid input:checked")).map(i=>i.value).join(", ");
-  const nota=document.getElementById("resExtra").value.trim()||"Sin nota";
-  const{total}=calcReserva();
-  if(!nombre||!telefono||!correo||!fecha||!hora){toast("Completa todos los campos obligatorios","error");return;}
-  document.getElementById("resStatus").textContent="⏳ Enviando...";
-  document.getElementById("btnReserva").disabled=true;
-  const resp = await fetchPOST("crearSolicitud",{tipo:"Reserva",nombre,telefono,correo,restaurante,fecha,hora,personas,extras,nota,tipoComida,montoEstimado:total+"Bs",estado:"Pendiente"});
-  document.getElementById("btnReserva").disabled=false;
+document.getElementById("btnReserva").addEventListener("click", async function(){
+  const restaurante = document.getElementById("resNombreRest").textContent;
+  const nombre = document.getElementById("resNombre").value.trim();
+  const telefono = document.getElementById("resTel").value.trim();
+  const correo = document.getElementById("resEmail").value.trim();
+  const fecha = document.getElementById("resFecha").value;
+  const hora = document.getElementById("resHora").value;
+  const personas = document.getElementById("resPersonas").value;
+  const tipoComida = document.getElementById("resTipoComida").value;
+  const extras = Array.from(document.querySelectorAll("#resExtrasGrid input:checked")).map(i=>i.value).join(", ");
+  const nota = document.getElementById("resExtra").value.trim() || "Sin nota";
+  const { total } = calcReserva();
+  if(!nombre || !telefono || !correo || !fecha || !hora){ toast("Completa todos los campos obligatorios", "error"); return; }
+  document.getElementById("resStatus").textContent = "⏳ Enviando...";
+  this.disabled = true;
+  const resp = await fetchPOST("crearSolicitud", {tipo:"Reserva", nombre, telefono, correo, restaurante, fecha, hora, personas, extras, nota, tipoComida, montoEstimado: total+"Bs", estado:"Pendiente"});
+  this.disabled = false;
   if(resp.exito){
     cerrar("modalReserva");
     toast(`✅ Reserva enviada a ${restaurante}`);
-    const key=getRestKey(restaurante);
-    const info=key?RESTAURANTES_EXTRA[key]:null;
-    const maps=info&&info.maps?`\n📍 Maps: ${info.maps}`:"";
-    const msgWA=`🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
-    const telUsuario=(usuarioActual&&usuarioActual.telefono||telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
+    // Envío de confirmación WA/mail opcional (similar al anterior)
+    const key = getRestKey(restaurante);
+    const info = key ? RESTAURANTES_EXTRA[key] : null;
+    const maps = info && info.maps ? `\n📍 Maps: ${info.maps}` : "";
+    const msgWA = `🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
+    const telUsuario = (usuarioActual && usuarioActual.telefono || telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
     if(telUsuario){
       setTimeout(()=>{
         if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
-          window.open(`https://wa.me/${telUsuario}?text=${encodeURIComponent(msgWA)}`,"_blank");
+          window.open(`https://wa.me/${telUsuario}?text=${encodeURIComponent(msgWA)}`, "_blank");
         }
-      },500);
+      }, 500);
     }
     setTimeout(()=>{
-      const mailSubject=encodeURIComponent(`Reserva en ${restaurante} – ${fecha}`);
-      const mailBody=encodeURIComponent(msgWA.replace(/\*/g,""));
-      window.open(`mailto:${correo}?subject=${mailSubject}&body=${mailBody}`,"_blank");
-    },1500);
-  }else{
-    document.getElementById("resStatus").textContent="❌ "+resp.mensaje;
+      const mailSubject = encodeURIComponent(`Reserva en ${restaurante} – ${fecha}`);
+      const mailBody = encodeURIComponent(msgWA.replace(/\*/g,""));
+      window.open(`mailto:${correo}?subject=${mailSubject}&body=${mailBody}`, "_blank");
+    }, 1500);
+  } else {
+    document.getElementById("resStatus").textContent = "❌ "+resp.mensaje;
     toast("No se pudo guardar la reserva, intente nuevamente", "error");
   }
 });
 
 // ══ MIS RESERVAS ══
-window.abrirConsultaEstado=function(){
-  document.getElementById("consultaEmail").value=usuarioActual?usuarioActual.correo:"";
-  document.getElementById("resultadoEstado").innerHTML="";
-  document.getElementById("modalEstado").style.display="flex";
+window.abrirConsultaEstado = function(){
+  if(!usuarioActual){ toast("Debes iniciar sesión", "error"); abrirModalLogin(); return; }
+  document.getElementById("consultaEmail").value = usuarioActual.correo;
+  document.getElementById("resultadoEstado").innerHTML = "";
+  document.getElementById("modalEstado").style.display = "flex";
 };
-document.getElementById("btnConsultar").addEventListener("click",async()=>{
+document.getElementById("btnConsultar").addEventListener("click", async function(){
   const email=document.getElementById("consultaEmail").value.trim();
-  if(!email){toast("Ingresa un correo","error");return;}
-  document.getElementById("resultadoEstado").innerHTML="⏳ Consultando...";
-  const raw=await llamarScript("consultarSolicitudes",{correo:email});
-  const solicitudes=Array.isArray(raw)?raw:(raw&&raw.data?raw.data:[]);
-  const div=document.getElementById("resultadoEstado");
-  if(solicitudes&&solicitudes.length>0){
-    let html=`<table class="tabla-estado"><tr><th>Fecha</th><th>Restaurante</th><th>Tipo</th><th>Estado</th></tr>`;
+  if(!email){ toast("Ingresa un correo","error"); return; }
+  document.getElementById("resultadoEstado").innerHTML = "⏳ Consultando...";
+  const raw = await llamarScript("consultarSolicitudes", {correo: email});
+  const solicitudes = Array.isArray(raw) ? raw : (raw && raw.data ? raw.data : []);
+  const div = document.getElementById("resultadoEstado");
+  if(solicitudes && solicitudes.length > 0){
+    let html = `<table class="tabla-estado"><tr><th>Fecha</th><th>Restaurante</th><th>Tipo</th><th>Estado</th></tr>`;
     solicitudes.forEach(s=>{
-      const estado=(s.estado||"").toLowerCase();
-      const cls=estado.includes("confirm")?"estado-confirmado":estado.includes("rechaz")?"estado-rechazado":"estado-pendiente";
-      html+=`<tr><td>${s.fechaHora||"—"}</td><td>${s.restaurante||"—"}</td><td>${s.tipo||""}</td><td><span class="estado-pill ${cls}">${s.estado||""}</span></td></tr>`;
+      const estado = (s.estado||"").toLowerCase();
+      const cls = estado.includes("confirm") ? "estado-confirmado" : estado.includes("rechaz") ? "estado-rechazado" : "estado-pendiente";
+      html += `<tr><td>${s.fechaHora||"—"}</td><td>${s.restaurante||"—"}</td><td>${s.tipo||""}</td><td><span class="estado-pill ${cls}">${s.estado||""}</span></td></tr>`;
     });
-    div.innerHTML=html+"</table>";
-  }else{div.innerHTML="<p style='color:rgba(200,185,220,.55);font-size:.95rem'>No se encontraron reservas.</p>";}
+    div.innerHTML = html + "</table>";
+  } else {
+    div.innerHTML = "<p style='color:rgba(200,185,220,.55);font-size:.95rem'>No se encontraron reservas.</p>";
+  }
 });
 
 // ══ OPINIÓN ══
-document.getElementById("starsContainer").addEventListener("click",e=>{
+document.getElementById("starsContainer").addEventListener("click", function(e){
   if(e.target.dataset.val){
-    starsVal=parseInt(e.target.dataset.val);
-    document.querySelectorAll("#starsContainer span").forEach((s,i)=>s.classList.toggle("active",i<starsVal));
+    starsVal = parseInt(e.target.dataset.val);
+    document.querySelectorAll("#starsContainer span").forEach((s,i)=>s.classList.toggle("active", i<starsVal));
   }
 });
-document.getElementById("btnOpinion").addEventListener("click",async()=>{
-  if(!usuarioActual){toast("Debes registrarte para opinar","error");return;}
-  const nombre=document.getElementById("opNombre").value.trim()||usuarioActual.nombre;
-  const restaurante=document.getElementById("opRest").value;
-  const comentario=document.getElementById("opTexto").value.trim();
-  if(!comentario||starsVal===0){toast("Completa el comentario y calificación","error");return;}
-  const resp=await fetchPOST("crearSolicitud",{tipo:"Opinión",nombre,correo:usuarioActual.correo,restaurante,calificacion:starsVal+"★",comentario,estado:"Publicado"});
+document.getElementById("btnOpinion").addEventListener("click", async function(){
+  if(!usuarioActual){ toast("Debes iniciar sesión para opinar", "error"); abrirModalLogin(); return; }
+  const nombre = document.getElementById("opNombre").value.trim() || usuarioActual.nombre;
+  const restaurante = document.getElementById("opRest").value;
+  const comentario = document.getElementById("opTexto").value.trim();
+  if(!comentario || starsVal===0){ toast("Completa el comentario y calificación","error"); return; }
+  const resp = await fetchPOST("crearSolicitud", {tipo:"Opinión", nombre, correo: usuarioActual.correo, restaurante, calificacion: starsVal+"★", comentario, estado:"Publicado"});
   if(resp.exito){
-    cerrar("modalOpinion");toast("¡Gracias por tu opinión! ⭐");
-    starsVal=0;document.querySelectorAll("#starsContainer span").forEach(s=>s.classList.remove("active"));
-    document.getElementById("opTexto").value="";
-  }else{
+    cerrar("modalOpinion");
+    toast("¡Gracias por tu opinión! ⭐");
+    starsVal = 0;
+    document.querySelectorAll("#starsContainer span").forEach(s=>s.classList.remove("active"));
+    document.getElementById("opTexto").value = "";
+  } else {
     toast("Error al enviar opinión: "+resp.mensaje, "error");
   }
 });
-document.getElementById("btnOpinarFloat").addEventListener("click",()=>{
-  if(!usuarioActual){toast("Regístrate para opinar","error");return;}
-  document.getElementById("opNombre").value=usuarioActual.nombre;
-  document.getElementById("modalOpinion").style.display="flex";
+document.getElementById("btnOpinarFloat").addEventListener("click", function(){
+  if(!usuarioActual){ toast("Regístrate para opinar","error"); abrirModalLogin(); return; }
+  document.getElementById("opNombre").value = usuarioActual.nombre;
+  document.getElementById("modalOpinion").style.display = "flex";
 });
 
 // ══ CONTACTO ══
-document.getElementById("btnContacto").addEventListener("click",async()=>{
-  if(!usuarioActual){toast("Regístrate para contactarnos","error");return;}
-  const mensaje=document.getElementById("ctcMsg").value.trim();
-  if(!mensaje){toast("Escribe un mensaje","error");return;}
-  const resp=await fetchPOST("crearSolicitud",{tipo:"Contacto",nombre:usuarioActual.nombre,correo:usuarioActual.correo,mensaje,estado:"Pendiente"});
+document.getElementById("btnContacto").addEventListener("click", async function(){
+  if(!usuarioActual){ toast("Debes iniciar sesión para contactarnos", "error"); abrirModalLogin(); return; }
+  const mensaje = document.getElementById("ctcMsg").value.trim();
+  if(!mensaje){ toast("Escribe un mensaje","error"); return; }
+  const resp = await fetchPOST("crearSolicitud", {tipo:"Contacto", nombre: usuarioActual.nombre, correo: usuarioActual.correo, mensaje, estado:"Pendiente"});
   if(resp.exito){
     toast("📨 Mensaje enviado. Te contactaremos pronto.");
-    document.getElementById("ctcMsg").value="";
-  }else{
+    document.getElementById("ctcMsg").value = "";
+  } else {
     toast("Error al enviar mensaje: "+resp.mensaje, "error");
   }
 });
@@ -1623,7 +1611,7 @@ function mostrarPlatoHistorico(dept, btn){
   panel.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 
-window.addEventListener("click",e=>{if(e.target.classList.contains("modal-overlay"))e.target.style.display="none";});
+window.addEventListener("click", e => { if(e.target.classList.contains("modal-overlay")) e.target.style.display = "none"; });
 
 // ══ INIT ══
 cargarSesion();
