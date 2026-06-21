@@ -124,6 +124,26 @@ main{margin-left:68px;min-height:100vh;}
 .card-img-wrap{height:185px;overflow:hidden;position:relative;background:var(--panel2);}
 .card-img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
 .card:hover .card-img{transform:scale(1.07);}
+.plato-estrella-wrap{
+  position:relative;height:150px;overflow:hidden;background:var(--panel2);
+  border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);
+}
+.plato-estrella-img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.card:hover .plato-estrella-img{transform:scale(1.06);}
+.plato-estrella-tag{
+  position:absolute;top:.5rem;left:.5rem;
+  background:linear-gradient(135deg,var(--gold),var(--ember));
+  color:#1a1208;font-weight:800;font-size:.72rem;letter-spacing:.04em;
+  padding:.22rem .65rem;border-radius:20px;text-transform:uppercase;
+  box-shadow:0 3px 10px rgba(0,0,0,.4);display:flex;align-items:center;gap:.25rem;
+}
+.plato-estrella-nombre{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(8,6,8,.92),rgba(8,6,8,0));
+  padding:1.6rem .8rem .5rem;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;
+  color:#FFF3DC;text-shadow:0 2px 6px rgba(0,0,0,.6);
+}
 .card-body{padding:1.1rem;flex:1;display:flex;flex-direction:column;}
 .card-body h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin:.3rem 0 .15rem;color:#F0E8FF;}
 .card-city{color:var(--ember);font-weight:700;font-size:.88rem;font-family:'Space Mono',monospace;margin-bottom:.4rem;}
@@ -753,7 +773,789 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 // ══════════════════════════════════════════════
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz9eWTYqeIvV4d8KkiINNh4x5D2wPBYWVFAsVg5VrOIdnMEu7h_P4K-VGIYdJe0XkaQQ/exec";
 
-// ══ DATOS RESTAURANTES (extra) ══
+// ══ RESTAURANTES (12 fijos, datos provistos) ══
+const RESTAURANTES_FIJOS = 
+[
+  {
+    "nombre": "RINCON PACEÑO",
+    "ciudad": "Santa Cruz",
+    "tipo": "Andina",
+    "horario": "9:30 a 15:30",
+    "telefono": "78763081",
+    "direccion": "https://maps.app.goo.gl/Z9knATXwJUc3g11d9",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGR9GFeiSS0am1A2fMLENyN38C02w5Fs3EFZygmNtDt4IX7-Q6NenmXaWqS2SA3O3k_yLyhfhaCxcCqsZA4_UgkZ09HljVTzJ2KPqR7MZ5bAaPDG-Emq-RJF8VxrC9QHEset_BgoLVK08Y9=w408-h544-k-no",
+    "platoEstrella": {
+      "nombre": "ISPI",
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ispi_Pace%C3%B1o.jpg/960px-Ispi_Pace%C3%B1o.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Platos principales",
+        "items": [
+          {
+            "plato": "ISPI",
+            "precio": "55 Bs - 5 Bs"
+          },
+          {
+            "plato": "FRICASE",
+            "precio": "60 Bs"
+          },
+          {
+            "plato": "SAJTA DE POLLO",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "TRUCHA",
+            "precio": "65 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "5 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "La Casa del Camba",
+    "ciudad": "Santa Cruz",
+    "tipo": "Oriental",
+    "horario": "11:00 a 18:00",
+    "telefono": "76003877",
+    "direccion": "Av. Cristobal de Mendoza 1365, Santa Cruz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHbVPBvcm9-ffcKszXVJ0ABA9ceIU8X6dJojvsCL7dF0U9GeCwHnw6plMAWJJVy3iQb2hNEFZrAW_rnhu8GZrr449E_mku8bVgHbY9RKN8qMIuFfydIlmOUixxs-XngwKJC6RZRUM5Rettl=w408-h306-k-no",
+    "platoEstrella": {
+      "nombre": "MAJADITO (tostado o aguadito)",
+      "imagen": "https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/05/majadito-de-charque-Paulina-Cocina-Recetas-1722430370.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Platos principales",
+        "items": [
+          {
+            "plato": "MAJADITO (tostado o aguadito)",
+            "precio": "55-65 Bs"
+          },
+          {
+            "plato": "KEPERI AL HORNO",
+            "precio": "75 Bs"
+          },
+          {
+            "plato": "PICANTE DE GALLINA",
+            "precio": "65-75 Bs"
+          },
+          {
+            "plato": "PIQUE MACHO",
+            "precio": "90-110 Bs"
+          },
+          {
+            "plato": "PATASCA",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "SOPA DE MANI",
+            "precio": "35-45 Bs"
+          },
+          {
+            "plato": "CHICHARRON DE LAGARTO",
+            "precio": "80-95 Bs"
+          },
+          {
+            "plato": "PICANTE DE LENGUA",
+            "precio": "70-80 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres",
+        "items": [
+          {
+            "plato": "CUÑAPÉ",
+            "precio": "5-7 Bs"
+          },
+          {
+            "plato": "HORNEADO YUCA",
+            "precio": "10-15 Bs"
+          },
+          {
+            "plato": "MASACO DE YUCA",
+            "precio": "25-35 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA CAMBA",
+            "precio": "35 Bs"
+          },
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "30-35 Bs"
+          },
+          {
+            "plato": "CHUFLAY",
+            "precio": "25-30 Bs"
+          },
+          {
+            "plato": "REFRESCO TAMARINDO",
+            "precio": "30-35 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Sucremanta",
+    "ciudad": "Santa Cruz",
+    "tipo": "Chuquisaqueña",
+    "horario": "8:30 a 15:00",
+    "telefono": "77839392",
+    "direccion": "Puerto Rico, Santa Cruz de la Sierra",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGrtdA-3LxfSCLT05Bx-uxpqHDI7sOZFIEPBH9FpR6v82ssBvLwYXsSXd46wV8yeaBLzKjPp503SDktbxM_B1jfWTVSAWMwyCar3NndZPbzJdeC8zBz-er5g3WzfHtDyp3OtjWw=w408-h544-k-no",
+    "platoEstrella": {
+      "nombre": "MENUDITO MEDIO",
+      "imagen": "https://pxcdn.reduno.com.bo/reduno/102021/1633357722127.webp?cw=800&ch=450&extw=jpg"
+    },
+    "menu": [
+      {
+        "cat": "Menú",
+        "items": [
+          {
+            "plato": "MENUDITO MEDIO",
+            "precio": "35 Bs"
+          },
+          {
+            "plato": "CHORIZO ENTERO",
+            "precio": "50 Bs"
+          },
+          {
+            "plato": "SANDWICH DE CHORIZO",
+            "precio": "25 Bs"
+          },
+          {
+            "plato": "MONDONGO",
+            "precio": "55 Bs"
+          },
+          {
+            "plato": "FRITANGA",
+            "precio": "55 Bs"
+          },
+          {
+            "plato": "PICANTE MIXTO",
+            "precio": "60 Bs"
+          },
+          {
+            "plato": "PICANTE DE LENGUA",
+            "precio": "55 Bs"
+          },
+          {
+            "plato": "PICANTE DE POLLO",
+            "precio": "50 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres",
+        "items": [
+          {
+            "plato": "SALTEÑA DE POLLO",
+            "precio": "9 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "La Bodega Boliviana",
+    "ciudad": "Santa Cruz",
+    "tipo": "Criolla",
+    "horario": "10:00 a 22:00",
+    "telefono": "78894436",
+    "direccion": "Av. Roca y Coronado, 3er Anillo Interno, Santa Cruz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH7Qpj3kPd4CJaEfzRTGhg8XauxEAw6efHss2ZIHiyTOwyq08V3PlrqfN13vdF9Iq9Uaeclpu0WifSzn1rm5OC1KymNMhAyphKCJr4zrir7k6j3d1iWpROj-b0W0f4CaAY1UBLHZw=w426-h240-k-no",
+    "platoEstrella": {
+      "nombre": "FIDEOS UCHU'S",
+      "imagen": "https://pxcdn.reduno.com.bo/reduno/062018/1544509859861.webp?cw=800&ch=450&extw=png"
+    },
+    "menu": [
+      {
+        "cat": "Especialidades",
+        "items": [
+          {
+            "plato": "FIDEOS UCHU'S",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "SOPA DE MANI",
+            "precio": "25 Bs"
+          },
+          {
+            "plato": "PIQUE MACHO",
+            "precio": "75 Bs"
+          },
+          {
+            "plato": "LOMO MONTADO",
+            "precio": "50 Bs"
+          },
+          {
+            "plato": "CHICHARRON MIXTO",
+            "precio": "65 Bs"
+          },
+          {
+            "plato": "ESCABECHE",
+            "precio": "35 Bs"
+          },
+          {
+            "plato": "CHARQUEKAN",
+            "precio": "60 Bs"
+          },
+          {
+            "plato": "RIÑON AL JUGO",
+            "precio": "40 Bs"
+          },
+          {
+            "plato": "CHANKA DE POLLO",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "PIQUE BORRACHO",
+            "precio": "65-75 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "REFRESCO TAMARINDO",
+            "precio": "10-35 Bs"
+          },
+          {
+            "plato": "LIMONADA",
+            "precio": "12-40 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "EL AJIBE COMIDA TIPICA",
+    "ciudad": "Santa Cruz",
+    "tipo": "Típica",
+    "horario": "11:00 a 16:00",
+    "telefono": "70288881",
+    "direccion": "Calle Ñuflo de Chávez, Santa Cruz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFYzHg-C4zhtSYJoKy3h7B52acb_BuDVCWqkKqZes0loCtcvnMLGhB6JjWA7CfGG12fGee3yp9PDtZc7cEybthPoP7hZ8wwwpAqfkt6RWoRq84ywGRJqv4sT5ukmqPrwjwaPyr5Ew=w408-h306-k-no",
+    "platoEstrella": {
+      "nombre": "LOCRO CARRETERO",
+      "imagen": "https://pxcdn.eldeber.com.bo/eldeber/40821/092025/1757313936746.webp?cw=1200&ch=675&extw=jpg"
+    },
+    "menu": [
+      {
+        "cat": "Platos",
+        "items": [
+          {
+            "plato": "SOPA DE MANÍ",
+            "precio": "30 Bs"
+          },
+          {
+            "plato": "LOCRO CARRETERO",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "KEPERI AL HORNO",
+            "precio": "65 Bs"
+          },
+          {
+            "plato": "PIQUE MACHO",
+            "precio": "85 Bs"
+          },
+          {
+            "plato": "PICANTE DE GALLINA",
+            "precio": "55 Bs"
+          },
+          {
+            "plato": "PICANTE DE LENGUA",
+            "precio": "60 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres",
+        "items": [
+          {
+            "plato": "MANJAR BLANCO",
+            "precio": "20 Bs"
+          },
+          {
+            "plato": "SUSPIRO ALTEÑO",
+            "precio": "22 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA CAMBA",
+            "precio": "12-40 Bs"
+          },
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "12-40 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Gustitos Bolivianos",
+    "ciudad": "Santa Cruz",
+    "tipo": "Andina",
+    "horario": "10:00 a 17:00",
+    "telefono": "69501915",
+    "direccion": "3er Anillo Interno 591, casi Av. La Barranca, Santa Cruz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEjkiqbcHFxod0NnX9cYnqEBH1HpkL1xwBae28kG30FdKvbwwVM2ajsXQ094nKfUw0graRT1h2bwQg5MOUvaAkh_IV0aMvVZBTu2tAg29aqLSJPxlNqCG7dLky-Kn5H9a-evJJ8lQ=w427-h240-k-no",
+    "platoEstrella": {
+      "nombre": "THIMPU DE CORDERO",
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Thimpu_2.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Cordero",
+        "items": [
+          {
+            "plato": "THIMPU DE CORDERO",
+            "precio": "55 Bs"
+          },
+          {
+            "plato": "GUISO DE CORDERO",
+            "precio": "50 Bs"
+          },
+          {
+            "plato": "BRAZUELO DE CORDERO",
+            "precio": "65 Bs"
+          },
+          {
+            "plato": "COSTILLA DE CORDERO",
+            "precio": "60 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Pollos",
+        "items": [
+          {
+            "plato": "SAJTA DE POLLO",
+            "precio": "45 Bs"
+          },
+          {
+            "plato": "PICANTE",
+            "precio": "50-55 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA CAMBA",
+            "precio": "10 Bs"
+          },
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "10-35 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "La Rufina Bolivia",
+    "ciudad": "La Paz",
+    "tipo": "Paceña",
+    "horario": "12:00 a 22:00",
+    "telefono": "68216777",
+    "direccion": "Belisario Salinas 572, La Paz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGMdHUGZV3kplx9A-Se19zmeMPGiwWprveV-Fu-RkHhVqtqbDztgWUqTPlemnS4pOnFKTFIhpzvtfGmOrrLzngydd4UL6P5WJXXUI4zH3gc9dlvCdNJY0P9stL5mABef6MkCpOC-qVEYl8=w408-h544-k-no",
+    "platoEstrella": {
+      "nombre": "MONDONGO",
+      "imagen": "https://www.cocina-boliviana.com/base/stock/Recipe/mondongo-chuquisaqueno/mondongo-chuquisaqueno_web.jpg.webp"
+    },
+    "menu": [
+      {
+        "cat": "Menú",
+        "items": [
+          {
+            "plato": "MONDONGO",
+            "precio": "65-75 Bs"
+          },
+          {
+            "plato": "CONEJO MENTIROSO",
+            "precio": "60-70 Bs"
+          },
+          {
+            "plato": "PAILA",
+            "precio": "55-65 Bs"
+          },
+          {
+            "plato": "CHICHARRON DE TRUCHA",
+            "precio": "70-85 Bs"
+          },
+          {
+            "plato": "RELLENO DE PLATANO",
+            "precio": "35-45 Bs"
+          },
+          {
+            "plato": "ESCABECHE",
+            "precio": "40-50 Bs"
+          },
+          {
+            "plato": "SANDWICH DE CHOLA",
+            "precio": "45-55 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres",
+        "items": [
+          {
+            "plato": "HELADO DE CANELA",
+            "precio": "20-25 Bs"
+          },
+          {
+            "plato": "TUMBO CON TAWAS",
+            "precio": "30-35 Bs"
+          },
+          {
+            "plato": "ARROZ CON LECHE",
+            "precio": "25-30 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "15-20 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Restaurant Doña Remedios",
+    "ciudad": "La Paz",
+    "tipo": "Paceña",
+    "horario": "9:00 a 20:40",
+    "telefono": "74855203",
+    "direccion": "Av. Arce #2063, La Paz",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHtpwWyVlM7IFKoaAsf2hN8T_8shQPuf3Uh1AqkLloTFMSUXWVRwm953BIUKqAnLMAxibikRmlzEEA37vxdhzsvoJmzylC73MWKEJetqcejoVZUKrysTWhGnJ3_-lV74fn-F1vz=w533-h240-k-no",
+    "platoEstrella": {
+      "nombre": "FRICASE MIXTO",
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Fricase_mixto.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Especiales",
+        "items": [
+          {
+            "plato": "FRICASE MIXTO",
+            "precio": "50-60 Bs"
+          },
+          {
+            "plato": "CHICHARRON ESPECIAL",
+            "precio": "65-80 Bs"
+          },
+          {
+            "plato": "LECHON AL HORNO",
+            "precio": "60-70 Bs"
+          },
+          {
+            "plato": "POLLO AL HORNO",
+            "precio": "45-55 Bs"
+          },
+          {
+            "plato": "CHICHARRON DE POLLO",
+            "precio": "45-55 Bs"
+          },
+          {
+            "plato": "PIQUE MACHO",
+            "precio": "80-100 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA",
+            "precio": "10-35 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Casa de Campo",
+    "ciudad": "Cochabamba",
+    "tipo": "Valles",
+    "horario": "11:00 a 22:00",
+    "telefono": "44243937",
+    "direccion": "Av. Uyuni, Cochabamba",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEyXGZeNhV3z24Aq8f-RB4_5O5r33KntGa13jzbBwE4VKOe83nXp8kFq5-A30Q2Zd7aRjJpi0jb-M4vVDVlAC6U5cuckDeC4mNQmL3Ps4lYmL1aPJL2uI-26HYDDFYcWg_bnZSF=w408-h306-k-no",
+    "platoEstrella": {
+      "nombre": "PIQUE MACHO",
+      "imagen": "https://estaticos-noticias.unitel.bo/binrepository/1121x512/49c0/1024d512/none/125450566/PANM/pique-macho-foto-la-batidora_289322020_1140x520_UN415197_MG172766577.jpeg"
+    },
+    "menu": [
+      {
+        "cat": "Platos",
+        "items": [
+          {
+            "plato": "PIQUE MACHO",
+            "precio": "95-115 Bs"
+          },
+          {
+            "plato": "PLANCHITA",
+            "precio": "85-100 Bs"
+          },
+          {
+            "plato": "BRAZUELO DE CORDERO",
+            "precio": "80-95 Bs"
+          },
+          {
+            "plato": "PICANTE DE LENGUA",
+            "precio": "65-75 Bs"
+          },
+          {
+            "plato": "CHAIRO",
+            "precio": "40-50 Bs"
+          },
+          {
+            "plato": "SILPANCHO",
+            "precio": "55-65 Bs"
+          },
+          {
+            "plato": "CHAMKA DE POLLO",
+            "precio": "50-60 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres/Bebidas",
+        "items": [
+          {
+            "plato": "HELADO DE QUINUA/FLAN",
+            "precio": "22-125 Bs"
+          },
+          {
+            "plato": "CHICHA MORADA/LIMONADA",
+            "precio": "Variado"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Cayenna Restaurant",
+    "ciudad": "Cochabamba",
+    "tipo": "Tradicional",
+    "horario": "10:00 a 17:00",
+    "telefono": "62845067",
+    "direccion": "Calle esq. Parque C. Fidel Anze, Cochabamba",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGuDCP8FKrqJXiydBv8EXM6eVs4aDgqEQzfavSvrkbmZJ7zNDB8W3Nl566zYXcJg0ttNE3vmcTEPCr3JvI448zHRN98gMeqFduKGFJoqqLxGRTFuk4G9ITTCUO_UkY8SuQMYMzC=w427-h240-k-no",
+    "platoEstrella": {
+      "nombre": "FRICASÉ",
+      "imagen": "https://pxcdn.eldeber.com.bo/eldeber/19183/092025/1757307713993.webp?cw=1200&ch=675&extw=jpg"
+    },
+    "menu": [
+      {
+        "cat": "Cocina",
+        "items": [
+          {
+            "plato": "FRICASÉ",
+            "precio": "40-55 Bs"
+          },
+          {
+            "plato": "PIQUE COCHABAMBINO",
+            "precio": "60-85 Bs"
+          },
+          {
+            "plato": "PLANCHITA",
+            "precio": "70-90 Bs"
+          },
+          {
+            "plato": "CHICHARRON DE CERDO",
+            "precio": "50-70 Bs"
+          },
+          {
+            "plato": "LOMO BORRACHO",
+            "precio": "55-70 Bs"
+          },
+          {
+            "plato": "LAPIN",
+            "precio": "40-55 Bs"
+          },
+          {
+            "plato": "FRITANGA",
+            "precio": "40-55 Bs"
+          },
+          {
+            "plato": "CHARQUEKAN",
+            "precio": "45-60 Bs"
+          },
+          {
+            "plato": "COSTILLAR DE CORDERO",
+            "precio": "60-80 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA CAMBA",
+            "precio": "10 Bs"
+          },
+          {
+            "plato": "MOCOCHINCHI",
+            "precio": "15 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "Heredad de Jacob",
+    "ciudad": "Tarija",
+    "tipo": "Sureña",
+    "horario": "10:00 a 17:00",
+    "telefono": "78247190",
+    "direccion": "Erquis Norte, Km 7, Tarija",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEttdYXfZ5glH7dcIeGvmYxHEAPg08MTtbXbVZRUQR7TztqpXnAJ3dEF9Yv3uPoFrpgz99A2iKuh1rKTibZ_Zea2s4NBSebFSHMUXHgDifs_8K2HkIj6g8hx6FksKq_PjRbcf8zAQ=w408-h725-k-no",
+    "platoEstrella": {
+      "nombre": "CHANCHO ALA CRUZ",
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/9/91/Chancho_a_la_Cruz.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Tarijeño",
+        "items": [
+          {
+            "plato": "SAICE",
+            "precio": "35-50 Bs"
+          },
+          {
+            "plato": "RANGA",
+            "precio": "35-45 Bs"
+          },
+          {
+            "plato": "CHANCHO ALA CRUZ",
+            "precio": "60-85 Bs"
+          },
+          {
+            "plato": "COSTILLA",
+            "precio": "55-75 Bs"
+          },
+          {
+            "plato": "PICANTE DE POLLO",
+            "precio": "45-60 Bs"
+          },
+          {
+            "plato": "PICANTE DE LENGUA",
+            "precio": "55-70 Bs"
+          },
+          {
+            "plato": "MONDONGO",
+            "precio": "45-60 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Postres",
+        "items": [
+          {
+            "plato": "TAMALES TARIJEÑOS",
+            "precio": "10-15 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA Y MOCOCHINCHI",
+            "precio": "10-15 Bs"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nombre": "La Casa de Doña Pastorita",
+    "ciudad": "Tarija",
+    "tipo": "Tarijeña",
+    "horario": "8:00 a 13:00",
+    "telefono": "70227000",
+    "direccion": "Daniel Campos 1248, Tarija",
+    "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHXktEpdlt-QVcRmdH_8pWtlkrn6joZf_n3ssXgamySoMN8wyMLaTG70X-klIcqEqvDWcaE13YUwXbf8KS8gLSZQrH0OT_RLYxFIfgjV3k3_cwPpSyFlVDEEoybePe_LjORn8ay=w408-h306-k-no",
+    "platoEstrella": {
+      "nombre": "CHANCHO ALA OLLA",
+      "imagen": "https://gastronomiabolivia.com/wp-content/uploads/picana-de-Bolivia.jpg"
+    },
+    "menu": [
+      {
+        "cat": "Buffet",
+        "items": [
+          {
+            "plato": "BUFFET CRIOLLO",
+            "precio": "60-85 Bs"
+          },
+          {
+            "plato": "RANGA",
+            "precio": "35-45 Bs"
+          },
+          {
+            "plato": "SAICE TARIJEÑO",
+            "precio": "35-50 Bs"
+          },
+          {
+            "plato": "SOPA DE MANI",
+            "precio": "15-25 Bs"
+          },
+          {
+            "plato": "PICANTE MIXTO",
+            "precio": "50-65 Bs"
+          },
+          {
+            "plato": "CHANCHO ALA OLLA",
+            "precio": "55-75 Bs"
+          }
+        ]
+      },
+      {
+        "cat": "Bebidas",
+        "items": [
+          {
+            "plato": "CHICHA Y MOCOCHINCHI",
+            "precio": "10-15 Bs"
+          }
+        ]
+      }
+    ]
+  }
+];
+
+// ══ DATOS EXTRA RESTAURANTES (redes sociales y alérgenos) ══
 const RESTAURANTES_EXTRA = {
   "RINCON PACEÑO":{
     maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66",
@@ -1045,6 +1847,8 @@ function sesionIniciada(usuario){
   if(savedAlerg){ try { misAlergias = JSON.parse(savedAlerg); } catch(e){ misAlergias = []; } }
   mostrarNavUser();
   aplicarFiltroAlergias();
+  pedirPermisoNotificaciones();
+  verificarNotificacionesReservas();
 }
 
 function mostrarNavUser(){
@@ -1088,6 +1892,8 @@ function cargarSesion(){
       if(savedAlerg){ try { misAlergias = JSON.parse(savedAlerg); } catch(e){ misAlergias = []; } }
       mostrarNavUser();
       aplicarFiltroAlergias();
+      pedirPermisoNotificaciones();
+      verificarNotificacionesReservas();
     } catch(e){ localStorage.removeItem("usuarioSabrolivia"); }
   } else {
     mostrarNavUser();
@@ -1156,23 +1962,33 @@ function verTodosRest(){
   document.getElementById("alergWarningBanner").classList.remove("show");
 }
 
-// ══ CATÁLOGOS ══ (sin cambios)
+// ══ CATÁLOGOS ══
+// Los 12 restaurantes ahora se cargan localmente desde RESTAURANTES_FIJOS (datos provistos directamente).
+// Mercados y supermercados siguen viniendo del backend (Google Apps Script).
 async function cargarCatalogos(){
+  // Restaurantes: datos fijos, sin depender del backend
+  restaurantes = RESTAURANTES_FIJOS;
+  renderRestaurantes();
+  generarFiltros();
+  llenarSelectOpinion();
+  llenarSelectCalc();
+
+  // Mercados y supermercados: se mantienen desde el backend
   try{
     const result = await llamarScript("obtenerCatalogos");
     const data = result && result.success ? result.data : result;
-    if(data && data.restaurantes){
-      restaurantes = data.restaurantes || [];
+    if(data){
       mercados = data.mercados || [];
       supermercados = data.supermercados || [];
-      renderRestaurantes(); renderMercados(); renderSupermercados();
-      generarFiltros(); generarFiltrosSuper();
-      llenarSelectOpinion(); llenarSelectCalc();
+      renderMercados(); renderSupermercados();
+      generarFiltrosSuper();
     } else {
-      document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ No se pudieron cargar los datos.</div>';
+      document.getElementById("gridMercados").innerHTML = '<div class="loader">⚠️ No se pudieron cargar los mercados.</div>';
+      document.getElementById("gridSupermercados").innerHTML = '<div class="loader">⚠️ No se pudieron cargar los supermercados.</div>';
     }
   } catch(e){
-    document.getElementById("gridRestaurantes").innerHTML = '<div class="loader">⚠️ Error de conexión.</div>';
+    document.getElementById("gridMercados").innerHTML = '<div class="loader">⚠️ Error de conexión.</div>';
+    document.getElementById("gridSupermercados").innerHTML = '<div class="loader">⚠️ Error de conexión.</div>';
   }
 }
 
@@ -1213,6 +2029,13 @@ function renderRestaurantes(filtro="todas"){
     const alergRest=getAlergInfoForRest(r.nombre||"");
     const conflicto=hayConflictoAlergia(alergRest);
     const alergBadgeHTML=conflicto.length?`<span class="badge badge-alergia">⚠️ ${conflicto.join(", ")}</span>`:"";
+    const pe=r.platoEstrella||null;
+    const platoEstrellaHTML=pe?`
+      <div class="plato-estrella-wrap">
+        <img src="${pe.imagen}" class="plato-estrella-img" alt="${pe.nombre}" loading="lazy" onerror="this.onerror=null;this.src='${ph}'">
+        <span class="plato-estrella-tag">⭐ Plato estrella</span>
+        <div class="plato-estrella-nombre">${pe.nombre}</div>
+      </div>`:"";
     const card=document.createElement("div");
     card.className="card";
     card.dataset.alergenos=JSON.stringify(alergRest);
@@ -1220,6 +2043,7 @@ function renderRestaurantes(filtro="todas"){
       <div class="card-img-wrap">
         <img src="${r.imagen||ph}" class="card-img" alt="${r.nombre}" loading="lazy" onerror="this.onerror=null;this.src='${ph}'">
       </div>
+      ${platoEstrellaHTML}
       <div class="card-body">
         <span class="badge badge-tipo">${r.tipo||"Restaurante"}</span>
         <span class="badge badge-hora">⏰ ${r.horario||"—"}</span>
@@ -1489,7 +2313,6 @@ document.getElementById("btnReserva").addEventListener("click", async function()
   if(resp.exito){
     cerrar("modalReserva");
     toast(`✅ Reserva enviada a ${restaurante}`);
-    // Envío de confirmación WA/mail opcional (similar al anterior)
     const key = getRestKey(restaurante);
     const info = key ? RESTAURANTES_EXTRA[key] : null;
     const maps = info && info.maps ? `\n📍 Maps: ${info.maps}` : "";
@@ -1612,6 +2435,51 @@ function mostrarPlatoHistorico(dept, btn){
 }
 
 window.addEventListener("click", e => { if(e.target.classList.contains("modal-overlay")) e.target.style.display = "none"; });
+
+// ══ NOTIFICACIONES DE CAMBIO DE ESTADO ══
+async function verificarNotificacionesReservas(){
+  if(!usuarioActual) return;
+  const raw = await llamarScript("consultarSolicitudes", {correo: usuarioActual.correo});
+  const solicitudes = Array.isArray(raw) ? raw : (raw && raw.data ? raw.data : []);
+  if(!solicitudes || !solicitudes.length) return;
+
+  const key = "estadosReservas_" + usuarioActual.correo;
+  let previos = {};
+  try{ previos = JSON.parse(localStorage.getItem(key) || "{}"); }catch(e){ previos = {}; }
+
+  solicitudes.forEach(s=>{
+    if(s.tipo !== "Reserva" || !s.id) return;
+    const anterior = previos[s.id];
+    if(anterior && anterior !== s.estado && (s.estado === "Confirmado" || s.estado === "Rechazado")){
+      mostrarNotificacionReserva(s);
+    }
+    previos[s.id] = s.estado;
+  });
+
+  localStorage.setItem(key, JSON.stringify(previos));
+}
+
+function mostrarNotificacionReserva(s){
+  if(s.estado === "Confirmado"){
+    toast(`🎉 ¡Tu reserva en ${s.restaurante} fue confirmada!`, "exito");
+  } else {
+    toast(`⚠️ Tu reserva en ${s.restaurante} no pudo confirmarse`, "error");
+  }
+  if("Notification" in window && Notification.permission === "granted"){
+    new Notification(s.estado === "Confirmado" ? "🎉 Reserva confirmada" : "⚠️ Reserva no confirmada", {
+      body: `${s.restaurante} — Sabrolivia`
+    });
+  }
+}
+
+function pedirPermisoNotificaciones(){
+  if("Notification" in window && Notification.permission === "default"){
+    Notification.requestPermission();
+  }
+}
+
+// Revisa cambios cada 60 segundos mientras el usuario tenga la pestaña abierta
+setInterval(verificarNotificacionesReservas, 60000);
 
 // ══ INIT ══
 cargarSesion();
