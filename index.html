@@ -18,8 +18,6 @@
 }
 html{scroll-behavior:smooth;font-size:18px;}
 body{font-family:'Inter',sans-serif;background:var(--obsidian);color:#E8E0F0;line-height:1.6;overflow-x:hidden;}
-
-/* ══ SIDEBAR ══ */
 #sidebar{
   position:fixed;left:0;top:0;bottom:0;width:68px;
   background:rgba(10,6,12,0.96);backdrop-filter:blur(20px);
@@ -55,11 +53,7 @@ body{font-family:'Inter',sans-serif;background:var(--obsidian);color:#E8E0F0;lin
 .ni-icon{font-size:1.45rem;min-width:30px;text-align:center;position:relative;z-index:1;flex-shrink:0;}
 .ni-label{position:relative;z-index:1;opacity:0;transition:opacity .2s .05s;white-space:nowrap;}
 #sidebar:hover .ni-label{opacity:1;}
-
-/* ══ MAIN ══ */
 main{margin-left:68px;min-height:100vh;}
-
-/* ══ TOP BAR ══ */
 #topBar{
   position:fixed;top:0;right:0;left:68px;height:58px;
   background:rgba(10,6,12,0.92);backdrop-filter:blur(16px);
@@ -96,12 +90,8 @@ main{margin-left:68px;min-height:100vh;}
   background:rgba(255,107,53,.15);border:1px solid rgba(255,107,53,.3);
   color:var(--ember);padding:.22rem .65rem;border-radius:10px;font-size:.85rem;font-weight:700;
 }
-
-/* ══ PAGES ══ */
 .page{display:none;padding-top:58px;}
 .page.active{display:block;}
-
-/* ══ SECTION PAGES ══ */
 .sec-page{padding:2.5rem 2.5rem 3rem 2rem;max-width:1300px;margin:0 auto;}
 .sec-header{margin-bottom:2.2rem;}
 .sec-eyebrow{
@@ -111,8 +101,6 @@ main{margin-left:68px;min-height:100vh;}
 .sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:900;line-height:1.1;}
 .glow-gold{color:var(--gold);} .glow-violet{color:var(--violet2);} .glow-neon{color:var(--neon);}
 .glow-ember{color:var(--ember);} .glow-sky{color:var(--sky);} .glow-lime{color:var(--lime);} .glow-rose{color:var(--rose);}
-
-/* ══ CARDS ══ */
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem;}
 .card{
   background:var(--panel);border:1px solid var(--glass-border);border-radius:var(--radius);
@@ -186,8 +174,6 @@ main{margin-left:68px;min-height:100vh;}
 .menu-item .precio{color:var(--gold);font-weight:700;font-family:'Space Mono',monospace;}
 .menu-seccion{font-weight:700;color:var(--ember);font-size:.8rem;margin:.5rem 0 .15rem;text-transform:uppercase;letter-spacing:.1em;}
 .loader{text-align:center;padding:3rem;color:rgba(200,185,220,.35);font-size:.9rem;}
-
-/* ══ FILTROS ══ */
 .filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.8rem;}
 .filtros button{
   padding:.5rem 1.2rem;border:1px solid var(--glass-border);background:var(--glass);
@@ -198,8 +184,6 @@ main{margin-left:68px;min-height:100vh;}
   background:linear-gradient(135deg,var(--violet),var(--violet2));color:#fff;border-color:transparent;
   box-shadow:0 4px 14px rgba(124,58,237,.3);
 }
-
-/* ══ RECETAS ══ */
 .recetas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem;}
 .receta-card{
   background:var(--panel);border:1px solid var(--glass-border);border-radius:var(--radius);
@@ -217,8 +201,6 @@ main{margin-left:68px;min-height:100vh;}
 .share-btn{padding:.24rem .65rem;border-radius:9px;font-size:.82rem;font-weight:700;border:none;cursor:pointer;font-family:'Inter',sans-serif;transition:.18s;}
 .sh-wa{background:rgba(37,211,102,.1);color:#25D366;}.sh-wa:hover{background:#25D366;color:#fff;}
 .sh-fb{background:rgba(24,119,242,.1);color:#5B8DEF;}.sh-fb:hover{background:#1877F2;color:#fff;}
-
-/* ══ CALCULADORA ══ */
 .calc-wrap{
   background:var(--panel);border:1px solid var(--glass-border);border-radius:26px;
   max-width:700px;margin:0 auto;padding:1.8rem;box-shadow:var(--sombra);
@@ -248,8 +230,24 @@ main{margin-left:68px;min-height:100vh;}
 .btn-calc-wa:hover{box-shadow:0 6px 18px rgba(37,211,102,.45);}
 .btn-calc-mail{background:linear-gradient(135deg,var(--ember),var(--rose));color:#fff;box-shadow:0 4px 12px rgba(255,107,53,.28);}
 .btn-calc-mail:hover{box-shadow:0 6px 18px rgba(255,107,53,.45);}
-
-/* ══ MICRO BUTTON ══ */
+.calc-tel-rapido{
+  display:none;margin-top:.7rem;padding:.85rem 1rem;
+  background:rgba(37,211,102,.06);border:1px solid rgba(37,211,102,.25);
+  border-radius:14px;text-align:left;
+}
+.calc-tel-rapido.show{display:block;}
+.calc-tel-rapido label{display:block;font-size:.82rem;color:rgba(200,185,220,.6);margin-bottom:.4rem;font-weight:600;}
+.calc-tel-rapido .tel-row{display:flex;gap:.5rem;}
+.calc-tel-rapido input{
+  flex:1;padding:.6rem .85rem;border:1.5px solid var(--glass-border);border-radius:10px;
+  font-family:'Inter',sans-serif;font-size:.95rem;background:rgba(255,255,255,.05);color:#E8E0F0;outline:none;
+}
+.calc-tel-rapido input:focus{border-color:#25D366;}
+.calc-tel-rapido .tel-go{
+  background:#25D366;color:#fff;border:none;padding:.6rem 1.1rem;border-radius:10px;
+  font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;
+}
+.calc-tel-rapido .tel-go:hover{background:#1fb358;}
 .btn-micro{
   display:inline-flex;align-items:center;gap:.4rem;
   background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.3);
@@ -258,8 +256,6 @@ main{margin-left:68px;min-height:100vh;}
   font-family:'Inter',sans-serif;text-decoration:none;margin-top:.5rem;
 }
 .btn-micro:hover{background:rgba(245,166,35,.22);color:#fff;}
-
-/* ══ MAPA HISTORICO ══ */
 .mapa-container{
   position:relative;width:100%;max-width:900px;margin:0 auto;
   background:linear-gradient(145deg,rgba(21,16,26,.9),rgba(29,21,37,.8));
@@ -298,8 +294,6 @@ main{margin-left:68px;min-height:100vh;}
   background:linear-gradient(135deg,rgba(245,166,35,.2),rgba(255,107,53,.15));
   border-color:rgba(245,166,35,.4);color:var(--gold);
 }
-
-/* ══ MODALES ══ */
 .modal-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;
   justify-content:center;align-items:center;z-index:4000;backdrop-filter:blur(6px);
@@ -348,8 +342,6 @@ main{margin-left:68px;min-height:100vh;}
 .estado-pendiente{background:rgba(245,166,35,.3);color:var(--gold);}
 .estado-confirmado{background:rgba(0,229,160,.18);color:var(--neon);}
 .estado-rechazado{background:rgba(255,58,120,.18);color:var(--rose);}
-
-/* ══ ALERGIAS MODAL ══ */
 .alerg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.4rem;margin:.5rem 0;}
 .alerg-chk{
   display:flex;align-items:center;gap:.45rem;font-size:.95rem;cursor:pointer;
@@ -379,8 +371,6 @@ main{margin-left:68px;min-height:100vh;}
   display:none;
 }
 .alerg-warning.show{display:block;}
-
-/* ══ TOAST ══ */
 #toast{
   position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(70px);
   background:var(--panel2);color:#fff;padding:.85rem 1.7rem;border-radius:50px;
@@ -392,8 +382,6 @@ main{margin-left:68px;min-height:100vh;}
 #toast.exito{border-color:rgba(0,229,160,.3);color:var(--neon);}
 #toast.error{border-color:rgba(255,58,120,.3);color:var(--rose);}
 #toast.info{border-color:rgba(245,166,35,.3);color:var(--gold);}
-
-/* ══ FLOAT BTN ══ */
 #btnOpinarFloat{
   position:fixed;bottom:2rem;right:2rem;
   background:linear-gradient(135deg,var(--violet),var(--violet2));
@@ -402,8 +390,6 @@ main{margin-left:68px;min-height:100vh;}
   z-index:3000;transition:.18s;display:flex;align-items:center;justify-content:center;
 }
 #btnOpinarFloat:hover{transform:scale(1.1);box-shadow:0 10px 26px rgba(124,58,237,.65);}
-
-/* ══ FOOTER ══ */
 footer{
   background:var(--void);border-top:1px solid var(--glass-border);
   text-align:center;padding:1.8rem;margin-top:2rem;
@@ -415,8 +401,6 @@ footer .f-logo{
 }
 footer p{color:rgba(200,185,220,.5);font-size:.85rem;margin-top:.45rem;}
 footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
-
-/* ══ RESPONSIVE ══ */
 @media(max-width:768px){
   #sidebar{
     width:100%;height:auto;flex-direction:row;
@@ -454,7 +438,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 <div id="toast"></div>
 <button id="btnOpinarFloat" title="Dejar opinión" style="display:none">💬</button>
 
-<!-- ══ SIDEBAR ══ -->
 <nav id="sidebar">
   <div class="sb-logo">🇧🇴 Sabrolivia</div>
   <a href="#" class="nav-item ni-rest active" onclick="showPage('restaurantes',this)"><span class="ni-icon">🍽️</span><span class="ni-label">Restaurantes</span></a>
@@ -466,7 +449,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   <a href="#" class="nav-item ni-cont"        onclick="showPage('contacto',this)"><span class="ni-icon">📬</span><span class="ni-label">Contacto</span></a>
 </nav>
 
-<!-- ══ TOP BAR ══ -->
 <div id="topBar">
   <div class="tb-left">
     <span class="tb-flag">🇧🇴</span>
@@ -474,14 +456,11 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <span id="tbAlergBadge" class="alergia-badge" style="display:none">⚠️ Alergias activas</span>
   </div>
   <div class="tb-right" id="tbRight">
-    <!-- Contenido dinámico: se llena con JavaScript -->
   </div>
 </div>
 
-<!-- ══ MAIN ══ -->
 <main>
 
-<!-- RESTAURANTES -->
 <div id="pageRestaurantes" class="page active">
   <div class="sec-page">
     <div class="sec-header">
@@ -496,7 +475,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- RECETAS -->
 <div id="pageRecetas" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -508,7 +486,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- CALCULADORA -->
 <div id="pageCalculadora" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -556,11 +533,17 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
         <button class="btn-calc btn-calc-wa" onclick="enviarPresupuestoWA()">📲 Enviar por WhatsApp</button>
         <button class="btn-calc btn-calc-mail" onclick="enviarPresupuestoMail()">📧 Enviar por Correo</button>
       </div>
+      <div class="calc-tel-rapido" id="calcTelRapido">
+        <label>📱 Ingresa el número de WhatsApp al que quieres recibir el presupuesto:</label>
+        <div class="tel-row">
+          <input type="tel" id="calcTelInput" placeholder="Ej: 70000000 o 59170000000">
+          <button class="tel-go" onclick="confirmarTelRapidoYEnviar()">Enviar</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- MERCADOS -->
 <div id="pageMercados" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -571,7 +554,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- SUPERMERCADOS -->
 <div id="pageSupermercados" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -583,7 +565,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- MAPA HISTÓRICO -->
 <div id="pageMapa" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -606,7 +587,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- CONTACTO -->
 <div id="pageContacto" class="page">
   <div class="sec-page">
     <div class="sec-header">
@@ -629,12 +609,10 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 </footer>
 </main>
 
-<!-- ══ MODAL LOGIN/REGISTRO (estilo oscuro como antes) ══ -->
 <div class="modal-overlay" id="modalLogin">
   <div class="modal" style="background:rgba(15,12,16,0.96); border:1px solid rgba(245,166,35,.18);">
     <div class="modal-body" style="padding:1.8rem;">
       <button class="modal-close" onclick="cerrar('modalLogin')" style="color:rgba(200,185,220,.4);">&times;</button>
-      <!-- Imagen pequeña encima -->
       <div style="display:flex; justify-content:center; margin-bottom:0.5rem;">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfJyGq_QektIzFB7Iz0xcum8FltLbzquDytw&s" alt="Sabrolivia" style="max-width:70px; border-radius:12px; opacity:0.7; border:1px solid rgba(245,166,35,.2);">
       </div>
@@ -668,7 +646,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div>
 </div>
 
-<!-- ══ MODAL RESERVA ══ -->
 <div class="modal-overlay" id="modalReserva">
   <div class="modal"><div class="modal-body">
     <button class="modal-close" onclick="cerrar('modalReserva')">&times;</button>
@@ -715,7 +692,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div></div>
 </div>
 
-<!-- ══ MODAL OPINIÓN ══ -->
 <div class="modal-overlay" id="modalOpinion">
   <div class="modal"><div class="modal-body">
     <button class="modal-close" onclick="cerrar('modalOpinion')">&times;</button>
@@ -732,7 +708,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div></div>
 </div>
 
-<!-- ══ MODAL MIS RESERVAS ══ -->
 <div class="modal-overlay" id="modalEstado">
   <div class="modal"><div class="modal-body">
     <button class="modal-close" onclick="cerrar('modalEstado')">&times;</button>
@@ -743,7 +718,6 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
   </div></div>
 </div>
 
-<!-- ══ MODAL ALERGIAS ══ -->
 <div class="modal-overlay" id="modalAlergias">
   <div class="modal"><div class="modal-body">
     <button class="modal-close" onclick="cerrar('modalAlergias')">&times;</button>
@@ -768,12 +742,8 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-// CONFIG
-// ══════════════════════════════════════════════
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz9eWTYqeIvV4d8KkiINNh4x5D2wPBYWVFAsVg5VrOIdnMEu7h_P4K-VGIYdJe0XkaQQ/exec";
 
-// ══ RESTAURANTES (12 fijos, datos provistos) ══
 const RESTAURANTES_FIJOS = 
 [
   {
@@ -784,41 +754,15 @@ const RESTAURANTES_FIJOS =
     "telefono": "78763081",
     "direccion": "https://maps.app.goo.gl/Z9knATXwJUc3g11d9",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGR9GFeiSS0am1A2fMLENyN38C02w5Fs3EFZygmNtDt4IX7-Q6NenmXaWqS2SA3O3k_yLyhfhaCxcCqsZA4_UgkZ09HljVTzJ2KPqR7MZ5bAaPDG-Emq-RJF8VxrC9QHEset_BgoLVK08Y9=w408-h544-k-no",
-    "platoEstrella": {
-      "nombre": "ISPI",
-      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ispi_Pace%C3%B1o.jpg/960px-Ispi_Pace%C3%B1o.jpg"
-    },
+    "platoEstrella": { "nombre": "ISPI", "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ispi_Pace%C3%B1o.jpg/960px-Ispi_Pace%C3%B1o.jpg" },
     "menu": [
-      {
-        "cat": "Platos principales",
-        "items": [
-          {
-            "plato": "ISPI",
-            "precio": "55 Bs - 5 Bs"
-          },
-          {
-            "plato": "FRICASE",
-            "precio": "60 Bs"
-          },
-          {
-            "plato": "SAJTA DE POLLO",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "TRUCHA",
-            "precio": "65 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "5 Bs"
-          }
-        ]
-      }
+      { "cat": "Platos principales", "items": [
+        { "plato": "ISPI", "precio": "55 Bs - 5 Bs" },
+        { "plato": "FRICASE", "precio": "60 Bs" },
+        { "plato": "SAJTA DE POLLO", "precio": "45 Bs" },
+        { "plato": "TRUCHA", "precio": "65 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [ { "plato": "MOCOCHINCHI", "precio": "5 Bs" } ] }
     ]
   },
   {
@@ -829,86 +773,29 @@ const RESTAURANTES_FIJOS =
     "telefono": "76003877",
     "direccion": "Av. Cristobal de Mendoza 1365, Santa Cruz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHbVPBvcm9-ffcKszXVJ0ABA9ceIU8X6dJojvsCL7dF0U9GeCwHnw6plMAWJJVy3iQb2hNEFZrAW_rnhu8GZrr449E_mku8bVgHbY9RKN8qMIuFfydIlmOUixxs-XngwKJC6RZRUM5Rettl=w408-h306-k-no",
-    "platoEstrella": {
-      "nombre": "MAJADITO (tostado o aguadito)",
-      "imagen": "https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/05/majadito-de-charque-Paulina-Cocina-Recetas-1722430370.jpg"
-    },
+    "platoEstrella": { "nombre": "MAJADITO (tostado o aguadito)", "imagen": "https://cdn.blog.paulinacocina.net/wp-content/uploads/2024/05/majadito-de-charque-Paulina-Cocina-Recetas-1722430370.jpg" },
     "menu": [
-      {
-        "cat": "Platos principales",
-        "items": [
-          {
-            "plato": "MAJADITO (tostado o aguadito)",
-            "precio": "55-65 Bs"
-          },
-          {
-            "plato": "KEPERI AL HORNO",
-            "precio": "75 Bs"
-          },
-          {
-            "plato": "PICANTE DE GALLINA",
-            "precio": "65-75 Bs"
-          },
-          {
-            "plato": "PIQUE MACHO",
-            "precio": "90-110 Bs"
-          },
-          {
-            "plato": "PATASCA",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "SOPA DE MANI",
-            "precio": "35-45 Bs"
-          },
-          {
-            "plato": "CHICHARRON DE LAGARTO",
-            "precio": "80-95 Bs"
-          },
-          {
-            "plato": "PICANTE DE LENGUA",
-            "precio": "70-80 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres",
-        "items": [
-          {
-            "plato": "CUÑAPÉ",
-            "precio": "5-7 Bs"
-          },
-          {
-            "plato": "HORNEADO YUCA",
-            "precio": "10-15 Bs"
-          },
-          {
-            "plato": "MASACO DE YUCA",
-            "precio": "25-35 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA CAMBA",
-            "precio": "35 Bs"
-          },
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "30-35 Bs"
-          },
-          {
-            "plato": "CHUFLAY",
-            "precio": "25-30 Bs"
-          },
-          {
-            "plato": "REFRESCO TAMARINDO",
-            "precio": "30-35 Bs"
-          }
-        ]
-      }
+      { "cat": "Platos principales", "items": [
+        { "plato": "MAJADITO (tostado o aguadito)", "precio": "55-65 Bs" },
+        { "plato": "KEPERI AL HORNO", "precio": "75 Bs" },
+        { "plato": "PICANTE DE GALLINA", "precio": "65-75 Bs" },
+        { "plato": "PIQUE MACHO", "precio": "90-110 Bs" },
+        { "plato": "PATASCA", "precio": "45 Bs" },
+        { "plato": "SOPA DE MANI", "precio": "35-45 Bs" },
+        { "plato": "CHICHARRON DE LAGARTO", "precio": "80-95 Bs" },
+        { "plato": "PICANTE DE LENGUA", "precio": "70-80 Bs" }
+      ]},
+      { "cat": "Postres", "items": [
+        { "plato": "CUÑAPÉ", "precio": "5-7 Bs" },
+        { "plato": "HORNEADO YUCA", "precio": "10-15 Bs" },
+        { "plato": "MASACO DE YUCA", "precio": "25-35 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [
+        { "plato": "CHICHA CAMBA", "precio": "35 Bs" },
+        { "plato": "MOCOCHINCHI", "precio": "30-35 Bs" },
+        { "plato": "CHUFLAY", "precio": "25-30 Bs" },
+        { "plato": "REFRESCO TAMARINDO", "precio": "30-35 Bs" }
+      ]}
     ]
   },
   {
@@ -919,57 +806,19 @@ const RESTAURANTES_FIJOS =
     "telefono": "77839392",
     "direccion": "Puerto Rico, Santa Cruz de la Sierra",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGrtdA-3LxfSCLT05Bx-uxpqHDI7sOZFIEPBH9FpR6v82ssBvLwYXsSXd46wV8yeaBLzKjPp503SDktbxM_B1jfWTVSAWMwyCar3NndZPbzJdeC8zBz-er5g3WzfHtDyp3OtjWw=w408-h544-k-no",
-    "platoEstrella": {
-      "nombre": "MENUDITO MEDIO",
-      "imagen": "https://pxcdn.reduno.com.bo/reduno/102021/1633357722127.webp?cw=800&ch=450&extw=jpg"
-    },
+    "platoEstrella": { "nombre": "MENUDITO MEDIO", "imagen": "https://pxcdn.reduno.com.bo/reduno/102021/1633357722127.webp?cw=800&ch=450&extw=jpg" },
     "menu": [
-      {
-        "cat": "Menú",
-        "items": [
-          {
-            "plato": "MENUDITO MEDIO",
-            "precio": "35 Bs"
-          },
-          {
-            "plato": "CHORIZO ENTERO",
-            "precio": "50 Bs"
-          },
-          {
-            "plato": "SANDWICH DE CHORIZO",
-            "precio": "25 Bs"
-          },
-          {
-            "plato": "MONDONGO",
-            "precio": "55 Bs"
-          },
-          {
-            "plato": "FRITANGA",
-            "precio": "55 Bs"
-          },
-          {
-            "plato": "PICANTE MIXTO",
-            "precio": "60 Bs"
-          },
-          {
-            "plato": "PICANTE DE LENGUA",
-            "precio": "55 Bs"
-          },
-          {
-            "plato": "PICANTE DE POLLO",
-            "precio": "50 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres",
-        "items": [
-          {
-            "plato": "SALTEÑA DE POLLO",
-            "precio": "9 Bs"
-          }
-        ]
-      }
+      { "cat": "Menú", "items": [
+        { "plato": "MENUDITO MEDIO", "precio": "35 Bs" },
+        { "plato": "CHORIZO ENTERO", "precio": "50 Bs" },
+        { "plato": "SANDWICH DE CHORIZO", "precio": "25 Bs" },
+        { "plato": "MONDONGO", "precio": "55 Bs" },
+        { "plato": "FRITANGA", "precio": "55 Bs" },
+        { "plato": "PICANTE MIXTO", "precio": "60 Bs" },
+        { "plato": "PICANTE DE LENGUA", "precio": "55 Bs" },
+        { "plato": "PICANTE DE POLLO", "precio": "50 Bs" }
+      ]},
+      { "cat": "Postres", "items": [ { "plato": "SALTEÑA DE POLLO", "precio": "9 Bs" } ] }
     ]
   },
   {
@@ -980,69 +829,24 @@ const RESTAURANTES_FIJOS =
     "telefono": "78894436",
     "direccion": "Av. Roca y Coronado, 3er Anillo Interno, Santa Cruz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAH7Qpj3kPd4CJaEfzRTGhg8XauxEAw6efHss2ZIHiyTOwyq08V3PlrqfN13vdF9Iq9Uaeclpu0WifSzn1rm5OC1KymNMhAyphKCJr4zrir7k6j3d1iWpROj-b0W0f4CaAY1UBLHZw=w426-h240-k-no",
-    "platoEstrella": {
-      "nombre": "FIDEOS UCHU'S",
-      "imagen": "https://pxcdn.reduno.com.bo/reduno/062018/1544509859861.webp?cw=800&ch=450&extw=png"
-    },
+    "platoEstrella": { "nombre": "FIDEOS UCHU'S", "imagen": "https://pxcdn.reduno.com.bo/reduno/062018/1544509859861.webp?cw=800&ch=450&extw=png" },
     "menu": [
-      {
-        "cat": "Especialidades",
-        "items": [
-          {
-            "plato": "FIDEOS UCHU'S",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "SOPA DE MANI",
-            "precio": "25 Bs"
-          },
-          {
-            "plato": "PIQUE MACHO",
-            "precio": "75 Bs"
-          },
-          {
-            "plato": "LOMO MONTADO",
-            "precio": "50 Bs"
-          },
-          {
-            "plato": "CHICHARRON MIXTO",
-            "precio": "65 Bs"
-          },
-          {
-            "plato": "ESCABECHE",
-            "precio": "35 Bs"
-          },
-          {
-            "plato": "CHARQUEKAN",
-            "precio": "60 Bs"
-          },
-          {
-            "plato": "RIÑON AL JUGO",
-            "precio": "40 Bs"
-          },
-          {
-            "plato": "CHANKA DE POLLO",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "PIQUE BORRACHO",
-            "precio": "65-75 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "REFRESCO TAMARINDO",
-            "precio": "10-35 Bs"
-          },
-          {
-            "plato": "LIMONADA",
-            "precio": "12-40 Bs"
-          }
-        ]
-      }
+      { "cat": "Especialidades", "items": [
+        { "plato": "FIDEOS UCHU'S", "precio": "45 Bs" },
+        { "plato": "SOPA DE MANI", "precio": "25 Bs" },
+        { "plato": "PIQUE MACHO", "precio": "75 Bs" },
+        { "plato": "LOMO MONTADO", "precio": "50 Bs" },
+        { "plato": "CHICHARRON MIXTO", "precio": "65 Bs" },
+        { "plato": "ESCABECHE", "precio": "35 Bs" },
+        { "plato": "CHARQUEKAN", "precio": "60 Bs" },
+        { "plato": "RIÑON AL JUGO", "precio": "40 Bs" },
+        { "plato": "CHANKA DE POLLO", "precio": "45 Bs" },
+        { "plato": "PIQUE BORRACHO", "precio": "65-75 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [
+        { "plato": "REFRESCO TAMARINDO", "precio": "10-35 Bs" },
+        { "plato": "LIMONADA", "precio": "12-40 Bs" }
+      ]}
     ]
   },
   {
@@ -1053,66 +857,24 @@ const RESTAURANTES_FIJOS =
     "telefono": "70288881",
     "direccion": "Calle Ñuflo de Chávez, Santa Cruz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFYzHg-C4zhtSYJoKy3h7B52acb_BuDVCWqkKqZes0loCtcvnMLGhB6JjWA7CfGG12fGee3yp9PDtZc7cEybthPoP7hZ8wwwpAqfkt6RWoRq84ywGRJqv4sT5ukmqPrwjwaPyr5Ew=w408-h306-k-no",
-    "platoEstrella": {
-      "nombre": "LOCRO CARRETERO",
-      "imagen": "https://pxcdn.eldeber.com.bo/eldeber/40821/092025/1757313936746.webp?cw=1200&ch=675&extw=jpg"
-    },
+    "platoEstrella": { "nombre": "LOCRO CARRETERO", "imagen": "https://pxcdn.eldeber.com.bo/eldeber/40821/092025/1757313936746.webp?cw=1200&ch=675&extw=jpg" },
     "menu": [
-      {
-        "cat": "Platos",
-        "items": [
-          {
-            "plato": "SOPA DE MANÍ",
-            "precio": "30 Bs"
-          },
-          {
-            "plato": "LOCRO CARRETERO",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "KEPERI AL HORNO",
-            "precio": "65 Bs"
-          },
-          {
-            "plato": "PIQUE MACHO",
-            "precio": "85 Bs"
-          },
-          {
-            "plato": "PICANTE DE GALLINA",
-            "precio": "55 Bs"
-          },
-          {
-            "plato": "PICANTE DE LENGUA",
-            "precio": "60 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres",
-        "items": [
-          {
-            "plato": "MANJAR BLANCO",
-            "precio": "20 Bs"
-          },
-          {
-            "plato": "SUSPIRO ALTEÑO",
-            "precio": "22 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA CAMBA",
-            "precio": "12-40 Bs"
-          },
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "12-40 Bs"
-          }
-        ]
-      }
+      { "cat": "Platos", "items": [
+        { "plato": "SOPA DE MANÍ", "precio": "30 Bs" },
+        { "plato": "LOCRO CARRETERO", "precio": "45 Bs" },
+        { "plato": "KEPERI AL HORNO", "precio": "65 Bs" },
+        { "plato": "PIQUE MACHO", "precio": "85 Bs" },
+        { "plato": "PICANTE DE GALLINA", "precio": "55 Bs" },
+        { "plato": "PICANTE DE LENGUA", "precio": "60 Bs" }
+      ]},
+      { "cat": "Postres", "items": [
+        { "plato": "MANJAR BLANCO", "precio": "20 Bs" },
+        { "plato": "SUSPIRO ALTEÑO", "precio": "22 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [
+        { "plato": "CHICHA CAMBA", "precio": "12-40 Bs" },
+        { "plato": "MOCOCHINCHI", "precio": "12-40 Bs" }
+      ]}
     ]
   },
   {
@@ -1123,58 +885,22 @@ const RESTAURANTES_FIJOS =
     "telefono": "69501915",
     "direccion": "3er Anillo Interno 591, casi Av. La Barranca, Santa Cruz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEjkiqbcHFxod0NnX9cYnqEBH1HpkL1xwBae28kG30FdKvbwwVM2ajsXQ094nKfUw0graRT1h2bwQg5MOUvaAkh_IV0aMvVZBTu2tAg29aqLSJPxlNqCG7dLky-Kn5H9a-evJJ8lQ=w427-h240-k-no",
-    "platoEstrella": {
-      "nombre": "THIMPU DE CORDERO",
-      "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Thimpu_2.jpg"
-    },
+    "platoEstrella": { "nombre": "THIMPU DE CORDERO", "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Thimpu_2.jpg" },
     "menu": [
-      {
-        "cat": "Cordero",
-        "items": [
-          {
-            "plato": "THIMPU DE CORDERO",
-            "precio": "55 Bs"
-          },
-          {
-            "plato": "GUISO DE CORDERO",
-            "precio": "50 Bs"
-          },
-          {
-            "plato": "BRAZUELO DE CORDERO",
-            "precio": "65 Bs"
-          },
-          {
-            "plato": "COSTILLA DE CORDERO",
-            "precio": "60 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Pollos",
-        "items": [
-          {
-            "plato": "SAJTA DE POLLO",
-            "precio": "45 Bs"
-          },
-          {
-            "plato": "PICANTE",
-            "precio": "50-55 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA CAMBA",
-            "precio": "10 Bs"
-          },
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "10-35 Bs"
-          }
-        ]
-      }
+      { "cat": "Cordero", "items": [
+        { "plato": "THIMPU DE CORDERO", "precio": "55 Bs" },
+        { "plato": "GUISO DE CORDERO", "precio": "50 Bs" },
+        { "plato": "BRAZUELO DE CORDERO", "precio": "65 Bs" },
+        { "plato": "COSTILLA DE CORDERO", "precio": "60 Bs" }
+      ]},
+      { "cat": "Pollos", "items": [
+        { "plato": "SAJTA DE POLLO", "precio": "45 Bs" },
+        { "plato": "PICANTE", "precio": "50-55 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [
+        { "plato": "CHICHA CAMBA", "precio": "10 Bs" },
+        { "plato": "MOCOCHINCHI", "precio": "10-35 Bs" }
+      ]}
     ]
   },
   {
@@ -1185,70 +911,23 @@ const RESTAURANTES_FIJOS =
     "telefono": "68216777",
     "direccion": "Belisario Salinas 572, La Paz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGMdHUGZV3kplx9A-Se19zmeMPGiwWprveV-Fu-RkHhVqtqbDztgWUqTPlemnS4pOnFKTFIhpzvtfGmOrrLzngydd4UL6P5WJXXUI4zH3gc9dlvCdNJY0P9stL5mABef6MkCpOC-qVEYl8=w408-h544-k-no",
-    "platoEstrella": {
-      "nombre": "MONDONGO",
-      "imagen": "https://www.cocina-boliviana.com/base/stock/Recipe/mondongo-chuquisaqueno/mondongo-chuquisaqueno_web.jpg.webp"
-    },
+    "platoEstrella": { "nombre": "MONDONGO", "imagen": "https://www.cocina-boliviana.com/base/stock/Recipe/mondongo-chuquisaqueno/mondongo-chuquisaqueno_web.jpg.webp" },
     "menu": [
-      {
-        "cat": "Menú",
-        "items": [
-          {
-            "plato": "MONDONGO",
-            "precio": "65-75 Bs"
-          },
-          {
-            "plato": "CONEJO MENTIROSO",
-            "precio": "60-70 Bs"
-          },
-          {
-            "plato": "PAILA",
-            "precio": "55-65 Bs"
-          },
-          {
-            "plato": "CHICHARRON DE TRUCHA",
-            "precio": "70-85 Bs"
-          },
-          {
-            "plato": "RELLENO DE PLATANO",
-            "precio": "35-45 Bs"
-          },
-          {
-            "plato": "ESCABECHE",
-            "precio": "40-50 Bs"
-          },
-          {
-            "plato": "SANDWICH DE CHOLA",
-            "precio": "45-55 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres",
-        "items": [
-          {
-            "plato": "HELADO DE CANELA",
-            "precio": "20-25 Bs"
-          },
-          {
-            "plato": "TUMBO CON TAWAS",
-            "precio": "30-35 Bs"
-          },
-          {
-            "plato": "ARROZ CON LECHE",
-            "precio": "25-30 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "15-20 Bs"
-          }
-        ]
-      }
+      { "cat": "Menú", "items": [
+        { "plato": "MONDONGO", "precio": "65-75 Bs" },
+        { "plato": "CONEJO MENTIROSO", "precio": "60-70 Bs" },
+        { "plato": "PAILA", "precio": "55-65 Bs" },
+        { "plato": "CHICHARRON DE TRUCHA", "precio": "70-85 Bs" },
+        { "plato": "RELLENO DE PLATANO", "precio": "35-45 Bs" },
+        { "plato": "ESCABECHE", "precio": "40-50 Bs" },
+        { "plato": "SANDWICH DE CHOLA", "precio": "45-55 Bs" }
+      ]},
+      { "cat": "Postres", "items": [
+        { "plato": "HELADO DE CANELA", "precio": "20-25 Bs" },
+        { "plato": "TUMBO CON TAWAS", "precio": "30-35 Bs" },
+        { "plato": "ARROZ CON LECHE", "precio": "25-30 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [ { "plato": "MOCOCHINCHI", "precio": "15-20 Bs" } ] }
     ]
   },
   {
@@ -1259,49 +938,17 @@ const RESTAURANTES_FIJOS =
     "telefono": "74855203",
     "direccion": "Av. Arce #2063, La Paz",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHtpwWyVlM7IFKoaAsf2hN8T_8shQPuf3Uh1AqkLloTFMSUXWVRwm953BIUKqAnLMAxibikRmlzEEA37vxdhzsvoJmzylC73MWKEJetqcejoVZUKrysTWhGnJ3_-lV74fn-F1vz=w533-h240-k-no",
-    "platoEstrella": {
-      "nombre": "FRICASE MIXTO",
-      "imagen": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Fricase_mixto.jpg"
-    },
+    "platoEstrella": { "nombre": "FRICASE MIXTO", "imagen": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Fricase_mixto.jpg" },
     "menu": [
-      {
-        "cat": "Especiales",
-        "items": [
-          {
-            "plato": "FRICASE MIXTO",
-            "precio": "50-60 Bs"
-          },
-          {
-            "plato": "CHICHARRON ESPECIAL",
-            "precio": "65-80 Bs"
-          },
-          {
-            "plato": "LECHON AL HORNO",
-            "precio": "60-70 Bs"
-          },
-          {
-            "plato": "POLLO AL HORNO",
-            "precio": "45-55 Bs"
-          },
-          {
-            "plato": "CHICHARRON DE POLLO",
-            "precio": "45-55 Bs"
-          },
-          {
-            "plato": "PIQUE MACHO",
-            "precio": "80-100 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA",
-            "precio": "10-35 Bs"
-          }
-        ]
-      }
+      { "cat": "Especiales", "items": [
+        { "plato": "FRICASE MIXTO", "precio": "50-60 Bs" },
+        { "plato": "CHICHARRON ESPECIAL", "precio": "65-80 Bs" },
+        { "plato": "LECHON AL HORNO", "precio": "60-70 Bs" },
+        { "plato": "POLLO AL HORNO", "precio": "45-55 Bs" },
+        { "plato": "CHICHARRON DE POLLO", "precio": "45-55 Bs" },
+        { "plato": "PIQUE MACHO", "precio": "80-100 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [ { "plato": "CHICHA", "precio": "10-35 Bs" } ] }
     ]
   },
   {
@@ -1312,57 +959,21 @@ const RESTAURANTES_FIJOS =
     "telefono": "44243937",
     "direccion": "Av. Uyuni, Cochabamba",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEyXGZeNhV3z24Aq8f-RB4_5O5r33KntGa13jzbBwE4VKOe83nXp8kFq5-A30Q2Zd7aRjJpi0jb-M4vVDVlAC6U5cuckDeC4mNQmL3Ps4lYmL1aPJL2uI-26HYDDFYcWg_bnZSF=w408-h306-k-no",
-    "platoEstrella": {
-      "nombre": "PIQUE MACHO",
-      "imagen": "https://estaticos-noticias.unitel.bo/binrepository/1121x512/49c0/1024d512/none/125450566/PANM/pique-macho-foto-la-batidora_289322020_1140x520_UN415197_MG172766577.jpeg"
-    },
+    "platoEstrella": { "nombre": "PIQUE MACHO", "imagen": "https://estaticos-noticias.unitel.bo/binrepository/1121x512/49c0/1024d512/none/125450566/PANM/pique-macho-foto-la-batidora_289322020_1140x520_UN415197_MG172766577.jpeg" },
     "menu": [
-      {
-        "cat": "Platos",
-        "items": [
-          {
-            "plato": "PIQUE MACHO",
-            "precio": "95-115 Bs"
-          },
-          {
-            "plato": "PLANCHITA",
-            "precio": "85-100 Bs"
-          },
-          {
-            "plato": "BRAZUELO DE CORDERO",
-            "precio": "80-95 Bs"
-          },
-          {
-            "plato": "PICANTE DE LENGUA",
-            "precio": "65-75 Bs"
-          },
-          {
-            "plato": "CHAIRO",
-            "precio": "40-50 Bs"
-          },
-          {
-            "plato": "SILPANCHO",
-            "precio": "55-65 Bs"
-          },
-          {
-            "plato": "CHAMKA DE POLLO",
-            "precio": "50-60 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres/Bebidas",
-        "items": [
-          {
-            "plato": "HELADO DE QUINUA/FLAN",
-            "precio": "22-125 Bs"
-          },
-          {
-            "plato": "CHICHA MORADA/LIMONADA",
-            "precio": "Variado"
-          }
-        ]
-      }
+      { "cat": "Platos", "items": [
+        { "plato": "PIQUE MACHO", "precio": "95-115 Bs" },
+        { "plato": "PLANCHITA", "precio": "85-100 Bs" },
+        { "plato": "BRAZUELO DE CORDERO", "precio": "80-95 Bs" },
+        { "plato": "PICANTE DE LENGUA", "precio": "65-75 Bs" },
+        { "plato": "CHAIRO", "precio": "40-50 Bs" },
+        { "plato": "SILPANCHO", "precio": "55-65 Bs" },
+        { "plato": "CHAMKA DE POLLO", "precio": "50-60 Bs" }
+      ]},
+      { "cat": "Postres/Bebidas", "items": [
+        { "plato": "HELADO DE QUINUA/FLAN", "precio": "22-125 Bs" },
+        { "plato": "CHICHA MORADA/LIMONADA", "precio": "Variado" }
+      ]}
     ]
   },
   {
@@ -1373,65 +984,23 @@ const RESTAURANTES_FIJOS =
     "telefono": "62845067",
     "direccion": "Calle esq. Parque C. Fidel Anze, Cochabamba",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGuDCP8FKrqJXiydBv8EXM6eVs4aDgqEQzfavSvrkbmZJ7zNDB8W3Nl566zYXcJg0ttNE3vmcTEPCr3JvI448zHRN98gMeqFduKGFJoqqLxGRTFuk4G9ITTCUO_UkY8SuQMYMzC=w427-h240-k-no",
-    "platoEstrella": {
-      "nombre": "FRICASÉ",
-      "imagen": "https://pxcdn.eldeber.com.bo/eldeber/19183/092025/1757307713993.webp?cw=1200&ch=675&extw=jpg"
-    },
+    "platoEstrella": { "nombre": "FRICASÉ", "imagen": "https://pxcdn.eldeber.com.bo/eldeber/19183/092025/1757307713993.webp?cw=1200&ch=675&extw=jpg" },
     "menu": [
-      {
-        "cat": "Cocina",
-        "items": [
-          {
-            "plato": "FRICASÉ",
-            "precio": "40-55 Bs"
-          },
-          {
-            "plato": "PIQUE COCHABAMBINO",
-            "precio": "60-85 Bs"
-          },
-          {
-            "plato": "PLANCHITA",
-            "precio": "70-90 Bs"
-          },
-          {
-            "plato": "CHICHARRON DE CERDO",
-            "precio": "50-70 Bs"
-          },
-          {
-            "plato": "LOMO BORRACHO",
-            "precio": "55-70 Bs"
-          },
-          {
-            "plato": "LAPIN",
-            "precio": "40-55 Bs"
-          },
-          {
-            "plato": "FRITANGA",
-            "precio": "40-55 Bs"
-          },
-          {
-            "plato": "CHARQUEKAN",
-            "precio": "45-60 Bs"
-          },
-          {
-            "plato": "COSTILLAR DE CORDERO",
-            "precio": "60-80 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA CAMBA",
-            "precio": "10 Bs"
-          },
-          {
-            "plato": "MOCOCHINCHI",
-            "precio": "15 Bs"
-          }
-        ]
-      }
+      { "cat": "Cocina", "items": [
+        { "plato": "FRICASÉ", "precio": "40-55 Bs" },
+        { "plato": "PIQUE COCHABAMBINO", "precio": "60-85 Bs" },
+        { "plato": "PLANCHITA", "precio": "70-90 Bs" },
+        { "plato": "CHICHARRON DE CERDO", "precio": "50-70 Bs" },
+        { "plato": "LOMO BORRACHO", "precio": "55-70 Bs" },
+        { "plato": "LAPIN", "precio": "40-55 Bs" },
+        { "plato": "FRITANGA", "precio": "40-55 Bs" },
+        { "plato": "CHARQUEKAN", "precio": "45-60 Bs" },
+        { "plato": "COSTILLAR DE CORDERO", "precio": "60-80 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [
+        { "plato": "CHICHA CAMBA", "precio": "10 Bs" },
+        { "plato": "MOCOCHINCHI", "precio": "15 Bs" }
+      ]}
     ]
   },
   {
@@ -1442,62 +1011,19 @@ const RESTAURANTES_FIJOS =
     "telefono": "78247190",
     "direccion": "Erquis Norte, Km 7, Tarija",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEttdYXfZ5glH7dcIeGvmYxHEAPg08MTtbXbVZRUQR7TztqpXnAJ3dEF9Yv3uPoFrpgz99A2iKuh1rKTibZ_Zea2s4NBSebFSHMUXHgDifs_8K2HkIj6g8hx6FksKq_PjRbcf8zAQ=w408-h725-k-no",
-    "platoEstrella": {
-      "nombre": "CHANCHO ALA CRUZ",
-      "imagen": "https://upload.wikimedia.org/wikipedia/commons/9/91/Chancho_a_la_Cruz.jpg"
-    },
+    "platoEstrella": { "nombre": "CHANCHO ALA CRUZ", "imagen": "https://upload.wikimedia.org/wikipedia/commons/9/91/Chancho_a_la_Cruz.jpg" },
     "menu": [
-      {
-        "cat": "Tarijeño",
-        "items": [
-          {
-            "plato": "SAICE",
-            "precio": "35-50 Bs"
-          },
-          {
-            "plato": "RANGA",
-            "precio": "35-45 Bs"
-          },
-          {
-            "plato": "CHANCHO ALA CRUZ",
-            "precio": "60-85 Bs"
-          },
-          {
-            "plato": "COSTILLA",
-            "precio": "55-75 Bs"
-          },
-          {
-            "plato": "PICANTE DE POLLO",
-            "precio": "45-60 Bs"
-          },
-          {
-            "plato": "PICANTE DE LENGUA",
-            "precio": "55-70 Bs"
-          },
-          {
-            "plato": "MONDONGO",
-            "precio": "45-60 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Postres",
-        "items": [
-          {
-            "plato": "TAMALES TARIJEÑOS",
-            "precio": "10-15 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA Y MOCOCHINCHI",
-            "precio": "10-15 Bs"
-          }
-        ]
-      }
+      { "cat": "Tarijeño", "items": [
+        { "plato": "SAICE", "precio": "35-50 Bs" },
+        { "plato": "RANGA", "precio": "35-45 Bs" },
+        { "plato": "CHANCHO ALA CRUZ", "precio": "60-85 Bs" },
+        { "plato": "COSTILLA", "precio": "55-75 Bs" },
+        { "plato": "PICANTE DE POLLO", "precio": "45-60 Bs" },
+        { "plato": "PICANTE DE LENGUA", "precio": "55-70 Bs" },
+        { "plato": "MONDONGO", "precio": "45-60 Bs" }
+      ]},
+      { "cat": "Postres", "items": [ { "plato": "TAMALES TARIJEÑOS", "precio": "10-15 Bs" } ] },
+      { "cat": "Bebidas", "items": [ { "plato": "CHICHA Y MOCOCHINCHI", "precio": "10-15 Bs" } ] }
     ]
   },
   {
@@ -1508,139 +1034,34 @@ const RESTAURANTES_FIJOS =
     "telefono": "70227000",
     "direccion": "Daniel Campos 1248, Tarija",
     "imagen": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHXktEpdlt-QVcRmdH_8pWtlkrn6joZf_n3ssXgamySoMN8wyMLaTG70X-klIcqEqvDWcaE13YUwXbf8KS8gLSZQrH0OT_RLYxFIfgjV3k3_cwPpSyFlVDEEoybePe_LjORn8ay=w408-h306-k-no",
-    "platoEstrella": {
-      "nombre": "CHANCHO ALA OLLA",
-      "imagen": "https://gastronomiabolivia.com/wp-content/uploads/picana-de-Bolivia.jpg"
-    },
+    "platoEstrella": { "nombre": "CHANCHO ALA OLLA", "imagen": "https://gastronomiabolivia.com/wp-content/uploads/picana-de-Bolivia.jpg" },
     "menu": [
-      {
-        "cat": "Buffet",
-        "items": [
-          {
-            "plato": "BUFFET CRIOLLO",
-            "precio": "60-85 Bs"
-          },
-          {
-            "plato": "RANGA",
-            "precio": "35-45 Bs"
-          },
-          {
-            "plato": "SAICE TARIJEÑO",
-            "precio": "35-50 Bs"
-          },
-          {
-            "plato": "SOPA DE MANI",
-            "precio": "15-25 Bs"
-          },
-          {
-            "plato": "PICANTE MIXTO",
-            "precio": "50-65 Bs"
-          },
-          {
-            "plato": "CHANCHO ALA OLLA",
-            "precio": "55-75 Bs"
-          }
-        ]
-      },
-      {
-        "cat": "Bebidas",
-        "items": [
-          {
-            "plato": "CHICHA Y MOCOCHINCHI",
-            "precio": "10-15 Bs"
-          }
-        ]
-      }
+      { "cat": "Buffet", "items": [
+        { "plato": "BUFFET CRIOLLO", "precio": "60-85 Bs" },
+        { "plato": "RANGA", "precio": "35-45 Bs" },
+        { "plato": "SAICE TARIJEÑO", "precio": "35-50 Bs" },
+        { "plato": "SOPA DE MANI", "precio": "15-25 Bs" },
+        { "plato": "PICANTE MIXTO", "precio": "50-65 Bs" },
+        { "plato": "CHANCHO ALA OLLA", "precio": "55-75 Bs" }
+      ]},
+      { "cat": "Bebidas", "items": [ { "plato": "CHICHA Y MOCOCHINCHI", "precio": "10-15 Bs" } ] }
     ]
   }
 ];
 
-// ══ DATOS EXTRA RESTAURANTES (redes sociales y alérgenos) ══
 const RESTAURANTES_EXTRA = {
-  "RINCON PACEÑO":{
-    maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66",
-    fb:"https://www.facebook.com/share/1B3ooPsGPF/",
-    tt:"https://www.tiktok.com/@el.rincon.paceo",
-    wa:"78763081",
-    alergenos:["gluten","cerdo"]
-  },
-  "LA CASA DEL CAMBA":{
-    maps:"https://maps.app.goo.gl/aq7ih3qdPaxxdorLA",
-    fb:"https://www.facebook.com/share/1FmKXTqPqb/",
-    tt:"https://www.tiktok.com/@casadelcambaoficial",
-    wa:"76003877",
-    alergenos:["gluten","cerdo"]
-  },
-  "SUCREMANTA":{
-    maps:"https://maps.app.goo.gl/GjbCmfWkiiazLSWKA",
-    fb:"https://www.facebook.com/share/1DxP1grKdo/",
-    tt:"https://www.tiktok.com/@sucremantaestradi",
-    wa:"77839392",
-    alergenos:["gluten","lactosa"]
-  },
-  "LA BODEGA BOLIVIANA":{
-    maps:"https://maps.app.goo.gl/MbTFqf18jBxjHPpx9",
-    fb:"https://www.facebook.com/share/1D2rnAD5ax/",
-    tt:"https://www.tiktok.com/@bodega.boliviana",
-    wa:"78894436",
-    alergenos:["gluten","cerdo","huevo"]
-  },
-  "EL AJIBE COMIDA TIPICA":{
-    maps:"https://maps.app.goo.gl/rNvA5scV5rx7D2cU6",
-    fb:"https://www.facebook.com/share/1aGftybXf1/",
-    tt:"https://www.tiktok.com/@elaljibecomidatipica",
-    wa:"70288881",
-    alergenos:["cerdo","gluten"]
-  },
-  "GUSTITOS BOLIVIANOS":{
-    maps:"https://maps.app.goo.gl/qCtHhfQDdgFsS9QE6",
-    fb:"https://www.facebook.com/share/1HD6dtqvEz/",
-    tt:"https://www.tiktok.com/@restaurantgustitos",
-    wa:"69501915",
-    alergenos:["huevo","gluten"]
-  },
-  "LA RUFINA BOLIVIA":{
-    maps:"https://maps.app.goo.gl/dXFVxXYzu56KxHo6A",
-    fb:"https://www.facebook.com/share/1LBfwWoDvF/",
-    tt:"https://www.tiktok.com/@larufinabolivia",
-    wa:"68216777",
-    alergenos:["gluten","cerdo"]
-  },
-  "RESTAURANT DOÑA REMEDIOS":{
-    maps:"https://maps.app.goo.gl/6A4hKfhHtqkPoiDu5",
-    fb:"https://www.facebook.com/share/14ewXP2psFc/",
-    tt:"",
-    wa:"74855203",
-    alergenos:["huevo","lactosa"]
-  },
-  "CASA DE CAMPO":{
-    maps:"https://maps.app.goo.gl/r2prXjjnQsesradd7",
-    fb:"https://www.facebook.com/share/19BvvY2ai1/",
-    tt:"https://www.tiktok.com/@restcdc",
-    wa:"44243937",
-    alergenos:["gluten","cerdo","huevo"]
-  },
-  "CAYENNA RESTAURANT":{
-    maps:"https://maps.app.goo.gl/fEnnjhght7iYXagQ6",
-    fb:"https://www.facebook.com/share/1EPgyeTTYR/",
-    tt:"https://www.tiktok.com/@cayenna.bistrocafe",
-    wa:"62845067",
-    alergenos:["lactosa","gluten"]
-  },
-  "HEREDAD DE JACOB":{
-    maps:"https://maps.app.goo.gl/XqMHNXivrAaeDSZ1A",
-    fb:"https://www.facebook.com/share/1AnwvM5xkf/",
-    tt:"https://www.tiktok.com/@laheredaddejacobturismo",
-    wa:"78247190",
-    alergenos:["gluten","huevo"]
-  },
-  "LA CASA DE DOÑA PASTORITA":{
-    maps:"https://maps.app.goo.gl/nGB2gktLVBuTJV9X7",
-    fb:"https://www.facebook.com/share/18eL2EbtA4/",
-    tt:"https://www.tiktok.com/@saicepastorita",
-    wa:"70227000",
-    alergenos:["cerdo","gluten"]
-  }
+  "RINCON PACEÑO":{ maps:"https://maps.app.goo.gl/nMRhRbZSuNyAuPx66", fb:"https://www.facebook.com/share/1B3ooPsGPF/", tt:"https://www.tiktok.com/@el.rincon.paceo", wa:"78763081", alergenos:["gluten","cerdo"] },
+  "LA CASA DEL CAMBA":{ maps:"https://maps.app.goo.gl/aq7ih3qdPaxxdorLA", fb:"https://www.facebook.com/share/1FmKXTqPqb/", tt:"https://www.tiktok.com/@casadelcambaoficial", wa:"76003877", alergenos:["gluten","cerdo"] },
+  "SUCREMANTA":{ maps:"https://maps.app.goo.gl/GjbCmfWkiiazLSWKA", fb:"https://www.facebook.com/share/1DxP1grKdo/", tt:"https://www.tiktok.com/@sucremantaestradi", wa:"77839392", alergenos:["gluten","lactosa"] },
+  "LA BODEGA BOLIVIANA":{ maps:"https://maps.app.goo.gl/MbTFqf18jBxjHPpx9", fb:"https://www.facebook.com/share/1D2rnAD5ax/", tt:"https://www.tiktok.com/@bodega.boliviana", wa:"78894436", alergenos:["gluten","cerdo","huevo"] },
+  "EL AJIBE COMIDA TIPICA":{ maps:"https://maps.app.goo.gl/rNvA5scV5rx7D2cU6", fb:"https://www.facebook.com/share/1aGftybXf1/", tt:"https://www.tiktok.com/@elaljibecomidatipica", wa:"70288881", alergenos:["cerdo","gluten"] },
+  "GUSTITOS BOLIVIANOS":{ maps:"https://maps.app.goo.gl/qCtHhfQDdgFsS9QE6", fb:"https://www.facebook.com/share/1HD6dtqvEz/", tt:"https://www.tiktok.com/@restaurantgustitos", wa:"69501915", alergenos:["huevo","gluten"] },
+  "LA RUFINA BOLIVIA":{ maps:"https://maps.app.goo.gl/dXFVxXYzu56KxHo6A", fb:"https://www.facebook.com/share/1LBfwWoDvF/", tt:"https://www.tiktok.com/@larufinabolivia", wa:"68216777", alergenos:["gluten","cerdo"] },
+  "RESTAURANT DOÑA REMEDIOS":{ maps:"https://maps.app.goo.gl/6A4hKfhHtqkPoiDu5", fb:"https://www.facebook.com/share/14ewXP2psFc/", tt:"", wa:"74855203", alergenos:["huevo","lactosa"] },
+  "CASA DE CAMPO":{ maps:"https://maps.app.goo.gl/r2prXjjnQsesradd7", fb:"https://www.facebook.com/share/19BvvY2ai1/", tt:"https://www.tiktok.com/@restcdc", wa:"44243937", alergenos:["gluten","cerdo","huevo"] },
+  "CAYENNA RESTAURANT":{ maps:"https://maps.app.goo.gl/fEnnjhght7iYXagQ6", fb:"https://www.facebook.com/share/1EPgyeTTYR/", tt:"https://www.tiktok.com/@cayenna.bistrocafe", wa:"62845067", alergenos:["lactosa","gluten"] },
+  "HEREDAD DE JACOB":{ maps:"https://maps.app.goo.gl/XqMHNXivrAaeDSZ1A", fb:"https://www.facebook.com/share/1AnwvM5xkf/", tt:"https://www.tiktok.com/@laheredaddejacobturismo", wa:"78247190", alergenos:["gluten","huevo"] },
+  "LA CASA DE DOÑA PASTORITA":{ maps:"https://maps.app.goo.gl/nGB2gktLVBuTJV9X7", fb:"https://www.facebook.com/share/18eL2EbtA4/", tt:"https://www.tiktok.com/@saicepastorita", wa:"70227000", alergenos:["cerdo","gluten"] }
 };
 
 function getRestKey(nombre){
@@ -1694,7 +1115,6 @@ let starsVal = 0;
 let misAlergias = [];
 let mostrarFiltradoRest = true;
 
-// ══ TOAST ══
 function toast(msg, tipo="exito"){
   const t=document.getElementById("toast");
   t.textContent=msg; t.className="show "+tipo;
@@ -1702,7 +1122,6 @@ function toast(msg, tipo="exito"){
 }
 function cerrar(id){document.getElementById(id).style.display="none";}
 
-// ══ API ══
 async function llamarScript(action, params={}){
   const url=new URL(SCRIPT_URL);
   url.searchParams.set("action",action);
@@ -1732,7 +1151,6 @@ function ytThumb(url){
   return m?`https://img.youtube.com/vi/${m[1]}/mqdefault.jpg`:"";
 }
 
-// ══ PAGE SYSTEM ══
 function showPage(id, navEl){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   const pageId = "page"+id.charAt(0).toUpperCase()+id.slice(1);
@@ -1748,7 +1166,6 @@ function showPage(id, navEl){
   return false;
 }
 
-// ══ LOGIN / REGISTRO (MODAL) ══
 function abrirModalLogin(){
   document.getElementById("modalLogin").style.display="flex";
   document.getElementById("loginStatus").textContent="";
@@ -1839,7 +1256,6 @@ document.getElementById("loginBtnEntrar").addEventListener("click", async functi
   }
 });
 
-// ══ SESIÓN ══
 function sesionIniciada(usuario){
   usuarioActual = {nombre: usuario.nombre||"", telefono: usuario.telefono||"", correo: usuario.correo||"", ciudad: usuario.ciudad||"", interes: usuario.interes||""};
   localStorage.setItem("usuarioSabrolivia", JSON.stringify(usuarioActual));
@@ -1900,7 +1316,6 @@ function cargarSesion(){
   }
 }
 
-// ══ ALERGIAS ══
 function abrirAlergias(){
   if(!usuarioActual){ toast("Debes iniciar sesión para configurar alergias", "error"); abrirModalLogin(); return; }
   document.querySelectorAll("#alergGrid input[type=checkbox]").forEach(chk=>{chk.checked = misAlergias.includes(chk.value);});
@@ -1962,18 +1377,13 @@ function verTodosRest(){
   document.getElementById("alergWarningBanner").classList.remove("show");
 }
 
-// ══ CATÁLOGOS ══
-// Los 12 restaurantes ahora se cargan localmente desde RESTAURANTES_FIJOS (datos provistos directamente).
-// Mercados y supermercados siguen viniendo del backend (Google Apps Script).
 async function cargarCatalogos(){
-  // Restaurantes: datos fijos, sin depender del backend
   restaurantes = RESTAURANTES_FIJOS;
   renderRestaurantes();
   generarFiltros();
   llenarSelectOpinion();
   llenarSelectCalc();
 
-  // Mercados y supermercados: se mantienen desde el backend
   try{
     const result = await llamarScript("obtenerCatalogos");
     const data = result && result.success ? result.data : result;
@@ -2136,7 +1546,6 @@ function llenarSelectCalc(){
   actualizarCalculadora();
 }
 
-// ══ RECETAS ══
 function renderRecetas(){
   const grid=document.getElementById("gridRecetas");
   grid.innerHTML=RECETAS.map(r=>{
@@ -2164,7 +1573,6 @@ function renderRecetas(){
   if(misAlergias.length>0) aplicarFiltroAlergias();
 }
 
-// ══ CALCULADORA ══
 function actualizarCalculadora(){
   const tipo=document.getElementById("calcTipo").value;
   const personas=parseInt(document.getElementById("calcPersonas").value)||1;
@@ -2214,44 +1622,90 @@ Detrás de cada plato boliviano hay una historia, una familia y mucho cariño pu
   return{texto,total:d.total,rest};
 }
 
-function enviarPresupuestoWA() {
-  if (!usuarioActual) {
-    toast("Debes iniciar sesión para enviar por WhatsApp", "error");
-    abrirModalLogin();
-    return;
+// ───────────────────────────────────────────────────────────
+// 🔧 CORRECCIÓN: helper para normalizar cualquier número boliviano
+// Acepta "70000000", "591 70000000", "+591-7000-0000", etc.
+// Devuelve null si no hay un número válido (mínimo 11 dígitos: 591 + 8 locales).
+// ───────────────────────────────────────────────────────────
+function normalizarTelefonoBO(valor){
+  if(!valor) return null;
+  let tel = String(valor).replace(/\D/g,"");
+  if(!tel) return null;
+  if(!(tel.startsWith("591") && tel.length > 8)){
+    tel = "591" + tel;
   }
-  if (!usuarioActual.telefono || usuarioActual.telefono.trim() === "") {
-    toast("⚠️ No tienes un número de teléfono registrado. Actualiza tu perfil.", "error");
-    return;
+  if(tel.length < 11) return null;
+  return tel;
+}
+
+// ───────────────────────────────────────────────────────────
+// 🔧 CORRECCIÓN PRINCIPAL DEL BOTÓN "Enviar por WhatsApp"
+// Antes: dependía obligatoriamente de usuarioActual.telefono y, si faltaba
+// o estaba vacío, la función terminaba sin avisar bien ni dar manera de continuar.
+// Ahora:
+//   1. Ya NO exige haber iniciado sesión.
+//   2. Si hay un teléfono guardado (de sesión) lo usa directo.
+//   3. Si no hay teléfono válido, muestra una cajita en la propia calculadora
+//      para escribirlo ahí mismo y reintenta el envío sin perder los datos calculados.
+// ───────────────────────────────────────────────────────────
+function enviarPresupuestoWA(){
+  try{
+    const telGuardado = usuarioActual ? usuarioActual.telefono : "";
+    const telNormalizado = normalizarTelefonoBO(telGuardado);
+
+    if(telNormalizado){
+      abrirWhatsAppConTelefono(telNormalizado);
+      return;
+    }
+
+    document.getElementById("calcTelRapido").classList.add("show");
+    document.getElementById("calcTelInput").focus();
+    toast("📱 Escribe tu número de WhatsApp para enviarte el presupuesto", "info");
+  }catch(error){
+    toast("❌ Ocurrió un error al preparar el envío: " + error.message, "error");
   }
-  let tel = usuarioActual.telefono.replace(/\D/g, "");
-  if (!tel.startsWith("591")) tel = "591" + tel;
-  if (tel.length < 11) {
-    toast("⚠️ El número de teléfono parece incompleto. Debe tener al menos 8 dígitos después del código de país.", "error");
-    return;
+}
+
+function confirmarTelRapidoYEnviar(){
+  try{
+    const input = document.getElementById("calcTelInput");
+    const tel = normalizarTelefonoBO(input.value);
+    if(!tel){
+      toast("⚠️ Ingresa un número válido (mínimo 8 dígitos)", "error");
+      return;
+    }
+    document.getElementById("calcTelRapido").classList.remove("show");
+    abrirWhatsAppConTelefono(tel);
+  }catch(error){
+    toast("❌ Error al enviar: " + error.message, "error");
   }
+}
+
+function abrirWhatsAppConTelefono(telConCodigoPais){
   const { texto } = calcResumen();
-  const waUrl = `https://wa.me/${tel}?text=${encodeURIComponent(texto)}`;
-  try {
+  const waUrl = `https://wa.me/${telConCodigoPais}?text=${encodeURIComponent(texto)}`;
+  try{
     const ventana = window.open(waUrl, "_blank");
-    if (!ventana || ventana.closed || typeof ventana.closed === 'undefined') {
-      toast("⚠️ Tu navegador bloqueó la ventana. Copia el enlace manualmente.", "info");
-      console.log("Abre este enlace:", waUrl);
+    if(!ventana || ventana.closed || typeof ventana.closed === "undefined"){
+      toast("⚠️ Tu navegador bloqueó la ventana. Habilita las ventanas emergentes e intenta de nuevo.", "info");
     } else {
       toast("📲 Abriendo WhatsApp...", "info");
     }
-  } catch (error) {
+  }catch(error){
     toast("❌ Error al abrir WhatsApp: " + error.message, "error");
   }
 }
 
 function enviarPresupuestoMail(){
-  if(!usuarioActual){ toast("Debes iniciar sesión", "error"); abrirModalLogin(); return; }
+  if(!usuarioActual || !usuarioActual.correo){
+    toast("Debes iniciar sesión para enviar por correo", "error");
+    abrirModalLogin();
+    return;
+  }
   const {texto, rest} = calcResumen();
   window.open(`mailto:${usuarioActual.correo}?subject=${encodeURIComponent("Presupuesto – "+rest)}&body=${encodeURIComponent(texto)}`, "_blank");
 }
 
-// ══ RESERVA ══
 function calcReserva(){
   const tipo=document.getElementById("resTipoComida").value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
   const personas=parseInt(document.getElementById("resPersonas").value)||1;
@@ -2317,11 +1771,11 @@ document.getElementById("btnReserva").addEventListener("click", async function()
     const info = key ? RESTAURANTES_EXTRA[key] : null;
     const maps = info && info.maps ? `\n📍 Maps: ${info.maps}` : "";
     const msgWA = `🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
-    const telUsuario = (usuarioActual && usuarioActual.telefono || telefono).replace(/\D/g,"").replace(/^(?!591)/,"591");
-    if(telUsuario){
+    const telUsuarioNormalizado = normalizarTelefonoBO((usuarioActual && usuarioActual.telefono) || telefono);
+    if(telUsuarioNormalizado){
       setTimeout(()=>{
         if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
-          window.open(`https://wa.me/${telUsuario}?text=${encodeURIComponent(msgWA)}`, "_blank");
+          window.open(`https://wa.me/${telUsuarioNormalizado}?text=${encodeURIComponent(msgWA)}`, "_blank");
         }
       }, 500);
     }
@@ -2336,7 +1790,6 @@ document.getElementById("btnReserva").addEventListener("click", async function()
   }
 });
 
-// ══ MIS RESERVAS ══
 window.abrirConsultaEstado = function(){
   if(!usuarioActual){ toast("Debes iniciar sesión", "error"); abrirModalLogin(); return; }
   document.getElementById("consultaEmail").value = usuarioActual.correo;
@@ -2363,7 +1816,6 @@ document.getElementById("btnConsultar").addEventListener("click", async function
   }
 });
 
-// ══ OPINIÓN ══
 document.getElementById("starsContainer").addEventListener("click", function(e){
   if(e.target.dataset.val){
     starsVal = parseInt(e.target.dataset.val);
@@ -2393,7 +1845,6 @@ document.getElementById("btnOpinarFloat").addEventListener("click", function(){
   document.getElementById("modalOpinion").style.display = "flex";
 });
 
-// ══ CONTACTO ══
 document.getElementById("btnContacto").addEventListener("click", async function(){
   if(!usuarioActual){ toast("Debes iniciar sesión para contactarnos", "error"); abrirModalLogin(); return; }
   const mensaje = document.getElementById("ctcMsg").value.trim();
@@ -2407,7 +1858,6 @@ document.getElementById("btnContacto").addEventListener("click", async function(
   }
 });
 
-// ══ MAPA HISTÓRICO ══
 function renderMapaHistorico(){
   const selector=document.getElementById("deptSelector");
   const depts=Object.keys(PLATOS_HISTORICOS);
@@ -2436,7 +1886,6 @@ function mostrarPlatoHistorico(dept, btn){
 
 window.addEventListener("click", e => { if(e.target.classList.contains("modal-overlay")) e.target.style.display = "none"; });
 
-// ══ NOTIFICACIONES DE CAMBIO DE ESTADO ══
 async function verificarNotificacionesReservas(){
   if(!usuarioActual) return;
   const raw = await llamarScript("consultarSolicitudes", {correo: usuarioActual.correo});
@@ -2478,10 +1927,8 @@ function pedirPermisoNotificaciones(){
   }
 }
 
-// Revisa cambios cada 60 segundos mientras el usuario tenga la pestaña abierta
 setInterval(verificarNotificacionesReservas, 60000);
 
-// ══ INIT ══
 cargarSesion();
 cargarCatalogos();
 renderRecetas();
