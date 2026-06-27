@@ -6,6 +6,7 @@
 <title>Sabrolivia 🇧🇴 | Guía Gastronómica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -342,6 +343,12 @@ main{margin-left:68px;min-height:100vh;}
 .estado-pendiente{background:rgba(245,166,35,.3);color:var(--gold);}
 .estado-confirmado{background:rgba(0,229,160,.18);color:var(--neon);}
 .estado-rechazado{background:rgba(255,58,120,.18);color:var(--rose);}
+.ver-ticket-btn{
+  background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:var(--violet2);
+  padding:.22rem .65rem;border-radius:9px;font-size:.78rem;font-weight:700;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:.15s;
+}
+.ver-ticket-btn:hover{background:rgba(124,58,237,.3);color:#fff;}
 .alerg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.4rem;margin:.5rem 0;}
 .alerg-chk{
   display:flex;align-items:center;gap:.45rem;font-size:.95rem;cursor:pointer;
@@ -401,6 +408,86 @@ footer .f-logo{
 }
 footer p{color:rgba(200,185,220,.5);font-size:.85rem;margin-top:.45rem;}
 footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
+
+/* ============ TICKET ELECTRÓNICO ============ */
+.modal-ticket-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.86);display:none;
+  justify-content:center;align-items:center;z-index:5000;backdrop-filter:blur(8px);
+  padding:1.2rem;
+}
+.ticket-wrap{
+  width:100%;max-width:380px;max-height:94vh;overflow-y:auto;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+}
+#ticketCapture{
+  width:100%;background:linear-gradient(160deg,#1a1220 0%,#231730 55%,#1a1220 100%);
+  border-radius:22px;overflow:hidden;position:relative;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  border:1px solid rgba(245,166,35,.35);
+  font-family:'Inter',sans-serif;color:#fff;
+}
+.ticket-top{
+  background:linear-gradient(135deg,var(--ember),var(--rose));
+  padding:1.3rem 1.4rem 1.1rem;position:relative;
+}
+.ticket-top .tk-flag-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;}
+.ticket-top .tk-brand{font-family:'Playfair Display',serif;font-weight:900;font-size:1.15rem;color:#fff;}
+.ticket-top .tk-tag{
+  background:rgba(255,255,255,.22);color:#fff;font-size:.68rem;font-weight:800;
+  padding:.18rem .55rem;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;
+}
+.ticket-top .tk-estado{
+  font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  color:#fff;opacity:.92;
+}
+.ticket-body{padding:1.3rem 1.4rem .4rem;}
+.tk-rest-nombre{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;color:var(--gold2);line-height:1.15;margin-bottom:.15rem;}
+.tk-rest-ciudad{font-size:.82rem;color:rgba(255,255,255,.5);font-family:'Space Mono',monospace;letter-spacing:.05em;margin-bottom:1rem;}
+.tk-divider{border-top:1px dashed rgba(255,255,255,.18);margin:0 -1.4rem 1rem;position:relative;}
+.tk-divider::before,.tk-divider::after{
+  content:'';position:absolute;top:-9px;width:18px;height:18px;border-radius:50%;
+  background:#0F0C10;
+}
+.tk-divider::before{left:-9px;}
+.tk-divider::after{right:-9px;}
+.tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1rem;margin-bottom:1rem;}
+.tk-item .tk-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:.18rem;font-weight:700;}
+.tk-item .tk-value{font-size:.98rem;font-weight:700;color:#fff;}
+.tk-codigo-box{
+  text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(245,166,35,.25);
+  border-radius:14px;padding:.85rem;margin-bottom:1rem;
+}
+.tk-codigo-box .tk-codigo-label{font-size:.68rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.25rem;font-weight:700;}
+.tk-codigo-box .tk-codigo{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:900;color:var(--gold);letter-spacing:.08em;}
+.tk-monto-box{
+  background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(255,58,120,.18));
+  border:1px solid rgba(124,58,237,.3);border-radius:14px;padding:.9rem;text-align:center;margin-bottom:1.1rem;
+}
+.tk-monto-box .tk-monto-label{font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem;font-weight:700;}
+.tk-monto-box .tk-monto{font-family:'Space Mono',monospace;font-size:1.9rem;font-weight:900;color:var(--gold2);}
+.tk-footer{
+  padding:1rem 1.4rem 1.3rem;text-align:center;border-top:1px solid rgba(255,255,255,.08);
+}
+.tk-footer .tk-cliente{font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:.5rem;}
+.tk-footer .tk-msg{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.5;}
+.tk-barcode{
+  display:flex;justify-content:center;gap:2px;margin:.7rem 0;height:34px;align-items:flex-end;
+}
+.tk-barcode span{display:block;background:rgba(255,255,255,.55);width:3px;}
+.ticket-actions{display:flex;gap:.55rem;flex-wrap:wrap;justify-content:center;width:100%;}
+.btn-ticket{
+  padding:.65rem 1.25rem;border-radius:50px;font-weight:700;font-size:.88rem;cursor:pointer;
+  border:none;transition:.18s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-ticket-descargar{background:linear-gradient(135deg,var(--gold),var(--ember));color:#1a1208;box-shadow:0 4px 14px rgba(245,166,35,.3);}
+.btn-ticket-descargar:hover{box-shadow:0 6px 20px rgba(245,166,35,.5);}
+.btn-ticket-wa{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.28);}
+.btn-ticket-wa:hover{box-shadow:0 6px 20px rgba(37,211,102,.45);}
+.btn-ticket-mail{background:linear-gradient(135deg,var(--violet),var(--violet2));color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.3);}
+.btn-ticket-mail:hover{box-shadow:0 6px 20px rgba(124,58,237,.5);}
+.btn-ticket-cerrar{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);}
+.btn-ticket-cerrar:hover{background:rgba(255,255,255,.15);color:#fff;}
+
 @media(max-width:768px){
   #sidebar{
     width:100%;height:auto;flex-direction:row;
@@ -690,6 +777,50 @@ footer a{color:var(--gold);text-decoration:none;font-size:.85rem;}
     <button class="btn-enviar" id="btnReserva">📲 Confirmar Reserva</button>
     <p id="resStatus" style="font-size:.88rem;margin-top:.5rem;color:var(--neon)"></p>
   </div></div>
+</div>
+
+<div class="modal-ticket-overlay" id="modalTicket">
+  <div class="ticket-wrap">
+    <div id="ticketCapture">
+      <div class="ticket-top">
+        <div class="tk-flag-row">
+          <span class="tk-brand">🇧🇴 Sabrolivia</span>
+          <span class="tk-tag">Ticket de Reserva</span>
+        </div>
+        <div class="tk-estado" id="tkEstado">⏳ Pendiente de confirmación</div>
+      </div>
+      <div class="ticket-body">
+        <div class="tk-rest-nombre" id="tkRestNombre">—</div>
+        <div class="tk-rest-ciudad" id="tkRestCiudad">📍 —</div>
+        <div class="tk-divider"></div>
+        <div class="tk-grid">
+          <div class="tk-item"><div class="tk-label">📅 Fecha</div><div class="tk-value" id="tkFecha">—</div></div>
+          <div class="tk-item"><div class="tk-label">🕒 Hora</div><div class="tk-value" id="tkHora">—</div></div>
+          <div class="tk-item"><div class="tk-label">👥 Personas</div><div class="tk-value" id="tkPersonas">—</div></div>
+          <div class="tk-item"><div class="tk-label">🍽️ Tipo</div><div class="tk-value" id="tkTipo">—</div></div>
+        </div>
+        <div class="tk-codigo-box">
+          <div class="tk-codigo-label">Código del ticket</div>
+          <div class="tk-codigo" id="tkCodigo">SBV-000000</div>
+        </div>
+        <div class="tk-monto-box">
+          <div class="tk-monto-label">Total estimado</div>
+          <div class="tk-monto" id="tkMonto">0 Bs</div>
+        </div>
+        <div class="tk-barcode" id="tkBarcode"></div>
+      </div>
+      <div class="tk-footer">
+        <div class="tk-cliente" id="tkCliente">A nombre de —</div>
+        <div class="tk-msg">Presenta este ticket (impreso o digital) al llegar al restaurante. Sujeto a confirmación.</div>
+      </div>
+    </div>
+    <div class="ticket-actions">
+      <button class="btn-ticket btn-ticket-descargar" onclick="descargarTicket()">⬇️ Descargar</button>
+      <button class="btn-ticket btn-ticket-wa" onclick="compartirTicketWA()">💬 WhatsApp</button>
+      <button class="btn-ticket btn-ticket-mail" onclick="compartirTicketMail()">📧 Correo</button>
+      <button class="btn-ticket btn-ticket-cerrar" onclick="cerrar('modalTicket')">Cerrar</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal-overlay" id="modalOpinion">
@@ -1114,6 +1245,7 @@ let restaurantes = [], mercados = [], supermercados = [];
 let starsVal = 0;
 let misAlergias = [];
 let mostrarFiltradoRest = true;
+let ticketActual = null;
 
 function toast(msg, tipo="exito"){
   const t=document.getElementById("toast");
@@ -1140,7 +1272,7 @@ async function fetchPOST(action, data={}){
     const resultado = await resp.json();
     const exito = !!resultado.success;
     const mensaje = resultado.mensaje || resultado.error || (exito ? "Operación completada" : "Ocurrió un error en el servidor");
-    return { exito, mensaje };
+    return { exito, mensaje, id: resultado.id, codigoTicket: resultado.codigoTicket };
   }catch(e){
     return { exito: false, mensaje: "Error de conexión con el servidor" };
   }
@@ -1215,7 +1347,8 @@ document.getElementById("loginBtnRegistrar").addEventListener("click", async fun
     sesionIniciada({nombre, telefono, correo, ciudad, interes});
     status.style.color="rgba(0,229,160,.9)";
     status.textContent="¡Bienvenido "+nombre.split(" ")[0]+"!";
-    setTimeout(()=>{ cerrar("modalLogin"); }, 800);
+    toast("📩 Te enviamos un correo de bienvenida a "+correo, "exito");
+    setTimeout(()=>{ cerrar("modalLogin"); }, 900);
   } else {
     status.style.color="rgba(255,107,53,.9)";
     status.textContent="❌ Error al registrar: "+resp.mensaje;
@@ -1767,28 +1900,140 @@ document.getElementById("btnReserva").addEventListener("click", async function()
   if(resp.exito){
     cerrar("modalReserva");
     toast(`✅ Reserva enviada a ${restaurante}`);
-    const key = getRestKey(restaurante);
-    const info = key ? RESTAURANTES_EXTRA[key] : null;
-    const maps = info && info.maps ? `\n📍 Maps: ${info.maps}` : "";
-    const msgWA = `🇧🇴 *Sabrolivia – Confirmación de Reserva*\n\n🏪 ${restaurante}\n📅 ${fecha} a las ${hora}\n🍽️ ${tipoComida}\n👥 ${personas} persona(s)\n🎁 Extras: ${extras||"Ninguno"}\n💰 Estimado: *${total} Bs*${maps}\n\n📌 Nota: ${nota}\n\n¡Te contactaremos para confirmar! 🍽️`;
-    const telUsuarioNormalizado = normalizarTelefonoBO((usuarioActual && usuarioActual.telefono) || telefono);
-    if(telUsuarioNormalizado){
-      setTimeout(()=>{
-        if(confirm("¿Recibir confirmación en tu WhatsApp personal?")){
-          window.open(`https://wa.me/${telUsuarioNormalizado}?text=${encodeURIComponent(msgWA)}`, "_blank");
-        }
-      }, 500);
-    }
-    setTimeout(()=>{
-      const mailSubject = encodeURIComponent(`Reserva en ${restaurante} – ${fecha}`);
-      const mailBody = encodeURIComponent(msgWA.replace(/\*/g,""));
-      window.open(`mailto:${correo}?subject=${mailSubject}&body=${mailBody}`, "_blank");
-    }, 1500);
+
+    const codigoTicket = resp.codigoTicket || generarCodigoTicketLocal(resp.id);
+
+    // 🎫 Construir y mostrar el ticket electrónico
+    abrirTicket({
+      restaurante, nombre, telefono, correo, fecha, hora, personas, tipoComida,
+      extras, nota, total, estado: "Pendiente", codigoTicket
+    });
+
   } else {
     document.getElementById("resStatus").textContent = "❌ "+resp.mensaje;
     toast("No se pudo guardar la reserva, intente nuevamente", "error");
   }
 });
+
+// Genera un código de respaldo en el navegador si el backend no devolviera uno
+function generarCodigoTicketLocal(id){
+  const base = (id || (Date.now()+"")).toString().replace(/-/g,"").toUpperCase();
+  return "SBV-" + base.substring(0,6);
+}
+
+// ==================== 🎫 TICKET ELECTRÓNICO DE RESERVA ====================
+function abrirTicket(data){
+  ticketActual = data;
+
+  document.getElementById("tkRestNombre").textContent = data.restaurante || "—";
+  const key = getRestKey(data.restaurante || "");
+  const ciudadInfo = restaurantes.find(r => (r.nombre||"").toUpperCase() === (data.restaurante||"").toUpperCase());
+  document.getElementById("tkRestCiudad").textContent = "📍 " + (ciudadInfo ? ciudadInfo.ciudad : "Bolivia") + " 🇧🇴";
+
+  document.getElementById("tkFecha").textContent = formatearFechaBonita(data.fecha) || "—";
+  document.getElementById("tkHora").textContent = data.hora || "—";
+  document.getElementById("tkPersonas").textContent = data.personas || "—";
+  document.getElementById("tkTipo").textContent = data.tipoComida || "—";
+  document.getElementById("tkCodigo").textContent = data.codigoTicket || "SBV-000000";
+  document.getElementById("tkMonto").textContent = (data.total || 0) + " Bs";
+  document.getElementById("tkCliente").textContent = "A nombre de " + (data.nombre || "—");
+
+  const estadoEl = document.getElementById("tkEstado");
+  if((data.estado||"").toLowerCase().includes("confirm")){
+    estadoEl.textContent = "✅ Confirmado";
+  } else if((data.estado||"").toLowerCase().includes("rechaz")){
+    estadoEl.textContent = "❌ No confirmado";
+  } else {
+    estadoEl.textContent = "⏳ Pendiente de confirmación";
+  }
+
+  // Código de barras decorativo (puramente visual, generado a partir del código del ticket)
+  pintarBarcode(data.codigoTicket || "SBV-000000");
+
+  document.getElementById("modalTicket").style.display = "flex";
+}
+
+function pintarBarcode(codigo){
+  const cont = document.getElementById("tkBarcode");
+  cont.innerHTML = "";
+  let seed = 0;
+  for(let i=0;i<codigo.length;i++) seed += codigo.charCodeAt(i);
+  for(let i=0;i<38;i++){
+    const span = document.createElement("span");
+    const h = 12 + ((seed * (i+3)) % 22);
+    span.style.height = h + "px";
+    cont.appendChild(span);
+  }
+}
+
+function formatearFechaBonita(fechaISO){
+  if(!fechaISO) return "";
+  try{
+    const [y,m,d] = fechaISO.split("-");
+    const meses = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+    return `${parseInt(d)} ${meses[parseInt(m)-1]} ${y}`;
+  }catch(e){ return fechaISO; }
+}
+
+async function descargarTicket(){
+  try{
+    toast("🖼️ Generando imagen del ticket...", "info");
+    const nodo = document.getElementById("ticketCapture");
+    const canvas = await html2canvas(nodo, {backgroundColor:null, scale:2});
+    const link = document.createElement("a");
+    const codigo = (ticketActual && ticketActual.codigoTicket) || "ticket";
+    link.download = `Sabrolivia_Ticket_${codigo}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+    toast("✅ Ticket descargado", "exito");
+  }catch(error){
+    toast("❌ No se pudo descargar el ticket: " + error.message, "error");
+  }
+}
+
+function textoTicketPlano(){
+  if(!ticketActual) return "";
+  const d = ticketActual;
+  return `🎫 *TICKET DE RESERVA – SABROLIVIA* 🇧🇴
+
+🏪 *${d.restaurante}*
+👤 ${d.nombre}
+📅 ${formatearFechaBonita(d.fecha)}
+🕒 ${d.hora}
+👥 ${d.personas} persona(s)
+🍽️ ${d.tipoComida}
+🎁 Extras: ${d.extras || "Ninguno"}
+
+🎫 Código: *${d.codigoTicket}*
+💰 Total estimado: *${d.total} Bs*
+
+Estado: ${d.estado || "Pendiente de confirmación"}
+
+Presenta este ticket al llegar al restaurante.
+¡Gracias por elegir Sabrolivia! 💛`;
+}
+
+function compartirTicketWA(){
+  if(!ticketActual){ toast("No hay ticket activo", "error"); return; }
+  const telNormalizado = normalizarTelefonoBO(ticketActual.telefono) || normalizarTelefonoBO((usuarioActual&&usuarioActual.telefono));
+  const texto = encodeURIComponent(textoTicketPlano());
+  if(telNormalizado){
+    window.open(`https://wa.me/${telNormalizado}?text=${texto}`, "_blank");
+  } else {
+    window.open(`https://wa.me/?text=${texto}`, "_blank");
+  }
+  toast("📲 Abriendo WhatsApp con tu ticket...", "info");
+}
+
+function compartirTicketMail(){
+  if(!ticketActual){ toast("No hay ticket activo", "error"); return; }
+  const correo = ticketActual.correo || (usuarioActual && usuarioActual.correo) || "";
+  if(!correo){ toast("No hay un correo disponible para enviar", "error"); return; }
+  const asunto = encodeURIComponent("🎫 Tu ticket de reserva – " + ticketActual.restaurante);
+  const cuerpo = encodeURIComponent(textoTicketPlano().replace(/\*/g,""));
+  window.open(`mailto:${correo}?subject=${asunto}&body=${cuerpo}`, "_blank");
+  toast("📧 Abriendo tu correo con el ticket...", "info");
+}
 
 window.abrirConsultaEstado = function(){
   if(!usuarioActual){ toast("Debes iniciar sesión", "error"); abrirModalLogin(); return; }
@@ -1804,17 +2049,39 @@ document.getElementById("btnConsultar").addEventListener("click", async function
   const solicitudes = Array.isArray(raw) ? raw : (raw && raw.data ? raw.data : []);
   const div = document.getElementById("resultadoEstado");
   if(solicitudes && solicitudes.length > 0){
-    let html = `<table class="tabla-estado"><tr><th>Fecha</th><th>Restaurante</th><th>Tipo</th><th>Estado</th></tr>`;
+    let html = `<table class="tabla-estado"><tr><th>Fecha</th><th>Restaurante</th><th>Tipo</th><th>Estado</th><th>Ticket</th></tr>`;
     solicitudes.forEach(s=>{
       const estado = (s.estado||"").toLowerCase();
       const cls = estado.includes("confirm") ? "estado-confirmado" : estado.includes("rechaz") ? "estado-rechazado" : "estado-pendiente";
-      html += `<tr><td>${s.fechaHora||"—"}</td><td>${s.restaurante||"—"}</td><td>${s.tipo||""}</td><td><span class="estado-pill ${cls}">${s.estado||""}</span></td></tr>`;
+      const esReserva = (s.tipo||"") === "Reserva";
+      const btnTicket = esReserva
+        ? `<button class="ver-ticket-btn" onclick='verTicketDesdeHistorial(${JSON.stringify(s).replace(/'/g,"&#39;")})'>🎫 Ver</button>`
+        : "—";
+      html += `<tr><td>${s.fechaHora||"—"}</td><td>${s.restaurante||"—"}</td><td>${s.tipo||""}</td><td><span class="estado-pill ${cls}">${s.estado||""}</span></td><td>${btnTicket}</td></tr>`;
     });
     div.innerHTML = html + "</table>";
   } else {
     div.innerHTML = "<p style='color:rgba(200,185,220,.55);font-size:.95rem'>No se encontraron reservas.</p>";
   }
 });
+
+window.verTicketDesdeHistorial = function(s){
+  abrirTicket({
+    restaurante: s.restaurante || "—",
+    nombre: (usuarioActual && usuarioActual.nombre) || "—",
+    telefono: (usuarioActual && usuarioActual.telefono) || "",
+    correo: (usuarioActual && usuarioActual.correo) || "",
+    fecha: s.fechaReserva || "",
+    hora: s.hora || "—",
+    personas: s.personas || "—",
+    tipoComida: "—",
+    extras: "",
+    nota: s.nota || "",
+    total: 0,
+    estado: s.estado || "Pendiente",
+    codigoTicket: s.codigoTicket || generarCodigoTicketLocal(s.id)
+  });
+};
 
 document.getElementById("starsContainer").addEventListener("click", function(e){
   if(e.target.dataset.val){
